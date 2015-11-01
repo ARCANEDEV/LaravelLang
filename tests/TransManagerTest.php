@@ -50,5 +50,7 @@ class TransManagerTest extends TestCase
         foreach ($expectations as $expected) {
             $this->assertInstanceOf($expected, $this->manager);
         }
+
+        $this->assertCount(2, $this->manager->getPaths());
     }
 }
