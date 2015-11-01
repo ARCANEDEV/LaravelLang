@@ -58,12 +58,12 @@ class TransManager implements Contracts\TransManager
     /**
      * Load lang files.
      */
-    public function load()
+    private function load()
     {
         $exclude = ['vendor'];
 
         foreach ($this->getPaths() as $group => $langPath) {
-            $directories = new LocaleCollection;
+            $locales = new LocaleCollection;
 
             foreach ($this->filesystem->directories($langPath) as $path) {
                 $locale = basename($path);
@@ -72,10 +72,12 @@ class TransManager implements Contracts\TransManager
                     continue;
                 }
 
-                $directories->add($this->loadDirectory($locale, $path));
+                $locales->add(
+                    new Locale($locale, $path, $this->loadFiles($path))
+                );
             }
 
-            $this->locales[$group] = $directories;
+            $this->locales[$group] = $locales;
 
         }
     }
@@ -83,14 +85,13 @@ class TransManager implements Contracts\TransManager
     /**
      * Load the lang directory.
      *
-     * @param  string  $locale
      * @param  string  $path
      *
-     * @return Locale
+     * @return array
      *
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    private function loadDirectory($locale, $path)
+    private function loadFiles($path)
     {
         $files = [];
 
@@ -108,7 +109,7 @@ class TransManager implements Contracts\TransManager
             ];
         }
 
-        return new Locale($locale, $path, $files);
+        return $files;
     }
 
     /**
