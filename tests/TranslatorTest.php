@@ -61,7 +61,7 @@ class TranslatorTest extends TestCase
         ];
 
         foreach ($expectations as $locale => $translations) {
-            $this->app->setLocale($locale);
+            $this->translator->setLocale($locale);
 
             foreach ($translations as $key => $expected) {
                 $this->assertEquals($expected, $this->translator->get($key));
