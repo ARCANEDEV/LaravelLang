@@ -1,4 +1,5 @@
 <?php namespace Arcanedev\LaravelLang\Tests;
+
 use Arcanedev\LaravelLang\LaravelLangServiceProvider;
 
 /**
