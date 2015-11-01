@@ -70,7 +70,9 @@ class LaravelLangServiceProvider extends ServiceProvider
     {
         return [
             'arcanedev.laravel-lang.manager',
+            \Arcanedev\LaravelLang\Contracts\TransManager::class,
             'arcanedev.laravel-lang.checker',
+            \Arcanedev\LaravelLang\Contracts\TransChecker::class,
         ];
     }
 
@@ -94,6 +96,11 @@ class LaravelLangServiceProvider extends ServiceProvider
 
             return new TransManager($files, $paths);
         });
+
+        $this->app->bind(
+            \Arcanedev\LaravelLang\Contracts\TransManager::class,
+            'arcanedev.laravel-lang.manager'
+        );
     }
 
     /**
@@ -113,5 +120,10 @@ class LaravelLangServiceProvider extends ServiceProvider
 
             return new TransChecker($translator, $manager, $config->get('laravel-lang'));
         });
+
+        $this->app->bind(
+            \Arcanedev\LaravelLang\Contracts\TransChecker::class,
+            'arcanedev.laravel-lang.checker'
+        );
     }
 }
