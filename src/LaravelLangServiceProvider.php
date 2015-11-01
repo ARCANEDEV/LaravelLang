@@ -55,7 +55,7 @@ class LaravelLangServiceProvider extends ServiceProvider
     {
         $this->registerConfig();
 
-        $this->app->register(TranslationServiceProvider::class);
+        $this->app->register(Providers\TranslationServiceProvider::class);
     }
 
     /**

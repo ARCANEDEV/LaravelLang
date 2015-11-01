@@ -1,5 +1,6 @@
-<?php namespace Arcanedev\LaravelLang;
+<?php namespace Arcanedev\LaravelLang\Providers;
 
+use Arcanedev\LaravelLang\FileLoader;
 use Illuminate\Translation\TranslationServiceProvider as ServiceProvider;
 
 /**
