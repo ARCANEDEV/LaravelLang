@@ -20,7 +20,10 @@ class TransChecker implements TransCheckerInterface
     /** @var array */
     private $configs;
 
-    /** @var \Arcanedev\LaravelLang\Contracts\TransManager */
+    /** @var Translator */
+    private $translator;
+
+    /** @var TransManagerInterface */
     private $manager;
 
     /** @var array */
@@ -33,9 +36,9 @@ class TransChecker implements TransCheckerInterface
     /**
      * Make TransChecker instance.
      *
-     * @param  \Illuminate\Translation\Translator             $translator
-     * @param  \Arcanedev\LaravelLang\Contracts\TransManager  $manager
-     * @param  array                                          $configs
+     * @param  Translator             $translator
+     * @param  TransManagerInterface  $manager
+     * @param  array                  $configs
      */
     public function __construct(
         Translator $translator,
