@@ -1,7 +1,7 @@
 <?php namespace Arcanedev\LaravelLang;
 
 use Arcanedev\LaravelLang\Contracts\TransChecker as TransCheckerInterface;
-use Arcanedev\LaravelLang\Contracts\TransManager;
+use Arcanedev\LaravelLang\Contracts\TransManager as TransManagerInterface;
 use Arcanedev\LaravelLang\Entities\Locale;
 use Illuminate\Translation\Translator;
 
@@ -37,8 +37,11 @@ class TransChecker implements TransCheckerInterface
      * @param  \Arcanedev\LaravelLang\Contracts\TransManager  $manager
      * @param  array                                          $configs
      */
-    public function __construct(Translator $translator, TransManager $manager, array $configs)
-    {
+    public function __construct(
+        Translator $translator,
+        TransManagerInterface $manager,
+        array $configs
+    ) {
         $this->translator = $translator;
         $this->manager    = $manager;
         $this->configs    = $configs;
