@@ -67,6 +67,37 @@ abstract class TestCase extends BaseTestCase
         $basePath = dirname(__DIR__);
         $config   = $app['config'];
 
-        $config->set('laravel-lang.path', realpath($basePath . '/vendor/caouecs/laravel4-lang'));
+        $config->set('laravel-lang', [
+            'vendor'    => realpath($basePath . '/vendor/caouecs/laravel4-lang')
+        ]);
+
+        $this->copyLanguagesFixtures($app);
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Other Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Copy languages fixtures.
+     *
+     * @param  \Illuminate\Foundation\Application   $app
+     */
+    private function copyLanguagesFixtures($app)
+    {
+        /** @var \Illuminate\Filesystem\Filesystem $filesystem */
+        $filesystem = $app['files'];
+        $dir        = 'lang/en';
+        $from       = realpath(__DIR__ . DS . 'fixtures' . DS . $dir);
+        $to         = realpath(base_path('resources' . DS . $dir));
+
+        $files = array_map(function ($file) use ($from, $to) {
+            /** @var \Symfony\Component\Finder\SplFileInfo $file */
+            return $file->getRelativePathname();
+        }, $filesystem->allFiles($from));
+
+        foreach ($files as $file) {
+            $filesystem->copy($from . DS . $file, $to . DS . $file);
+        }
     }
 }
