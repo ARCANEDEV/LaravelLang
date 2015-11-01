@@ -89,10 +89,10 @@ class LaravelLangServiceProvider extends ServiceProvider
              */
             $files  = $app['files'];
             $config = $app['config'];
-            $paths  = [
+            $paths  = array_map('realpath', [
                 'app'    => $app->langPath(),
                 'vendor' => $config->get('laravel-lang.vendor', ''),
-            ];
+            ]);
 
             return new TransManager($files, $paths);
         });
