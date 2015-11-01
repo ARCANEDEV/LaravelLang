@@ -56,7 +56,10 @@ class LaravelLangServiceProviderTest extends TestCase
     /** @test */
     public function it_can_provides()
     {
-        $expected = [];
+        $expected = [
+            'arcanedev.laravel-lang.manager',
+            'arcanedev.laravel-lang.checker',
+        ];
 
         $this->assertEquals($expected, $this->provider->provides());
     }
