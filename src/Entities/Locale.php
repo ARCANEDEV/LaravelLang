@@ -12,10 +12,13 @@ class Locale
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
+    /** @var string */
     private $key   = '';
 
+    /** @var string */
     private $path  = '';
 
+    /** @var array */
     private $files = [];
 
     /* ------------------------------------------------------------------------------------------------
@@ -43,6 +46,11 @@ class Locale
         return $this->key;
     }
 
+    /**
+     * Get locale translations.
+     *
+     * @return array
+     */
     public function getTranslations()
     {
         $translations = array_map(function ($file) {
@@ -55,6 +63,14 @@ class Locale
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Merge translations.
+     *
+     * @param  Locale|null  $locale
+     * @param  array        $ignored
+     *
+     * @return array
      */
     public function mergeTranslations(Locale $locale = null, array $ignored = [])
     {
