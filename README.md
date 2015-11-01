@@ -21,7 +21,7 @@
 [badge_insight]:   https://img.shields.io/sensiolabs/i/8ed2a842-3f4e-4422-a881-cf7eb72a595d.svg?style=flat-square
 [badge_issues]:    https://img.shields.io/github/issues/ARCANEDEV/LaravelLang.svg?style=flat-square
 
-[badge_package]:   https://img.shields.io/badge/package-arcanedev/laravel-lang-blue.svg?style=flat-square
+[badge_package]:   https://img.shields.io/badge/package-arcanedev/laravel--lang-blue.svg?style=flat-square
 [badge_release]:   https://img.shields.io/packagist/v/arcanedev/laravel-lang.svg?style=flat-square
 [badge_downloads]: https://img.shields.io/packagist/dt/arcanedev/laravel-lang.svg?style=flat-square
 
