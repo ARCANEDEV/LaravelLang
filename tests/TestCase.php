@@ -79,7 +79,16 @@ abstract class TestCase extends BaseTestCase
         $config   = $app['config'];
 
         $config->set('laravel-lang', [
-            'vendor'    => realpath($basePath . '/vendor/caouecs/laravel4-lang')
+            'vendor'    => realpath($basePath . '/vendor/caouecs/laravel4-lang'),
+
+            'locales'   => ['es', 'fr'],
+
+            'check'     => [
+                'ignore'  => [
+                    'validation.custom',
+                    'validation.attributes',
+                ],
+            ],
         ]);
 
         $this->copyLanguagesFixtures($app);
