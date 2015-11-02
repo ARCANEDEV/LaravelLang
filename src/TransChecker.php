@@ -2,7 +2,6 @@
 
 use Arcanedev\LaravelLang\Contracts\TransChecker as TransCheckerInterface;
 use Arcanedev\LaravelLang\Contracts\TransManager as TransManagerInterface;
-use Arcanedev\LaravelLang\Entities\Locale;
 use Illuminate\Translation\Translator;
 
 /**
@@ -95,46 +94,61 @@ class TransChecker implements TransCheckerInterface
      */
     public function check()
     {
-        $from    = $this->getDefaultLocale();
-        $locales = $this->getLocales();
-        $ignored = $this->getIgnoredTranslations();
-
-        /**
-         * @var Locale $fromAppLocale
-         * @var Locale $fromVendorLocale
-         */
-        $fromAppLocale    = $this->manager->getFrom('app', $from);
-        $fromVendorLocale = $this->manager->getFrom('vendor', $from);
-        $fromTranslations = $fromAppLocale->mergeTranslations($fromVendorLocale, $ignored);
-        $this->missing    = [];
-
+        $this->missing = [];
+        $from          = $this->getDefaultLocale();
+        $locales       = $this->getLocales();
+        $ignored       = $this->getIgnoredTranslations();
+        $fromTrans     = $this->getTranslations($from, $ignored);
 
         foreach ($locales as $to) {
-            /**
-             * @var Locale $toAppLocale
-             * @var Locale $toVendorLocale
-             */
-            $toAppLocale      = $this->manager->getFrom('app', $to);
-            $toVendorLocale   = $this->manager->getFrom('vendor', $to);
-            $toTranslations   = is_null($toAppLocale)
-                ? $toVendorLocale->mergeTranslations($toAppLocale, $ignored)
-                : $toAppLocale->mergeTranslations($toVendorLocale, $ignored);
+            $toTrans = $this->getTranslations($to, $ignored);
 
-            $diff = array_diff_key($toTranslations, $fromTranslations);
-            if (count($diff)) {
-                foreach ($diff as $key => $value) {
-                    $this->missing[$from][] = $key;
-                }
-            }
-
-            $diff = array_diff_key($fromTranslations, $toTranslations);
-            if (count($diff)) {
-                foreach ($diff as $key => $value) {
-                    $this->missing[$to][] = $key;
-                }
-            }
+            $this->diffMissing($toTrans, $fromTrans, $from);
+            $this->diffMissing($fromTrans, $toTrans, $to);
         }
 
         return $this->missing;
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Other Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Get locale translations from multiple groups.
+     *
+     * @param  string  $locale
+     * @param  array   $ignored
+     *
+     * @return array
+     */
+    private function getTranslations($locale, array $ignored)
+    {
+        $appLocale    = $this->manager->getFrom('app', $locale);
+        $vendorLocale = $this->manager->getFrom('vendor', $locale);
+
+        return is_null($appLocale)
+            ? $vendorLocale->mergeTranslations($appLocale, $ignored)
+            : $appLocale->mergeTranslations($vendorLocale, $ignored);
+    }
+
+    /**
+     * Diff the missing translations.
+     *
+     * @param  array   $toTranslations
+     * @param  array   $fromTranslations
+     * @param  string  $locale
+     *
+     * @return array
+     */
+    private function diffMissing(array $toTranslations, array $fromTranslations, $locale)
+    {
+        $diff = array_diff_key($toTranslations, $fromTranslations);
+
+        if (count($diff) === 0) { return; }
+
+        foreach ($diff as $key => $value) {
+            $this->missing[$locale][] = $key;
+        }
     }
 }
