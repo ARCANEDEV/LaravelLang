@@ -47,6 +47,16 @@ class Locale
     }
 
     /**
+     * Get the locale translations path.
+     *
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
      * Get locale translations.
      *
      * @return array
