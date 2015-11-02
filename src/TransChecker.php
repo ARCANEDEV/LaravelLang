@@ -160,13 +160,25 @@ class TransChecker implements TransCheckerInterface
      */
     private function addMissing($locale, $transKey)
     {
-        if (
-            isset($this->missing[$locale]) &&
-            in_array($transKey, $this->missing[$locale])
-        ) {
-            return;
+        if ( ! $this->hasMissing($locale, $transKey)) {
+            $this->missing[$locale][] = $transKey;
+        }
+    }
+
+    /**
+     * Check if a missing translation exists in collection.
+     *
+     * @param  string  $locale
+     * @param  string  $transKey
+     *
+     * @return bool
+     */
+    private function hasMissing($locale, $transKey)
+    {
+        if ( ! isset($this->missing[$locale])) {
+            return false;
         }
 
-        $this->missing[$locale][] = $transKey;
+        return in_array($transKey, $this->missing[$locale]);
     }
 }
