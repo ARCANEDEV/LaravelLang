@@ -176,8 +176,7 @@ class TransManager implements Contracts\TransManager
      */
     public function keys()
     {
-        $locales = array_map(function ($locales) {
-            /** @var LocaleCollection $locales */
+        $locales = array_map(function (LocaleCollection $locales) {
             $keys = $locales->keys()->toArray();
             return array_combine($keys, $keys);
         }, $this->locales);
