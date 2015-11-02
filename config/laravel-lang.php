@@ -3,9 +3,9 @@
 return [
     'vendor'    => base_path('vendor/caouecs/laravel4-lang'),
 
-    'check'     => [
-        'locales' => ['es', 'fr'],
+    'locales'   => ['es', 'fr'],
 
+    'check'     => [
         'ignore'  => [
             'validation.custom',
             'validation.attributes',
