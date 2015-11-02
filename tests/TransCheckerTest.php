@@ -42,6 +42,31 @@ class TransCheckerTest extends TestCase
     /** @test */
     public function it_can_be_instantiated()
     {
-        $this->assertInstanceOf(TransChecker::class, $this->checker);
+        $expectations = [
+            \Arcanedev\LaravelLang\Contracts\TransChecker::class,
+            \Arcanedev\LaravelLang\TransChecker::class,
+        ];
+
+        foreach ($expectations as $expected) {
+            $this->assertInstanceOf($expected, $this->checker);
+        }
+    }
+
+    /** @test */
+    public function it_can_check()
+    {
+        $expected = [
+            'es' => [
+                'errors.404.title', 'errors.500.title', 'errors.503.title',
+            ],
+            'en' => [
+                'main.success',
+            ],
+            'fr' => [
+                'errors.404.title', 'errors.500.title', 'errors.503.title',
+            ],
+        ];
+
+        $this->assertEquals($expected, $this->checker->check());
     }
 }

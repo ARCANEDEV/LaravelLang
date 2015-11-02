@@ -71,7 +71,7 @@ class TransChecker implements TransCheckerInterface
      */
     public function getLocales()
     {
-        return array_get($this->configs, 'check.locales', []);
+        return array_get($this->configs, 'locales', []);
     }
 
     /**
@@ -84,19 +84,14 @@ class TransChecker implements TransCheckerInterface
         return array_get($this->configs, 'check.ignore', []);
     }
 
-    /**
-     * Get the translation paths.
-     *
-     * @return array
-     */
-    public function getPaths()
-    {
-        return $this->manager->getPaths();
-    }
-
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Check the missing translations.
+     *
+     * @return array
      */
     public function check()
     {
@@ -108,18 +103,19 @@ class TransChecker implements TransCheckerInterface
          * @var Locale $fromAppLocale
          * @var Locale $fromVendorLocale
          */
-        $fromAppLocale    = $this->manager->get('app', $from);
-        $fromVendorLocale = $this->manager->get('vendor', $from);
+        $fromAppLocale    = $this->manager->getFrom('app', $from);
+        $fromVendorLocale = $this->manager->getFrom('vendor', $from);
         $fromTranslations = $fromAppLocale->mergeTranslations($fromVendorLocale, $ignored);
         $this->missing    = [];
+
 
         foreach ($locales as $to) {
             /**
              * @var Locale $toAppLocale
              * @var Locale $toVendorLocale
              */
-            $toAppLocale      = $this->manager->get('app', $to);
-            $toVendorLocale   = $this->manager->get('vendor', $to);
+            $toAppLocale      = $this->manager->getFrom('app', $to);
+            $toVendorLocale   = $this->manager->getFrom('vendor', $to);
             $toTranslations   = is_null($toAppLocale)
                 ? $toVendorLocale->mergeTranslations($toAppLocale, $ignored)
                 : $toAppLocale->mergeTranslations($toVendorLocale, $ignored);
