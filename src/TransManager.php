@@ -16,7 +16,18 @@ class TransManager implements Contracts\TransManager
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
+    /**
+     * Lang directories paths.
+     *
+     * @var array
+     */
     private $paths   = [];
+
+    /**
+     * Translations collection.
+     *
+     * @var array
+     */
     private $locales = [];
 
     /** @var Filesystem */
@@ -27,6 +38,8 @@ class TransManager implements Contracts\TransManager
      | ------------------------------------------------------------------------------------------------
      */
     /**
+     * Make TransManager instance.
+     *
      * @param  \Illuminate\Filesystem\Filesystem  $filesystem
      * @param  array                              $paths
      */
@@ -62,28 +75,39 @@ class TransManager implements Contracts\TransManager
     {
         $exclude = ['vendor'];
 
-        foreach ($this->getPaths() as $group => $langPath) {
-            $locales = new LocaleCollection;
-
-            foreach ($this->filesystem->directories($langPath) as $path) {
-                $locale = basename($path);
-
-                if (in_array($locale, $exclude)) {
-                    continue;
-                }
-
-                $locales->add(
-                    new Locale($locale, $path, $this->loadFiles($path))
-                );
-            }
-
-            $this->locales[$group] = $locales;
-
+        foreach ($this->getPaths() as $group => $path) {
+            $this->locales[$group] = $this->loadDirectories($path, $exclude);
         }
     }
 
     /**
-     * Load the lang directory.
+     * Load directories.
+     *
+     * @param  string  $dirPath
+     * @param  array   $exclude
+     *
+     * @return LocaleCollection
+     */
+    private function loadDirectories($dirPath, array $exclude = [])
+    {
+        $locales = new LocaleCollection;
+
+        foreach ($this->filesystem->directories($dirPath) as $path) {
+            $key = basename($path);
+
+            if (in_array($key, $exclude)) {
+                continue;
+            }
+
+            $locale = new Locale($key, $path, $this->loadLocaleFiles($path));
+            $locales->add($locale);
+        }
+
+        return $locales;
+    }
+
+    /**
+     * Load the locale translation files.
      *
      * @param  string  $path
      *
@@ -91,15 +115,14 @@ class TransManager implements Contracts\TransManager
      *
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    private function loadFiles($path)
+    private function loadLocaleFiles($path)
     {
         $files = [];
 
         foreach ($this->filesystem->allFiles($path) as $file) {
             /** @var \Symfony\Component\Finder\SplFileInfo $file */
             $key = str_replace(
-                ['.php', DS],
-                ['', '.'],
+                ['.php', DS], ['', '.'],
                 $file->getRelativePathname()
             );
 
@@ -113,28 +136,47 @@ class TransManager implements Contracts\TransManager
     }
 
     /**
-     * Get locale from a group.
+     * Get locale collection by group location.
      *
      * @param  string  $group
-     * @param  string  $locale
-     * @param  mixed   $default
+     * @param  null    $default
      *
-     * @return Locale|mixed
+     * @return LocaleCollection|null
      */
-    public function get($group, $locale, $default = null)
+    public function getCollection($group, $default = null)
     {
-        $locales = $this->getCollection($group);
-
-        return $locales->get($locale, $default);
+        return array_get($this->locales, $group, $default);
     }
 
     /**
-     * @param  string  $group
+     * Get locale keys.
      *
-     * @return LocaleCollection
+     * @return array
      */
-    public function getCollection($group)
+    public function keys()
     {
-        return $this->locales[$group];
+        $locales = array_map(function ($locales) {
+            /** @var LocaleCollection $locales */
+            $keys = $locales->keys()->toArray();
+            return array_combine($keys, $keys);
+        }, $this->locales);
+
+        $all = [];
+
+        foreach ($locales as $keys) {
+            $all = array_merge($all, $keys);
+        }
+
+        return $all;
+    }
+
+    /**
+     * Get locales count.
+     *
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->keys());
     }
 }

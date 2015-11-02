@@ -24,13 +24,26 @@ interface TransManager
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Get locale from a group.
+     * Get locale collection by group location.
      *
      * @param  string  $group
-     * @param  string  $locale
-     * @param  mixed   $default
+     * @param  null    $default
      *
-     * @return \Arcanedev\LaravelLang\Entities\Locale|mixed
+     * @return \Arcanedev\LaravelLang\Entities\LocaleCollection|null
      */
-    public function get($group, $locale, $default = null);
+    public function getCollection($group, $default = null);
+
+    /**
+     * Get locale keys.
+     *
+     * @return array
+     */
+    public function keys();
+
+    /**
+     * Get locales count.
+     *
+     * @return int
+     */
+    public function count();
 }
