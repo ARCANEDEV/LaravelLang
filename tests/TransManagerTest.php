@@ -77,11 +77,13 @@ class TransManagerTest extends TestCase
     public function it_can_get_locales_collection()
     {
         $expectations = [
-            'app'    => 1,
+            'app'    => 2,
             'vendor' => $this->getLocalesCount(false),
         ];
 
         foreach ($expectations as $group => $count) {
+            $this->assertTrue($this->manager->hasCollection($group));
+
             $locales = $this->manager->getCollection($group);
 
             $this->assertInstanceOf(
@@ -89,5 +91,43 @@ class TransManagerTest extends TestCase
             );
             $this->assertCount($count, $locales);
         }
+    }
+
+    /** @test */
+    public function it_can_get_one_from_collection()
+    {
+        $expectations = [
+            'app'    => [
+                'en' => 'en',
+                'es' => null,
+                'fr' => 'fr',
+            ],
+            'vendor' => [
+                'en' => null,
+                'es' => 'es',
+                'fr' => 'fr',
+            ],
+        ];
+
+        foreach ($expectations as $group => $locales) {
+            foreach ($locales as $key => $expected) {
+                $locale = $this->manager->getFrom($group, $key);
+
+                if (is_null($expected)) {
+                    $this->assertNull($locale);
+                    continue;
+                }
+
+                $this->assertEquals($key, $locale->getKey());
+                $this->assertTrue(file_exists($locale->getPath()));
+                $this->assertNotEmpty($locale->getTranslations());
+            }
+        }
+    }
+
+    /** @test */
+    public function it_return_default_on_getting_one_from_not_existed_group()
+    {
+        $this->assertNull($this->manager->getFrom('locales', 'en'));
     }
 }

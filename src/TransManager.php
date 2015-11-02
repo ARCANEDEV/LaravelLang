@@ -47,7 +47,8 @@ class TransManager implements Contracts\TransManager
     {
         $this->filesystem = $filesystem;
         $this->paths      = $paths;
-        $this->load();
+        $exclude          = ['vendor'];
+        $this->load($exclude);
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -70,11 +71,11 @@ class TransManager implements Contracts\TransManager
      */
     /**
      * Load lang files.
+     *
+     * @param  array  $exclude
      */
-    private function load()
+    private function load(array $exclude = [])
     {
-        $exclude = ['vendor'];
-
         foreach ($this->getPaths() as $group => $path) {
             $this->locales[$group] = $this->loadDirectories($path, $exclude);
         }
@@ -149,6 +150,26 @@ class TransManager implements Contracts\TransManager
     }
 
     /**
+     * Get a locale translations from a group.
+     *
+     * @param  string  $group
+     * @param  string  $locale
+     * @param  null    $default
+     *
+     * @return Locale|null
+     */
+    public function getFrom($group, $locale, $default = null)
+    {
+        if ( ! $this->hasCollection($group)) {
+            return $default;
+        }
+
+        $locales = $this->getCollection($group);
+
+        return $locales->get($locale, $default);
+    }
+
+    /**
      * Get locale keys.
      *
      * @return array
@@ -178,5 +199,21 @@ class TransManager implements Contracts\TransManager
     public function count()
     {
         return count($this->keys());
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Check Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Check if a translation group exists.
+     *
+     * @param  string  $group
+     *
+     * @return bool
+     */
+    public function hasCollection($group)
+    {
+        return array_has($this->locales, $group);
     }
 }

@@ -34,6 +34,17 @@ interface TransManager
     public function getCollection($group, $default = null);
 
     /**
+     * Get a locale translations from a group.
+     *
+     * @param  string  $group
+     * @param  string  $locale
+     * @param  null    $default
+     *
+     * @return \Arcanedev\LaravelLang\Entities\Locale|null
+     */
+    public function getFrom($group, $locale, $default = null);
+
+    /**
      * Get locale keys.
      *
      * @return array
@@ -46,4 +57,17 @@ interface TransManager
      * @return int
      */
     public function count();
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Check Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Check if a translation group exists.
+     *
+     * @param  string  $group
+     *
+     * @return bool
+     */
+    public function hasCollection($group);
 }
