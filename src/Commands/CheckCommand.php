@@ -32,6 +32,13 @@ class CheckCommand extends Command
     /** @var \Arcanedev\LaravelLang\Contracts\TransChecker */
     private $checker;
 
+    /**
+     * Missing translations count.
+     *
+     * @var int
+     */
+    private $count = 0;
+
     /* ------------------------------------------------------------------------------------------------
      |  Constructor
      | ------------------------------------------------------------------------------------------------
@@ -46,6 +53,7 @@ class CheckCommand extends Command
         parent::__construct();
 
         $this->checker = $checker;
+        $this->count   = 0;
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -60,13 +68,15 @@ class CheckCommand extends Command
         $this->copyright();
 
         $this->info('Checking the missing translation...');
+        $this->line('');
 
         $missing = $this->checker->check();
 
-        $this->table(
-            ['locale', 'translations'],
-            $this->prepareRows($missing)
-        );
+        $this->table(['locale', 'translations'], $this->prepareRows($missing));
+
+        $this->line('');
+        $this->showMessage();
+        $this->line('');
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -82,25 +92,29 @@ class CheckCommand extends Command
      */
     private function prepareRows(array $missing)
     {
-        $rows  = [];
-        $count = 0;
+        $rows        = [];
 
         foreach ($missing as $locale => $translations) {
             foreach ($translations as $translation) {
                 $rows[] = [$locale, $translation];
-                $count++;
+                $this->count++;
             }
             $rows[] = $this->tableSeparator();
         }
 
-        /** @var \Symfony\Component\Console\Helper\FormatterHelper $formatter */
-        $formatter = $this->getHelper('formatter');
-
-        $rows[] = [
-            $formatter->formatSection('Total', '', 'info'),
-            $formatter->formatSection($count . ' translations are missing.', '', $count == 0 ? 'info' : 'error'),
-        ];
+        $rows[] = ['Total', $this->count . ' translations are missing.'];
 
         return $rows;
+    }
+
+    /**
+     * Show the message.
+     */
+    private function showMessage()
+    {
+        if ($this->count > 0)
+            $this->comment('Try to fix your translations and run again the `trans:check` command.');
+        else
+            $this->info('No missing translations, YOU ROCK !! (^_^)b');
     }
 }
