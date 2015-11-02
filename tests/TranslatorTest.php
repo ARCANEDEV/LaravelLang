@@ -53,7 +53,7 @@ class TranslatorTest extends TestCase
                 'auth.failed' => 'Estas credenciales no coinciden con nuestros registros.'
             ],
             'fr' => [
-                'auth.failed' => 'Ces certificats ne correspondent pas à nos enregistrements'
+                'auth.failed' => 'Ces identifiants ne correspondent pas à nos enregistrements'
             ],
             'it' => [
                 'auth.failed' => 'Credenziali non corrispondenti ai dati registrati.'

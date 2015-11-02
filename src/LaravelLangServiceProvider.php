@@ -56,6 +56,9 @@ class LaravelLangServiceProvider extends ServiceProvider
         $this->registerConfig();
 
         $this->app->register(Providers\TranslationServiceProvider::class);
+
+        $this->registerTransManager();
+        $this->registerTransChecker();
     }
 
     /**
@@ -66,7 +69,61 @@ class LaravelLangServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
-            //
+            'arcanedev.laravel-lang.manager',
+            \Arcanedev\LaravelLang\Contracts\TransManager::class,
+            'arcanedev.laravel-lang.checker',
+            \Arcanedev\LaravelLang\Contracts\TransChecker::class,
         ];
+    }
+
+    /**
+     * Register the trans manager.
+     */
+    private function registerTransManager()
+    {
+        $this->singleton('arcanedev.laravel-lang.manager', function ($app) {
+            /**
+             * @var  \Illuminate\Foundation\Application  $app
+             * @var  \Illuminate\Filesystem\Filesystem   $files
+             * @var  \Illuminate\Config\Repository       $config
+             */
+            $files  = $app['files'];
+            $config = $app['config'];
+            $paths  = array_map('realpath', [
+                'app'    => $app->langPath(),
+                'vendor' => $config->get('laravel-lang.vendor', ''),
+            ]);
+
+            return new TransManager($files, $paths);
+        });
+
+        $this->app->bind(
+            \Arcanedev\LaravelLang\Contracts\TransManager::class,
+            'arcanedev.laravel-lang.manager'
+        );
+    }
+
+    /**
+     * Register the trans checker.
+     */
+    private function registerTransChecker()
+    {
+        $this->singleton('arcanedev.laravel-lang.checker', function ($app) {
+            /**
+             * @var  \Illuminate\Translation\Translator             $translator
+             * @var  \Arcanedev\LaravelLang\Contracts\TransManager  $manager
+             * @var  \Illuminate\Config\Repository                  $config
+             */
+            $translator = $app['translator'];
+            $manager    = $app['arcanedev.laravel-lang.manager'];
+            $config     = $app['config'];
+
+            return new TransChecker($translator, $manager, $config->get('laravel-lang'));
+        });
+
+        $this->app->bind(
+            \Arcanedev\LaravelLang\Contracts\TransChecker::class,
+            'arcanedev.laravel-lang.checker'
+        );
     }
 }

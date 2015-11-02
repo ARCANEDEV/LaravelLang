@@ -1,21 +1,21 @@
 <?php namespace Arcanedev\LaravelLang\Tests;
 
-use Arcanedev\LaravelLang\LaravelLangServiceProvider;
+use Arcanedev\LaravelLang\TransChecker;
 
 /**
- * Class     LaravelLangServiceProviderTest
+ * Class     TransCheckerTest
  *
  * @package  Arcanedev\LaravelLang\Tests
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class LaravelLangServiceProviderTest extends TestCase
+class TransCheckerTest extends TestCase
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
-    /** @var  LaravelLangServiceProvider  */
-    private $provider;
+    /** @var TransChecker */
+    private $checker;
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
@@ -25,14 +25,14 @@ class LaravelLangServiceProviderTest extends TestCase
     {
         parent::setUp();
 
-        $this->provider = $this->app->getProvider(LaravelLangServiceProvider::class);
+        $this->checker = $this->app['arcanedev.laravel-lang.checker'];
     }
 
     public function tearDown()
     {
         parent::tearDown();
 
-        unset($this->provider);
+        unset($this->checker);
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -43,26 +43,30 @@ class LaravelLangServiceProviderTest extends TestCase
     public function it_can_be_instantiated()
     {
         $expectations = [
-            \Illuminate\Support\ServiceProvider::class,
-            \Arcanedev\Support\ServiceProvider::class,
-            \Arcanedev\Support\PackageServiceProvider::class,
+            \Arcanedev\LaravelLang\Contracts\TransChecker::class,
+            \Arcanedev\LaravelLang\TransChecker::class,
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->provider);
+            $this->assertInstanceOf($expected, $this->checker);
         }
     }
 
     /** @test */
-    public function it_can_provides()
+    public function it_can_check()
     {
         $expected = [
-            'arcanedev.laravel-lang.manager',
-            \Arcanedev\LaravelLang\Contracts\TransManager::class,
-            'arcanedev.laravel-lang.checker',
-            \Arcanedev\LaravelLang\Contracts\TransChecker::class,
+            'es' => [
+                'errors.404.title', 'errors.500.title', 'errors.503.title',
+            ],
+            'en' => [
+                'main.success',
+            ],
+            'fr' => [
+                'errors.404.title', 'errors.500.title', 'errors.503.title',
+            ],
         ];
 
-        $this->assertEquals($expected, $this->provider->provides());
+        $this->assertEquals($expected, $this->checker->check());
     }
 }

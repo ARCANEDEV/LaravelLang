@@ -11,6 +11,17 @@ use Orchestra\Testbench\TestCase as BaseTestCase;
 abstract class TestCase extends BaseTestCase
 {
     /* ------------------------------------------------------------------------------------------------
+     |  Properties
+     | ------------------------------------------------------------------------------------------------
+     */
+    protected $locales = [
+        'ar', 'bg', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'es', 'fa', 'fi', 'fr',
+        'he', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ka', 'km', 'ko', 'lt', 'me', 'mk',
+        'ms', 'nb', 'nl', 'pl', 'pt', 'pt-BR', 'ro', 'ru', 'sc', 'sk', 'sl', 'sq', 'sr',
+        'sv', 'th', 'tk', 'tr', 'uk', 'vi', 'zh-CN', 'zh-HK', 'zh-TW',
+    ];
+
+    /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
      */
@@ -68,7 +79,16 @@ abstract class TestCase extends BaseTestCase
         $config   = $app['config'];
 
         $config->set('laravel-lang', [
-            'vendor'    => realpath($basePath . '/vendor/caouecs/laravel4-lang')
+            'vendor'    => realpath($basePath . '/vendor/caouecs/laravel4-lang'),
+
+            'locales'   => ['es', 'fr'],
+
+            'check'     => [
+                'ignore'  => [
+                    'validation.custom',
+                    'validation.attributes',
+                ],
+            ],
         ]);
 
         $this->copyLanguagesFixtures($app);
@@ -87,17 +107,40 @@ abstract class TestCase extends BaseTestCase
     {
         /** @var \Illuminate\Filesystem\Filesystem $filesystem */
         $filesystem = $app['files'];
-        $dir        = 'lang/en';
-        $from       = realpath(__DIR__ . DS . 'fixtures' . DS . $dir);
-        $to         = realpath(base_path('resources' . DS . $dir));
 
-        $files = array_map(function ($file) use ($from, $to) {
-            /** @var \Symfony\Component\Finder\SplFileInfo $file */
-            return $file->getRelativePathname();
-        }, $filesystem->allFiles($from));
+        $filesystem->copyDirectory(
+            realpath(__DIR__ . DS . 'fixtures' . DS . 'lang'),
+            realpath(base_path('resources' . DS . 'lang'))
+        );
+    }
 
-        foreach ($files as $file) {
-            $filesystem->copy($from . DS . $file, $to . DS . $file);
+    /**
+     * Get available locales.
+     *
+     * @param  bool|true  $addEnglish
+     *
+     * @return array
+     */
+    protected function getLocales($addEnglish = true)
+    {
+        $locales = $this->locales;
+
+        if ($addEnglish) {
+            $locales = array_merge(['en' => 'en'], $locales);
         }
+
+        return $locales;
+    }
+
+    /**
+     * Count available locales.
+     *
+     * @param  bool|true  $addEnglish
+     *
+     * @return int
+     */
+    protected function getLocalesCount($addEnglish = true)
+    {
+        return count($this->getLocales($addEnglish));
     }
 }
