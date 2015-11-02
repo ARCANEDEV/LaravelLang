@@ -67,7 +67,7 @@ class CheckCommand extends Command
     {
         $this->copyright();
 
-        $this->info('Checking the missing translation...');
+        $this->info('Checking the missing translations...');
         $this->line('');
 
         $missing = $this->checker->check();
@@ -109,6 +109,8 @@ class CheckCommand extends Command
 
     /**
      * Show the message.
+     *
+     * @codeCoverageIgnore
      */
     private function showMessage()
     {
