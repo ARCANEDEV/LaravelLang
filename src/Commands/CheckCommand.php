@@ -29,7 +29,11 @@ class CheckCommand extends Command
      */
     protected $description = 'Check the missing translations.';
 
-    /** @var \Arcanedev\LaravelLang\Contracts\TransChecker */
+    /**
+     * The TransChecker instance.
+     *
+     * @var \Arcanedev\LaravelLang\Contracts\TransChecker
+     */
     private $checker;
 
     /**

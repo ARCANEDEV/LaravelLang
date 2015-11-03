@@ -115,6 +115,40 @@ abstract class TestCase extends BaseTestCase
     }
 
     /**
+     * Get the filesystem instance.
+     *
+     * @return \Illuminate\Filesystem\Filesystem
+     */
+    protected function filesystem()
+    {
+        return $this->app['files'];
+    }
+
+    /**
+     * Clean the lang folder.
+     *
+     * @param  string  $locale
+     *
+     * @return bool
+     */
+    protected function cleanLangDirectory($locale)
+    {
+        return $this->filesystem()->cleanDirectory($this->app->langPath() . DS . $locale);
+    }
+
+    /**
+     * Delete the lang folder.
+     *
+     * @param  string  $locale
+     *
+     * @return bool
+     */
+    protected function deleteLangDirectory($locale)
+    {
+        return $this->filesystem()->deleteDirectory($this->app->langPath() . DS . $locale);
+    }
+
+    /**
      * Get available locales.
      *
      * @param  bool|true  $addEnglish

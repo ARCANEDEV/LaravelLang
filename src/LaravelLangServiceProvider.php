@@ -1,6 +1,7 @@
 <?php namespace Arcanedev\LaravelLang;
 
 use Arcanedev\Support\PackageServiceProvider as ServiceProvider;
+use Illuminate\Foundation\Application;
 
 /**
  * Class     LaravelLangServiceProvider
@@ -82,9 +83,8 @@ class LaravelLangServiceProvider extends ServiceProvider
      */
     private function registerTransManager()
     {
-        $this->singleton('arcanedev.laravel-lang.manager', function ($app) {
+        $this->singleton('arcanedev.laravel-lang.manager', function (Application $app) {
             /**
-             * @var  \Illuminate\Foundation\Application  $app
              * @var  \Illuminate\Filesystem\Filesystem   $files
              * @var  \Illuminate\Config\Repository       $config
              */
@@ -109,7 +109,7 @@ class LaravelLangServiceProvider extends ServiceProvider
      */
     private function registerTransChecker()
     {
-        $this->singleton('arcanedev.laravel-lang.checker', function ($app) {
+        $this->singleton('arcanedev.laravel-lang.checker', function (Application $app) {
             /**
              * @var  \Illuminate\Translation\Translator             $translator
              * @var  \Arcanedev\LaravelLang\Contracts\TransManager  $manager
@@ -119,7 +119,7 @@ class LaravelLangServiceProvider extends ServiceProvider
             $manager    = $app['arcanedev.laravel-lang.manager'];
             $config     = $app['config'];
 
-            return new TransChecker($translator, $manager, $config->get('laravel-lang'));
+            return new TransChecker($translator, $manager, $config->get('laravel-lang', []));
         });
 
         $this->app->bind(

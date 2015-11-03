@@ -35,9 +35,9 @@ class FileLoader extends IlluminateFileLoader
      */
     public function __construct(Filesystem $files, $path, $languagesPath)
     {
-        $this->setLanguagesPath($languagesPath);
-
         parent::__construct($files, $path);
+
+        $this->setLanguagesPath($languagesPath);
     }
 
     /* ------------------------------------------------------------------------------------------------
