@@ -25,7 +25,7 @@ class TransPublisher implements Contracts\TransPublisher
     /**
      * The TransManager instance.
      *
-     * @var TransManager
+     * @var Contracts\TransManager
      */
     private $manager;
 

@@ -66,7 +66,7 @@ class PublishCommand extends Command
     {
         $this->copyright();
 
-        $locale = $this->argument('locale');
+        $locale = (string) $this->argument('locale');
         $force  = (bool) $this->option('force');
 
         if ($this->publisher->isDefault($locale)) {
