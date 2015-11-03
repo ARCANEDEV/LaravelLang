@@ -34,13 +34,15 @@ class CommandServiceProvider extends ServiceProvider
      */
     /**
      * Register the service provider.
-     *
-     * @return void
      */
     public function register()
     {
         $this->registerCommand(
             'check', \Arcanedev\LaravelLang\Commands\CheckCommand::class
+        );
+
+        $this->registerCommand(
+            'publish', \Arcanedev\LaravelLang\Commands\PublishCommand::class
         );
 
         $this->commands($this->commands);

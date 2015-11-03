@@ -60,6 +60,7 @@ class CommandServiceProviderTest extends TestCase
     {
         $expected = [
             'arcanedev.laravel-lang.commands.check',
+            'arcanedev.laravel-lang.commands.publish',
         ];
 
         $this->assertEquals($expected, $this->provider->provides());
