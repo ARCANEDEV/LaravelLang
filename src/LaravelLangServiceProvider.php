@@ -48,6 +48,18 @@ class LaravelLangServiceProvider extends ServiceProvider
      | ------------------------------------------------------------------------------------------------
      */
     /**
+     * Boot the service provider.
+     */
+    public function boot()
+    {
+        parent::boot();
+
+        $this->publishes([
+            $this->getConfigFile() => config_path("{$this->package}.php"),
+        ], 'config');
+    }
+
+    /**
      * Register the service provider.
      *
      * @return void
