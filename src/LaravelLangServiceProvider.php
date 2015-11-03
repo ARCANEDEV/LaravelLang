@@ -58,9 +58,13 @@ class LaravelLangServiceProvider extends ServiceProvider
 
         $this->registerTransManager();
         $this->registerTransChecker();
+        $this->registerLangPublisher();
 
         $this->app->register(Providers\TranslationServiceProvider::class);
-        $this->app->register(Providers\CommandServiceProvider::class);
+
+        if ($this->app->runningInConsole()) {
+            $this->app->register(Providers\CommandServiceProvider::class);
+        }
     }
 
     /**
@@ -75,9 +79,15 @@ class LaravelLangServiceProvider extends ServiceProvider
             \Arcanedev\LaravelLang\Contracts\TransManager::class,
             'arcanedev.laravel-lang.checker',
             \Arcanedev\LaravelLang\Contracts\TransChecker::class,
+            'arcanedev.laravel-lang.publisher',
+            \Arcanedev\LaravelLang\Contracts\TransPublisher::class,
         ];
     }
 
+    /* ------------------------------------------------------------------------------------------------
+     |  Services Functions
+     | ------------------------------------------------------------------------------------------------
+     */
     /**
      * Register the trans manager.
      */
@@ -125,6 +135,25 @@ class LaravelLangServiceProvider extends ServiceProvider
         $this->app->bind(
             \Arcanedev\LaravelLang\Contracts\TransChecker::class,
             'arcanedev.laravel-lang.checker'
+        );
+    }
+
+    private function registerLangPublisher()
+    {
+        $this->singleton('arcanedev.laravel-lang.publisher', function (Application $app) {
+            /**
+             * @var  \Illuminate\Filesystem\Filesystem              $files
+             * @var  \Arcanedev\LaravelLang\Contracts\TransManager  $manager
+             */
+            $files   = $app['files'];
+            $manager = $app['arcanedev.laravel-lang.manager'];
+
+            return new TransPublisher($files, $manager, $app->langPath());
+        });
+
+        $this->app->bind(
+            \Arcanedev\LaravelLang\Contracts\TransPublisher::class,
+            'arcanedev.laravel-lang.publisher'
         );
     }
 }

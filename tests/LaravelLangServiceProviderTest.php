@@ -61,6 +61,8 @@ class LaravelLangServiceProviderTest extends TestCase
             \Arcanedev\LaravelLang\Contracts\TransManager::class,
             'arcanedev.laravel-lang.checker',
             \Arcanedev\LaravelLang\Contracts\TransChecker::class,
+            'arcanedev.laravel-lang.publisher',
+            \Arcanedev\LaravelLang\Contracts\TransPublisher::class,
         ];
 
         $this->assertEquals($expected, $this->provider->provides());
