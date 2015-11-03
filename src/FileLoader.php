@@ -16,11 +16,18 @@ class FileLoader extends IlluminateFileLoader
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Languages dir.
+     * Vendor directory path.
      *
      * @var string
      */
-    protected $languagesPath;
+    protected $vendorPath;
+
+    /**
+     * Supported locales.
+     *
+     * @var array
+     */
+    protected $locales;
 
     /* ------------------------------------------------------------------------------------------------
      |  Constructor
@@ -31,13 +38,15 @@ class FileLoader extends IlluminateFileLoader
      *
      * @param  \Illuminate\Filesystem\Filesystem  $files
      * @param  string                             $path
-     * @param  string                             $languagesPath
+     * @param  string                             $vendorPath
+     * @param  array                              $locales
      */
-    public function __construct(Filesystem $files, $path, $languagesPath)
+    public function __construct(Filesystem $files, $path, $vendorPath, array $locales = [])
     {
         parent::__construct($files, $path);
 
-        $this->setLanguagesPath($languagesPath);
+        $this->setVendorPath($vendorPath);
+        $this->setSupportedLocales($locales);
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -45,27 +54,37 @@ class FileLoader extends IlluminateFileLoader
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Get the languages path.
+     * Get the vendor path.
      *
      * @return string
      */
-    private function getLanguagesPath()
+    private function getVendorPath()
     {
-        return $this->languagesPath;
+        return $this->vendorPath;
     }
 
     /**
-     * Set the languages path.
+     * Set the vendor path.
      *
-     * @param  string  $languagesPath
+     * @param  string  $vendorPath
      *
      * @return self
      */
-    private function setLanguagesPath($languagesPath)
+    private function setVendorPath($vendorPath)
     {
-        $this->languagesPath = $languagesPath;
+        $this->vendorPath = $vendorPath;
 
         return $this;
+    }
+
+    /**
+     * Set the supported locales.
+     *
+     * @param  array  $locales
+     */
+    private function setSupportedLocales(array $locales)
+    {
+        $this->locales = $locales;
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -83,8 +102,28 @@ class FileLoader extends IlluminateFileLoader
      */
     public function load($locale, $group, $namespace = null)
     {
-        $defaults = $this->loadPath($this->getLanguagesPath(), $locale, $group);
+        $defaults = [];
+
+        if (empty($this->locales) || $this->isSupported($locale)) {
+            $defaults = $this->loadPath($this->getVendorPath(), $locale, $group);
+        }
 
         return array_replace_recursive($defaults, parent::load($locale, $group, $namespace));
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Check Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Check if the locale is supported or use the fallback.
+     *
+     * @param  string  $locale
+     *
+     * @return bool
+     */
+    private function isSupported($locale)
+    {
+        return in_array($locale, $this->locales);
     }
 }

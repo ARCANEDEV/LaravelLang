@@ -26,11 +26,13 @@ class TranslationServiceProvider extends ServiceProvider
              * @var  \Illuminate\Config\Repository      $config
              * @var  \Illuminate\Filesystem\Filesystem  $files
              */
-            $config   = $app['config'];
-            $files    = $app['files'];
+            $config  = $app['config'];
+            $files   = $app['files'];
+            $vendor  = $config->get('laravel-lang.vendor', '');
+            $locales = $config->get('laravel-lang.locales', []);
 
             return new FileLoader(
-                $files, $app->langPath(), $config->get('laravel-lang.vendor', '')
+                $files, $app->langPath(), $vendor, $locales
             );
         });
     }

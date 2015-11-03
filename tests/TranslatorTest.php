@@ -55,9 +55,6 @@ class TranslatorTest extends TestCase
             'fr' => [
                 'auth.failed' => 'Ces identifiants ne correspondent pas à nos enregistrements'
             ],
-            'it' => [
-                'auth.failed' => 'Credenziali non corrispondenti ai dati registrati.'
-            ],
         ];
 
         foreach ($expectations as $locale => $translations) {
@@ -66,6 +63,21 @@ class TranslatorTest extends TestCase
             foreach ($translations as $key => $expected) {
                 $this->assertEquals($expected, $this->translator->get($key));
             }
+        }
+    }
+
+    /** @test */
+    public function it_can_translate_with_fallback()
+    {
+        $unsupportedLocales = ['ar', 'bg', 'bs', 'ca', 'it'];
+
+        foreach ($unsupportedLocales as $locale) {
+            $this->translator->setLocale($locale);
+
+            $this->assertEquals(
+                'These credentials do not match our records.',
+                $this->translator->get('auth.failed')
+            );
         }
     }
 }
