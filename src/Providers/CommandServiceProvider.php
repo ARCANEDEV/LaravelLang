@@ -41,6 +41,10 @@ class CommandServiceProvider extends ServiceProvider
             'check', \Arcanedev\LaravelLang\Commands\CheckCommand::class
         );
 
+        $this->registerCommand(
+            'publish', \Arcanedev\LaravelLang\Commands\PublishCommand::class
+        );
+
         $this->commands($this->commands);
     }
 
