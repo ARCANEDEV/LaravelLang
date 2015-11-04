@@ -2,7 +2,7 @@
 
 After publishing the package config file :
 
-```
+```php
 // config/laravel-lang.php
 <?php
 
