@@ -1,9 +1,9 @@
 {
     "name":        "arcanedev/laravel-lang",
-    "description": "Translations for Laravel 5 based on 'caouecs/laravel4-lang' package.",
-    "homepage":    "https://github.com/ARCANEDEV/Menus",
+    "description": "Translations manager and checker for Laravel 5 based on 'caouecs/laravel4-lang' package.",
+    "homepage":    "https://github.com/ARCANEDEV/LaravelLang",
     "keywords":    [
-        "arcanedev", "laravel", "translations", "trans", "languages", "lang", "validations"
+        "arcanedev", "laravel", "translations", "trans", "languages", "lang", "localisation", "localization", "validations"
     ],
     "authors":  [
         {
@@ -37,7 +37,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "1.2-dev"
         }
     }
 }
