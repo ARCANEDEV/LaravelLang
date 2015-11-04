@@ -27,13 +27,15 @@
 
 *By [ARCANEDEV&copy;](http://www.arcanedev.net/)*
 
-Translations for Laravel 5 based on 'caouecs/laravel4-lang' package.
+Translations manager and checker for Laravel 5 based on [caouecs/Laravel-lang](https://github.com/caouecs/Laravel-lang) translations.
 
 Feel free to check out the [releases](https://github.com/ARCANEDEV/LaravelLang/releases), [license](LICENSE.md), and [contribution guidelines](CONTRIBUTING.md).
 
 ### Features
 
   * Easy setup &amp; configuration.
+  * Missing translations Checker.
+  * Translations Publisher.
   * Well documented &amp; IDE Friendly.
   * Well tested with maximum code quality.
   * Made with :heart: &amp; :coffee:.
