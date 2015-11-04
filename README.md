@@ -47,14 +47,15 @@ Feel free to check out the [releases](https://github.com/ARCANEDEV/LaravelLang/r
   3. [Configuration](_docs/3-Configuration.md)
   4. [Usage](_docs/4-Usage.md)
 
-## TODOS
+## TODO
 
-  - [ ] Complete the documentation.
   - [ ] Test Laravel 5.0 support.
+  - [ ] Adding LaravelLang API.
 
 ## DONE
 
   - [x] Laravel 5.1 supported.
+  - [x] Complete the documentation.
 
 ## Contribution
 
