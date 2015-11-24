@@ -68,12 +68,12 @@ This is useful if you want to update/override the translations offered by the ve
 
 To publish for example the `fr` (French) translations, you simply run this command:
 
-```php
+```bash
 $ php artisan trans:publish fr
 ```
 
 If you have translations already in `resources/lang` and you want to force the publishing, add the `--force` flag :
 
-```php
+```bash
 $ php artisan trans:publish fr --force
 ```
