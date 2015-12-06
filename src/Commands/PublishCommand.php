@@ -30,7 +30,7 @@ class PublishCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Check the missing translations.';
+    protected $description = 'Publish the [locale] translations.';
 
     /**
      * The TransPublisher instance.
