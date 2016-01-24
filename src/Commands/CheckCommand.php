@@ -54,10 +54,11 @@ class CheckCommand extends Command
      */
     public function __construct(TransChecker $checker)
     {
-        parent::__construct();
-
+        $this->name    = $this->signature;
         $this->checker = $checker;
         $this->count   = 0;
+
+        parent::__construct();
     }
 
     /* ------------------------------------------------------------------------------------------------
