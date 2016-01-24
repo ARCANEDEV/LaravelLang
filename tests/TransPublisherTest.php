@@ -30,9 +30,9 @@ class TransPublisherTest extends TestCase
 
     public function tearDown()
     {
-        parent::tearDown();
-
         unset($this->publisher);
+
+        parent::tearDown();
     }
 
     /* ------------------------------------------------------------------------------------------------

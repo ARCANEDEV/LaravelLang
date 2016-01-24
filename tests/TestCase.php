@@ -14,26 +14,17 @@ abstract class TestCase extends BaseTestCase
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
-    protected $locales = [
-        'ar', 'bg', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'es', 'fa', 'fi', 'fr',
-        'he', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ka', 'km', 'ko', 'lt', 'me', 'mk',
-        'ms', 'nb', 'nl', 'pl', 'pt', 'pt-BR', 'ro', 'ru', 'sc', 'sk', 'sl', 'sq', 'sr',
-        'sv', 'th', 'tk', 'tr', 'uk', 'vi', 'zh-CN', 'zh-HK', 'zh-TW',
-    ];
-
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /**
+     * All the available locales.
+     *
+     * @var array
      */
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
-    public function tearDown()
-    {
-        parent::tearDown();
-    }
+    protected $locales = [
+        'ar', 'bg', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'es', 'fa', 'fi', 'fr', 'gl',
+        'he', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ka', 'km', 'ko', 'lt', 'me', 'mk', 'ms',
+        'nb', 'nl', 'pl', 'pt', 'pt-BR', 'ro', 'ru', 'sc', 'sk', 'sl', 'sq', 'sr', 'sv',
+        'th', 'tk', 'tr', 'uk', 'vi', 'zh-CN', 'zh-HK', 'zh-TW',
+    ];
 
     /* ------------------------------------------------------------------------------------------------
      |  Laravel Functions
@@ -74,7 +65,7 @@ abstract class TestCase extends BaseTestCase
      */
     protected function getEnvironmentSetUp($app)
     {
-        /** @var  \Illuminate\Config\Repository  $config */
+        /** @var  \Illuminate\Contracts\Config\Repository  $config */
         $basePath = dirname(__DIR__);
         $config   = $app['config'];
 
@@ -133,7 +124,8 @@ abstract class TestCase extends BaseTestCase
      */
     protected function cleanLangDirectory($locale)
     {
-        return $this->filesystem()->cleanDirectory($this->app->langPath() . DS . $locale);
+        return $this->filesystem()
+                    ->cleanDirectory($this->app->langPath() . DS . $locale);
     }
 
     /**
@@ -145,7 +137,8 @@ abstract class TestCase extends BaseTestCase
      */
     protected function deleteLangDirectory($locale)
     {
-        return $this->filesystem()->deleteDirectory($this->app->langPath() . DS . $locale);
+        return $this->filesystem()
+                    ->deleteDirectory($this->app->langPath() . DS . $locale);
     }
 
     /**
