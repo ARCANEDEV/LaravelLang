@@ -3,6 +3,8 @@
 use Arcanedev\LaravelLang\Bases\Command;
 use Arcanedev\LaravelLang\Contracts\TransPublisher;
 use Arcanedev\LaravelLang\Exceptions\LangPublishException;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Class     PublishCommand
@@ -50,9 +52,10 @@ class PublishCommand extends Command
      */
     public function __construct(TransPublisher $publisher)
     {
-        parent::__construct();
-
         $this->publisher = $publisher;
+        $this->name      = 'trans:publish';
+
+        parent::__construct();
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -99,5 +102,29 @@ class PublishCommand extends Command
         catch (LangPublishException $e) {
             $this->error($e->getMessage());
         }
+    }
+
+    /**
+     * Get the console command arguments.
+     *
+     * @return array
+     */
+    protected function getArguments()
+    {
+        return [
+            ['locale', InputArgument::REQUIRED, 'The language to publish the translations.'],
+        ];
+    }
+
+    /**
+     * Get the console command options.
+     *
+     * @return array
+     */
+    protected function getOptions()
+    {
+        return [
+            ['force', 'f', InputOption::VALUE_OPTIONAL, 'Force to override the translations', false],
+        ];
     }
 }

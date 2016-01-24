@@ -30,9 +30,9 @@ class TransPublisherTest extends TestCase
 
     public function tearDown()
     {
-        parent::tearDown();
-
         unset($this->publisher);
+
+        parent::tearDown();
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -42,13 +42,10 @@ class TransPublisherTest extends TestCase
     /** @test */
     public function it_can_be_instantiated()
     {
-        $expectations = [
+        $this->assertInstanceOf(
             \Arcanedev\LaravelLang\TransPublisher::class,
-        ];
-
-        foreach ($expectations as $expected) {
-            $this->instance($expected, $this->publisher);
-        }
+            $this->publisher
+        );
     }
 
     /** @test */

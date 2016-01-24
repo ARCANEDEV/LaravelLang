@@ -12,7 +12,7 @@
 [![Packagist Downloads][badge_downloads]](https://packagist.org/packages/arcanedev/laravel-lang)
 
 [badge_license]:   https://img.shields.io/packagist/l/arcanedev/laravel-lang.svg?style=flat-square
-[badge_laravel]:   https://img.shields.io/badge/For%20Laravel-5.0%7C5.1-orange.svg?style=flat-square
+[badge_laravel]:   https://img.shields.io/badge/For%20Laravel-5.x-orange.svg?style=flat-square
 
 [badge_build]:     https://img.shields.io/travis/ARCANEDEV/LaravelLang.svg?style=flat-square
 [badge_hhvm]:      https://img.shields.io/hhvm/arcanedev/laravel-lang.svg?style=flat-square
@@ -27,7 +27,7 @@
 
 *By [ARCANEDEV&copy;](http://www.arcanedev.net/)*
 
-Translations manager and checker for Laravel 5 based on [caouecs/Laravel-lang](https://github.com/caouecs/Laravel-lang) translations.
+Translations manager and checker for Laravel v5 based on [caouecs/Laravel-lang](https://github.com/caouecs/Laravel-lang) translations.
 
 Feel free to check out the [releases](https://github.com/ARCANEDEV/LaravelLang/releases), [license](LICENSE.md), and [contribution guidelines](CONTRIBUTING.md).
 
@@ -36,6 +36,7 @@ Feel free to check out the [releases](https://github.com/ARCANEDEV/LaravelLang/r
   * Easy setup &amp; configuration.
   * Missing translations Checker.
   * Translations Publisher.
+  * Laravel 5.0, 5.1 & 5.2 are supported.
   * Well documented &amp; IDE Friendly.
   * Well tested with maximum code quality.
   * Made with :heart: &amp; :coffee:.
@@ -49,13 +50,7 @@ Feel free to check out the [releases](https://github.com/ARCANEDEV/LaravelLang/r
 
 ## TODO
 
-  - [ ] Test Laravel 5.0 support.
   - [ ] Adding LaravelLang API.
-
-## DONE
-
-  - [x] Laravel 5.1 supported.
-  - [x] Complete the documentation.
 
 ## Contribution
 
