@@ -20,7 +20,7 @@ class LocaleCollection extends Collection
      * @param  string  $key
      * @param  mixed   $default
      *
-     * @return Locale|mixed
+     * @return \Arcanedev\LaravelLang\Entities\Locale|mixed
      */
     public function get($key, $default = null)
     {
@@ -30,9 +30,9 @@ class LocaleCollection extends Collection
     /**
      * Add a locale to collection.
      *
-     * @param  Locale  $local
+     * @param  \Arcanedev\LaravelLang\Entities\Locale  $local
      *
-     * @return \Arcanedev\LaravelLang\Entities\LocaleCollection
+     * @return self
      */
     public function add(Locale $local)
     {

@@ -108,6 +108,8 @@ class PublishCommand extends Command
      * Get the console command arguments.
      *
      * @return array
+     *
+     * @codeCoverageIgnore
      */
     protected function getArguments()
     {
@@ -120,6 +122,8 @@ class PublishCommand extends Command
      * Get the console command options.
      *
      * @return array
+     *
+     * @codeCoverageIgnore
      */
     protected function getOptions()
     {

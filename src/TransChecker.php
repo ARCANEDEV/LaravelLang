@@ -16,16 +16,32 @@ class TransChecker implements TransCheckerInterface
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
-    /** @var array */
+    /**
+     * Config values.
+     *
+     * @var array
+     */
     private $configs;
 
-    /** @var Translator */
+    /**
+     * The translator instance.
+     *
+     * @var \Illuminate\Translation\Translator
+     */
     private $translator;
 
-    /** @var TransManagerInterface */
+    /**
+     * The translator manager instance.
+     *
+     * @var \Arcanedev\LaravelLang\Contracts\TransManager
+     */
     private $manager;
 
-    /** @var array */
+    /**
+     * The missing translations.
+     *
+     * @var array
+     */
     private $missing     = [];
 
     /* ------------------------------------------------------------------------------------------------
@@ -35,9 +51,9 @@ class TransChecker implements TransCheckerInterface
     /**
      * Make TransChecker instance.
      *
-     * @param  Translator             $translator
-     * @param  TransManagerInterface  $manager
-     * @param  array                  $configs
+     * @param  \Illuminate\Translation\Translator             $translator
+     * @param  \Arcanedev\LaravelLang\Contracts\TransManager  $manager
+     * @param  array                                          $configs
      */
     public function __construct(
         Translator $translator,

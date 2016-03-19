@@ -77,8 +77,8 @@ class Locale
     /**
      * Merge translations.
      *
-     * @param  Locale|null  $locale
-     * @param  array        $ignored
+     * @param  self|null  $locale
+     * @param  array      $ignored
      *
      * @return array
      */

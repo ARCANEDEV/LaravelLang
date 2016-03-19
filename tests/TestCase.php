@@ -20,9 +20,9 @@ abstract class TestCase extends BaseTestCase
      * @var array
      */
     protected $locales = [
-        'ar', 'bg', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'es', 'fa', 'fi', 'fr', 'gl',
-        'he', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ka', 'km', 'ko', 'lt', 'me', 'mk', 'ms',
-        'nb', 'nl', 'pl', 'pt', 'pt-BR', 'ro', 'ru', 'sc', 'sk', 'sl', 'sq', 'sr', 'sv',
+        'ar', 'be', 'bg', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'es', 'fa', 'fi', 'fr', 'gl',
+        'he', 'hr', 'hu', 'id', 'is', 'is', 'it', 'ja', 'ka', 'km', 'ko', 'lt', 'me', 'mk', 'ms',
+        'nb', 'ne', 'nl', 'nn', 'pl', 'pt', 'pt-BR', 'ro', 'ru', 'sc', 'sk', 'sl', 'sq', 'sr', 'sv',
         'th', 'tk', 'tr', 'uk', 'vi', 'zh-CN', 'zh-HK', 'zh-TW',
     ];
 
@@ -153,7 +153,7 @@ abstract class TestCase extends BaseTestCase
         $locales = $this->locales;
 
         if ($addEnglish) {
-            $locales = array_merge(['en' => 'en'], $locales);
+            $locales = array_merge(['en' => 'en'], array_combine($locales, $locales));
         }
 
         return $locales;
