@@ -7,7 +7,7 @@ use Illuminate\Filesystem\Filesystem;
 /**
  * Class     TransManager
  *
- * @package  Arcanedev\LaravelLang\Entities
+ * @package  Arcanedev\LaravelLang
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class TransManager implements Contracts\TransManager
@@ -30,8 +30,19 @@ class TransManager implements Contracts\TransManager
      */
     private $locales = [];
 
-    /** @var Filesystem */
+    /**
+     * The filesystem instance.
+     *
+     * @var \Illuminate\Filesystem\Filesystem
+     */
     private $filesystem;
+
+    /**
+     * Excluded folders.
+     *
+     * @var array
+     */
+    private $excludedFolders = ['script', 'vendor'];
 
     /* ------------------------------------------------------------------------------------------------
      |  Constructor
@@ -47,8 +58,8 @@ class TransManager implements Contracts\TransManager
     {
         $this->filesystem = $filesystem;
         $this->paths      = $paths;
-        $exclude          = ['vendor'];
-        $this->load($exclude);
+
+        $this->load();
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -71,13 +82,11 @@ class TransManager implements Contracts\TransManager
      */
     /**
      * Load lang files.
-     *
-     * @param  array  $exclude
      */
-    private function load(array $exclude = [])
+    private function load()
     {
         foreach ($this->getPaths() as $group => $path) {
-            $this->locales[$group] = $this->loadDirectories($path, $exclude);
+            $this->locales[$group] = $this->loadDirectories($path);
         }
     }
 
@@ -85,23 +94,21 @@ class TransManager implements Contracts\TransManager
      * Load directories.
      *
      * @param  string  $dirPath
-     * @param  array   $exclude
      *
-     * @return LocaleCollection
+     * @return \Arcanedev\LaravelLang\Entities\LocaleCollection
      */
-    private function loadDirectories($dirPath, array $exclude = [])
+    private function loadDirectories($dirPath)
     {
         $locales = new LocaleCollection;
 
         foreach ($this->filesystem->directories($dirPath) as $path) {
-            $key = basename($path);
+            $excluded = in_array($key = basename($path), $this->excludedFolders);
 
-            if (in_array($key, $exclude)) {
-                continue;
+            if ( ! $excluded) {
+                $locales->add(
+                    new Locale($key, $path, $this->loadLocaleFiles($path))
+                );
             }
-
-            $locale = new Locale($key, $path, $this->loadLocaleFiles($path));
-            $locales->add($locale);
         }
 
         return $locales;
@@ -142,7 +149,7 @@ class TransManager implements Contracts\TransManager
      * @param  string  $group
      * @param  null    $default
      *
-     * @return LocaleCollection|null
+     * @return \Arcanedev\LaravelLang\Entities\LocaleCollection|null
      */
     public function getCollection($group, $default = null)
     {
@@ -156,7 +163,7 @@ class TransManager implements Contracts\TransManager
      * @param  string  $locale
      * @param  null    $default
      *
-     * @return Locale|null
+     * @return \Arcanedev\LaravelLang\Entities\Locale|null
      */
     public function getFrom($group, $locale, $default = null)
     {
