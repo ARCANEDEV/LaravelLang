@@ -103,7 +103,6 @@ class TransManagerTest extends TestCase
                 'fr' => 'fr',
             ],
             'vendor' => [
-                'en' => 'en',
                 'es' => 'es',
                 'fr' => 'fr',
             ],
