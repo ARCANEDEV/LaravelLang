@@ -53,7 +53,6 @@ class LaravelLangServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerConfig();
-
         $this->registerTransManager();
         $this->registerTransChecker();
         $this->registerLangPublisher();
@@ -70,9 +69,7 @@ class LaravelLangServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
-            $this->getConfigFile() => config_path("{$this->package}.php"),
-        ], 'config');
+        $this->publishConfig();
     }
 
     /**
