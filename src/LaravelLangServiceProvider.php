@@ -81,11 +81,11 @@ class LaravelLangServiceProvider extends ServiceProvider
     {
         return [
             'arcanedev.laravel-lang.manager',
-            \Arcanedev\LaravelLang\Contracts\TransManager::class,
+            Contracts\TransManager::class,
             'arcanedev.laravel-lang.checker',
-            \Arcanedev\LaravelLang\Contracts\TransChecker::class,
+            Contracts\TransChecker::class,
             'arcanedev.laravel-lang.publisher',
-            \Arcanedev\LaravelLang\Contracts\TransPublisher::class,
+            Contracts\TransPublisher::class,
         ];
     }
 
@@ -113,10 +113,7 @@ class LaravelLangServiceProvider extends ServiceProvider
             return new TransManager($files, $paths);
         });
 
-        $this->bind(
-            \Arcanedev\LaravelLang\Contracts\TransManager::class,
-            'arcanedev.laravel-lang.manager'
-        );
+        $this->bind(Contracts\TransManager::class, 'arcanedev.laravel-lang.manager');
     }
 
     /**
@@ -137,10 +134,7 @@ class LaravelLangServiceProvider extends ServiceProvider
             return new TransChecker($translator, $manager, $config->get('laravel-lang', []));
         });
 
-        $this->bind(
-            \Arcanedev\LaravelLang\Contracts\TransChecker::class,
-            'arcanedev.laravel-lang.checker'
-        );
+        $this->bind(Contracts\TransChecker::class, 'arcanedev.laravel-lang.checker');
     }
 
     /**
@@ -159,9 +153,6 @@ class LaravelLangServiceProvider extends ServiceProvider
             return new TransPublisher($files, $manager, $app->langPath());
         });
 
-        $this->bind(
-            \Arcanedev\LaravelLang\Contracts\TransPublisher::class,
-            'arcanedev.laravel-lang.publisher'
-        );
+        $this->bind(Contracts\TransPublisher::class, 'arcanedev.laravel-lang.publisher');
     }
 }
