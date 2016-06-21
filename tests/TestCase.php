@@ -70,7 +70,7 @@ abstract class TestCase extends BaseTestCase
         $config   = $app['config'];
 
         $config->set('laravel-lang', [
-            'vendor'    => realpath($basePath . '/vendor/caouecs/laravel4-lang'),
+            'vendor'    => realpath($basePath . '/vendor/caouecs/laravel-lang/src'),
 
             'locales'   => ['es', 'fr'],
 

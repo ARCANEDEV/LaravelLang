@@ -6,7 +6,7 @@ return [
      | ------------------------------------------------------------------------------------------------
      */
     /** @link      https://github.com/caouecs/Laravel-lang */
-    'vendor'    => base_path('vendor/caouecs/laravel4-lang'),
+    'vendor'    => base_path('vendor/caouecs/laravel-lang/src'),
 
     /* ------------------------------------------------------------------------------------------------
      |  Supported locales
