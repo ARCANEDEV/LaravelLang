@@ -1,6 +1,5 @@
 <?php namespace Arcanedev\LaravelLang\Commands;
 
-use Arcanedev\LaravelLang\Commands\AbstractCommand;
 use Arcanedev\LaravelLang\Contracts\TransChecker;
 
 /**

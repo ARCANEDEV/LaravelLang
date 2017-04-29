@@ -1,10 +1,7 @@
 <?php namespace Arcanedev\LaravelLang\Commands;
 
-use Arcanedev\LaravelLang\Commands\AbstractCommand;
 use Arcanedev\LaravelLang\Contracts\TransPublisher;
 use Arcanedev\LaravelLang\Exceptions\LangPublishException;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Class     PublishCommand
@@ -73,14 +70,11 @@ class PublishCommand extends AbstractCommand
         $this->copyright();
 
         $locale = (string) $this->argument('locale');
-        $force  = (bool) $this->option('force');
 
-        if ($this->publisher->isDefault($locale)) {
-            $this->info('The locale [' . $locale . '] is a default lang and it\'s shipped with laravel.');
-        }
-        else {
-            $this->publish($locale, $force);
-        }
+        if ($this->publisher->isDefault($locale))
+            $this->info("The locale [{$locale}] is a default lang and it's shipped with laravel.");
+        else
+            $this->publish($locale, (bool) $this->option('force'));
 
         $this->line('');
     }
@@ -106,33 +100,5 @@ class PublishCommand extends AbstractCommand
         catch (LangPublishException $e) {
             $this->error($e->getMessage());
         }
-    }
-
-    /**
-     * Get the console command arguments.
-     *
-     * @return array
-     *
-     * @codeCoverageIgnore
-     */
-    protected function getArguments()
-    {
-        return [
-            ['locale', InputArgument::REQUIRED, 'The language to publish the translations.'],
-        ];
-    }
-
-    /**
-     * Get the console command options.
-     *
-     * @return array
-     *
-     * @codeCoverageIgnore
-     */
-    protected function getOptions()
-    {
-        return [
-            ['force', 'f', InputOption::VALUE_OPTIONAL, 'Force to override the translations', false],
-        ];
     }
 }
