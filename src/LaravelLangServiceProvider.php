@@ -24,21 +24,6 @@ class LaravelLangServiceProvider extends ServiceProvider
     protected $package = 'laravel-lang';
 
     /* -----------------------------------------------------------------
-     |  Getters & Setters
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Get the base path of the package.
-     *
-     * @return string
-     */
-    public function getBasePath()
-    {
-        return dirname(__DIR__);
-    }
-
-    /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
@@ -56,10 +41,7 @@ class LaravelLangServiceProvider extends ServiceProvider
         $this->registerLangPublisher();
 
         $this->app->register(Providers\TranslationServiceProvider::class);
-
-        if ($this->app->runningInConsole()) {
-            $this->app->register(Providers\CommandServiceProvider::class);
-        }
+        $this->registerConsoleServiceProvider(Providers\CommandServiceProvider::class);
     }
 
     /**

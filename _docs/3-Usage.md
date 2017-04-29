@@ -1,11 +1,14 @@
-# 4. Usage
+# 3. Usage
 
 ## Table of contents
 
-1. [Artisan Commands](#artisan-commands)
-  * [Translations Checker](#translations-checker)
-  * [Translations Publisher](#translations-publisher)
-2. API (Work in progress)
+1. [Installation and Setup](1-Installation-and-Setup.md)
+2. [Configuration](2-Configuration.md)
+3. [Usage](3-Usage.md)
+   1. [Artisan Commands](#artisan-commands) 
+      1. [Translations Checker](#translations-checker)
+      2. [Translations Publisher](#translations-publisher) 
+   2. API (Work in progress)
 
 ## 1. Artisan Commands
 
