@@ -12,10 +12,11 @@ use Illuminate\Translation\TranslationServiceProvider as ServiceProvider;
  */
 class TranslationServiceProvider extends ServiceProvider
 {
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Register the translation line loader.
      */

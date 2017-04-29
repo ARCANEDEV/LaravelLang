@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\LaravelLang\Commands;
 
-use Arcanedev\LaravelLang\Bases\Command;
+use Arcanedev\LaravelLang\Commands\AbstractCommand;
 use Arcanedev\LaravelLang\Contracts\TransPublisher;
 use Arcanedev\LaravelLang\Exceptions\LangPublishException;
 use Symfony\Component\Console\Input\InputArgument;
@@ -12,12 +12,13 @@ use Symfony\Component\Console\Input\InputOption;
  * @package  Arcanedev\LaravelLang\Commands
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class PublishCommand extends Command
+class PublishCommand extends AbstractCommand
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
      * The name and signature of the console command.
      *
@@ -41,10 +42,11 @@ class PublishCommand extends Command
      */
     private $publisher;
 
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Constructor
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
      * Create a new console command instance.
      *
@@ -58,10 +60,11 @@ class PublishCommand extends Command
         parent::__construct();
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Execute the console command.
      */
@@ -82,10 +85,11 @@ class PublishCommand extends Command
         $this->line('');
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Publish the translations.
      *
@@ -97,7 +101,7 @@ class PublishCommand extends Command
         try {
             $this->publisher->publish($locale, $force);
 
-            $this->info('The locale [' . $locale . '] translations were published successfully.');
+            $this->info("The locale [{$locale}] translations were published successfully.");
         }
         catch (LangPublishException $e) {
             $this->error($e->getMessage());

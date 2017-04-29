@@ -11,21 +11,22 @@ use Illuminate\Filesystem\Filesystem;
  */
 class TransPublisher implements Contracts\TransPublisher
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
      * The filesystem instance.
      *
-     * @var Filesystem
+     * @var \Illuminate\Filesystem\Filesystem
      */
     private $filesystem;
 
     /**
      * The TransManager instance.
      *
-     * @var Contracts\TransManager
+     * @var \Arcanedev\LaravelLang\Contracts\TransManager
      */
     private $manager;
 
@@ -43,10 +44,11 @@ class TransPublisher implements Contracts\TransPublisher
      */
     private $langPath;
 
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Constructor
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
      * Make TransPublisher instance.
      *
@@ -71,10 +73,11 @@ class TransPublisher implements Contracts\TransPublisher
         $this->locales = $this->manager->getCollection('vendor');
     }
 
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Getters & Setters
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
      * Get the locale destination path.
      *
@@ -84,7 +87,7 @@ class TransPublisher implements Contracts\TransPublisher
      */
     private function getDestinationPath($locale)
     {
-        return $this->langPath . DS . $locale;
+        return $this->langPath.DS.$locale;
     }
 
     /**
@@ -100,10 +103,11 @@ class TransPublisher implements Contracts\TransPublisher
         return $this->locales->get($key, $default);
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Publish a lang.
      *
@@ -124,18 +128,19 @@ class TransPublisher implements Contracts\TransPublisher
 
         $this->checkLocale($localeKey);
 
-        $srcPath  = $this->getLocale($localeKey)->getPath();
-        $destPath = $this->getDestinationPath($localeKey);
+        $source      = $this->getLocale($localeKey)->getPath();
+        $destination = $this->getDestinationPath($localeKey);
 
-        $this->isPublishable($localeKey, $destPath, $force);
+        $this->isPublishable($localeKey, $destination, $force);
 
-        return $this->filesystem->copyDirectory($srcPath, $destPath);
+        return $this->filesystem->copyDirectory($source, $destination);
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Check Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Check Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Check if the locale is a default one (English is shipped with laravel).
      *
@@ -211,9 +216,8 @@ class TransPublisher implements Contracts\TransPublisher
      */
     private function isPublishable($locale, $path, $force)
     {
-        if ( ! $this->isFolderExists($path) || $this->isFolderEmpty($path)) {
+        if ( ! $this->isFolderExists($path) || $this->isFolderEmpty($path))
             return;
-        }
 
         if ( ! $force) {
             throw new LangPublishException(

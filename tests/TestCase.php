@@ -10,26 +10,28 @@ use Orchestra\Testbench\TestCase as BaseTestCase;
  */
 abstract class TestCase extends BaseTestCase
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
      * All the available locales.
      *
      * @var array
      */
     protected $locales = [
-        'ar', 'be', 'bg', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'es', 'fa', 'fi', 'fr', 'gl',
-        'he', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ka', 'km', 'ko', 'lt', 'me', 'mk', 'ms', 'nb',
-        'ne', 'nl', 'nn', 'pl', 'pt', 'pt-BR', 'ro', 'ru', 'sc', 'sk', 'sl', 'sq', 'sr', 'sv',
-        'th', 'tk', 'tr', 'uk', 'vi', 'zh-CN', 'zh-HK', 'zh-TW',
+        'ar', 'be', 'bg', 'bn', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'es', 'et', 'fa', 'fi', 'fr',
+        'gl', 'he', 'hi', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ka', 'kk', 'km', 'ko', 'lt', 'me', 'mk', 'ms',
+        'nb', 'ne', 'nl', 'nn', 'pl', 'pt', 'pt-BR', 'ro', 'ru', 'sc', 'sk', 'sl', 'sq', 'sr', 'sv', 'sw',
+        'tg', 'th', 'tk', 'tl', 'tr', 'uk', 'ur', 'vi', 'zh-CN', 'zh-HK', 'zh-TW',
     ];
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Laravel Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Get package providers.
      *
@@ -85,10 +87,11 @@ abstract class TestCase extends BaseTestCase
         $this->copyLanguagesFixtures($app);
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Copy languages fixtures.
      *
@@ -100,8 +103,8 @@ abstract class TestCase extends BaseTestCase
         $filesystem = $app['files'];
 
         $filesystem->copyDirectory(
-            realpath(__DIR__ . DS . 'fixtures' . DS . 'lang'),
-            realpath(base_path('resources' . DS . 'lang'))
+            realpath(__DIR__.DS.'fixtures'.DS.'lang'),
+            realpath(base_path('resources'.DS.'lang'))
         );
     }
 

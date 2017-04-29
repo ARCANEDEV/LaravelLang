@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\LaravelLang\Commands;
 
-use Arcanedev\LaravelLang\Bases\Command;
+use Arcanedev\LaravelLang\Commands\AbstractCommand;
 use Arcanedev\LaravelLang\Contracts\TransChecker;
 
 /**
@@ -9,12 +9,13 @@ use Arcanedev\LaravelLang\Contracts\TransChecker;
  * @package  Arcanedev\LaravelLang\Commands
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class CheckCommand extends Command
+class CheckCommand extends AbstractCommand
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
      * The name and signature of the console command.
      *
@@ -43,10 +44,11 @@ class CheckCommand extends Command
      */
     private $count = 0;
 
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Constructor
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
      * Init the CheckCommand.
      *
@@ -97,7 +99,7 @@ class CheckCommand extends Command
      */
     private function prepareRows(array $missing)
     {
-        $rows        = [];
+        $rows = [];
 
         foreach ($missing as $locale => $translations) {
             foreach ($translations as $translation) {

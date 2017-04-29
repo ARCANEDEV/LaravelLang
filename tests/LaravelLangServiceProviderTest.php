@@ -1,6 +1,7 @@
 <?php namespace Arcanedev\LaravelLang\Tests;
 
 use Arcanedev\LaravelLang\LaravelLangServiceProvider;
+use Arcanedev\LaravelLang\Contracts;
 
 /**
  * Class     LaravelLangServiceProviderTest
@@ -10,17 +11,19 @@ use Arcanedev\LaravelLang\LaravelLangServiceProvider;
  */
 class LaravelLangServiceProviderTest extends TestCase
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
-    /** @var  LaravelLangServiceProvider  */
+
+    /** @var  \Arcanedev\LaravelLang\LaravelLangServiceProvider  */
     private $provider;
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     public function setUp()
     {
         parent::setUp();
@@ -35,10 +38,11 @@ class LaravelLangServiceProviderTest extends TestCase
         parent::tearDown();
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Test Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Test Methods
+     | -----------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_be_instantiated()
     {
@@ -46,6 +50,7 @@ class LaravelLangServiceProviderTest extends TestCase
             \Illuminate\Support\ServiceProvider::class,
             \Arcanedev\Support\ServiceProvider::class,
             \Arcanedev\Support\PackageServiceProvider::class,
+            \Arcanedev\LaravelLang\LaravelLangServiceProvider::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -57,12 +62,9 @@ class LaravelLangServiceProviderTest extends TestCase
     public function it_can_provides()
     {
         $expected = [
-            'arcanedev.laravel-lang.manager',
-            \Arcanedev\LaravelLang\Contracts\TransManager::class,
-            'arcanedev.laravel-lang.checker',
-            \Arcanedev\LaravelLang\Contracts\TransChecker::class,
-            'arcanedev.laravel-lang.publisher',
-            \Arcanedev\LaravelLang\Contracts\TransPublisher::class,
+            Contracts\TransManager::class,
+            Contracts\TransChecker::class,
+            Contracts\TransPublisher::class,
         ];
 
         $this->assertEquals($expected, $this->provider->provides());

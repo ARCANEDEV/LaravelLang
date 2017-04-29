@@ -2,6 +2,7 @@
 
 use Arcanedev\LaravelLang\Providers\CommandServiceProvider;
 use Arcanedev\LaravelLang\Tests\TestCase;
+use Arcanedev\LaravelLang\Commands;
 
 /**
  * Class     CommandServiceProviderTest
@@ -11,17 +12,19 @@ use Arcanedev\LaravelLang\Tests\TestCase;
  */
 class CommandServiceProviderTest extends TestCase
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
-    /** @var CommandServiceProvider */
+
+    /** @var \Arcanedev\LaravelLang\Providers\CommandServiceProvider */
     private $provider;
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     public function setUp()
     {
         parent::setUp();
@@ -36,10 +39,11 @@ class CommandServiceProviderTest extends TestCase
         parent::tearDown();
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Test Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Tests
+     | -----------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_be_instantiated()
     {
@@ -59,8 +63,8 @@ class CommandServiceProviderTest extends TestCase
     public function it_can_provides()
     {
         $expected = [
-            'arcanedev.laravel-lang.commands.check',
-            'arcanedev.laravel-lang.commands.publish',
+            Commands\CheckCommand::class,
+            Commands\PublishCommand::class,
         ];
 
         $this->assertEquals($expected, $this->provider->provides());

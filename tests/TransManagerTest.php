@@ -1,7 +1,5 @@
 <?php namespace Arcanedev\LaravelLang\Tests;
 
-use Arcanedev\LaravelLang\Contracts\TransManager;
-
 /**
  * Class     TransManagerTest
  *
@@ -10,22 +8,24 @@ use Arcanedev\LaravelLang\Contracts\TransManager;
  */
 class TransManagerTest extends TestCase
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
-    /** @var TransManager */
+
+    /** @var \Arcanedev\LaravelLang\Contracts\TransManager */
     private $manager;
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     public function setUp()
     {
         parent::setUp();
 
-        $this->manager = $this->app['arcanedev.laravel-lang.manager'];
+        $this->manager = $this->app[\Arcanedev\LaravelLang\Contracts\TransManager::class];
     }
 
     public function tearDown()
@@ -35,10 +35,11 @@ class TransManagerTest extends TestCase
         parent::tearDown();
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Test Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Tests
+     | -----------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_be_instantiated()
     {
