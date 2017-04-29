@@ -11,16 +11,10 @@ use Illuminate\Foundation\Application;
  */
 class LaravelLangServiceProvider extends ServiceProvider
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
-    /**
-     * Vendor name.
-     *
-     * @var string
-     */
-    protected $vendor  = 'arcanedev';
 
     /**
      * Package name.
@@ -29,10 +23,11 @@ class LaravelLangServiceProvider extends ServiceProvider
      */
     protected $package = 'laravel-lang';
 
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Getters & Setters
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
      * Get the base path of the package.
      *
@@ -43,15 +38,18 @@ class LaravelLangServiceProvider extends ServiceProvider
         return dirname(__DIR__);
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Register the service provider.
      */
     public function register()
     {
+        parent::register();
+
         $this->registerConfig();
         $this->registerTransManager();
         $this->registerTransChecker();
@@ -69,6 +67,8 @@ class LaravelLangServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        parent::boot();
+
         $this->publishConfig();
     }
 
@@ -80,25 +80,23 @@ class LaravelLangServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
-            'arcanedev.laravel-lang.manager',
             Contracts\TransManager::class,
-            'arcanedev.laravel-lang.checker',
             Contracts\TransChecker::class,
-            'arcanedev.laravel-lang.publisher',
             Contracts\TransPublisher::class,
         ];
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Services Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Services
+     | -----------------------------------------------------------------
      */
+
     /**
      * Register the trans manager.
      */
     private function registerTransManager()
     {
-        $this->singleton('arcanedev.laravel-lang.manager', function (Application $app) {
+        $this->singleton(Contracts\TransManager::class, function (Application $app) {
             /**
              * @var  \Illuminate\Filesystem\Filesystem        $files
              * @var  \Illuminate\Contracts\Config\Repository  $config
@@ -112,8 +110,6 @@ class LaravelLangServiceProvider extends ServiceProvider
 
             return new TransManager($files, $paths);
         });
-
-        $this->bind(Contracts\TransManager::class, 'arcanedev.laravel-lang.manager');
     }
 
     /**
@@ -121,20 +117,18 @@ class LaravelLangServiceProvider extends ServiceProvider
      */
     private function registerTransChecker()
     {
-        $this->singleton('arcanedev.laravel-lang.checker', function (Application $app) {
+        $this->singleton(Contracts\TransChecker::class, function (Application $app) {
             /**
              * @var  \Illuminate\Translation\Translator             $translator
              * @var  \Arcanedev\LaravelLang\Contracts\TransManager  $manager
              * @var  \Illuminate\Contracts\Config\Repository        $config
              */
             $translator = $app['translator'];
-            $manager    = $app['arcanedev.laravel-lang.manager'];
+            $manager    = $app[Contracts\TransManager::class];
             $config     = $app['config'];
 
             return new TransChecker($translator, $manager, $config->get('laravel-lang', []));
         });
-
-        $this->bind(Contracts\TransChecker::class, 'arcanedev.laravel-lang.checker');
     }
 
     /**
@@ -142,17 +136,15 @@ class LaravelLangServiceProvider extends ServiceProvider
      */
     private function registerLangPublisher()
     {
-        $this->singleton('arcanedev.laravel-lang.publisher', function (Application $app) {
+        $this->singleton(Contracts\TransPublisher::class, function (Application $app) {
             /**
              * @var  \Illuminate\Filesystem\Filesystem              $files
              * @var  \Arcanedev\LaravelLang\Contracts\TransManager  $manager
              */
             $files   = $app['files'];
-            $manager = $app['arcanedev.laravel-lang.manager'];
+            $manager = $app[Contracts\TransManager::class];
 
             return new TransPublisher($files, $manager, $app->langPath());
         });
-
-        $this->bind(Contracts\TransPublisher::class, 'arcanedev.laravel-lang.publisher');
     }
 }

@@ -3,6 +3,7 @@
 use Arcanedev\LaravelLang\Entities\Locale;
 use Arcanedev\LaravelLang\Entities\LocaleCollection;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Arr;
 
 /**
  * Class     TransManager
@@ -12,10 +13,11 @@ use Illuminate\Filesystem\Filesystem;
  */
 class TransManager implements Contracts\TransManager
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
      * Lang directories paths.
      *
@@ -44,10 +46,11 @@ class TransManager implements Contracts\TransManager
      */
     private $excludedFolders = ['script', 'vendor'];
 
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Constructor
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
      * Make TransManager instance.
      *
@@ -62,10 +65,11 @@ class TransManager implements Contracts\TransManager
         $this->load();
     }
 
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Getters & Setters
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
      * Get the translation paths.
      *
@@ -76,10 +80,11 @@ class TransManager implements Contracts\TransManager
         return $this->paths;
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Load lang files.
      */
@@ -130,8 +135,7 @@ class TransManager implements Contracts\TransManager
         foreach ($this->filesystem->allFiles($path) as $file) {
             /** @var \Symfony\Component\Finder\SplFileInfo $file */
             $key = str_replace(
-                ['.php', DS], ['', '.'],
-                $file->getRelativePathname()
+                ['.php', DS], ['', '.'], $file->getRelativePathname()
             );
 
             $files[$key] = [
@@ -146,14 +150,14 @@ class TransManager implements Contracts\TransManager
     /**
      * Get locale collection by group location.
      *
-     * @param  string  $group
-     * @param  null    $default
+     * @param  string      $group
+     * @param  mixed|null  $default
      *
      * @return \Arcanedev\LaravelLang\Entities\LocaleCollection|null
      */
     public function getCollection($group, $default = null)
     {
-        return array_get($this->locales, $group, $default);
+        return Arr::get($this->locales, $group, $default);
     }
 
     /**
@@ -207,10 +211,11 @@ class TransManager implements Contracts\TransManager
         return count($this->keys());
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Check Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Check Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Check if a translation group exists.
      *
@@ -220,6 +225,6 @@ class TransManager implements Contracts\TransManager
      */
     public function hasCollection($group)
     {
-        return array_has($this->locales, $group);
+        return Arr::has($this->locales, $group);
     }
 }

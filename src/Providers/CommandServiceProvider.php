@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\LaravelLang\Providers;
 
+use Arcanedev\LaravelLang\Commands;
 use Arcanedev\Support\Providers\CommandServiceProvider as ServiceProvider;
 
 /**
@@ -10,51 +11,18 @@ use Arcanedev\Support\Providers\CommandServiceProvider as ServiceProvider;
  */
 class CommandServiceProvider extends ServiceProvider
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
-     * Vendor name.
+     * The commands to be registered.
      *
-     * @var string
+     * @var array
      */
-    protected $vendor   = 'arcanedev';
-
-    /**
-     * Package name.
-     *
-     * @var string
-     */
-    protected $package  = 'laravel-lang';
-
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
-     */
-    /**
-     * Register the service provider.
-     */
-    public function register()
-    {
-        $this->registerCommand(
-            'check', \Arcanedev\LaravelLang\Commands\CheckCommand::class
-        );
-
-        $this->registerCommand(
-            'publish', \Arcanedev\LaravelLang\Commands\PublishCommand::class
-        );
-
-        $this->commands($this->commands);
-    }
-
-    /**
-     * Get the provided commands.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return $this->commands;
-    }
+    protected $commands = [
+        Commands\CheckCommand::class,
+        Commands\PublishCommand::class,
+    ];
 }

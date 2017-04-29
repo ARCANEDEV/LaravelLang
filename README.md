@@ -1,7 +1,6 @@
 # LaravelLang [![Packagist License][badge_license]](LICENSE.md) [![For Laravel 5][badge_laravel]][link-github-repo]
 
 [![Travis Status][badge_build]][link-travis]
-[![HHVM Status][badge_hhvm]][link-hhvm]
 [![Coverage Status][badge_coverage]][link-scrutinizer]
 [![Scrutinizer Code Quality][badge_quality]][link-scrutinizer]
 [![SensioLabs Insight][badge_insight]][link-insight]
@@ -54,7 +53,6 @@ If you discover any security related issues, please email arcanedev.maroc@gmail.
 [badge_license]:      https://img.shields.io/packagist/l/arcanedev/laravel-lang.svg?style=flat-square
 [badge_laravel]:      https://img.shields.io/badge/Laravel-5.x-orange.svg?style=flat-square
 [badge_build]:        https://img.shields.io/travis/ARCANEDEV/LaravelLang.svg?style=flat-square
-[badge_hhvm]:         https://img.shields.io/hhvm/arcanedev/laravel-lang.svg?style=flat-square
 [badge_coverage]:     https://img.shields.io/scrutinizer/coverage/g/ARCANEDEV/LaravelLang.svg?style=flat-square
 [badge_quality]:      https://img.shields.io/scrutinizer/g/ARCANEDEV/LaravelLang.svg?style=flat-square
 [badge_insight]:      https://img.shields.io/sensiolabs/i/8ed2a842-3f4e-4422-a881-cf7eb72a595d.svg?style=flat-square
@@ -69,6 +67,5 @@ If you discover any security related issues, please email arcanedev.maroc@gmail.
 [link-contributors]:  https://github.com/ARCANEDEV/LaravelLang/graphs/contributors
 [link-packagist]:     https://packagist.org/packages/arcanedev/laravel-lang
 [link-travis]:        https://travis-ci.org/ARCANEDEV/LaravelLang
-[link-hhvm]:          http://hhvm.h4cc.de/package/arcanedev/laravel-lang
 [link-scrutinizer]:   https://scrutinizer-ci.com/g/ARCANEDEV/LaravelLang/?branch=master
 [link-insight]:       https://insight.sensiolabs.com/projects/8ed2a842-3f4e-4422-a881-cf7eb72a595d

@@ -1,4 +1,4 @@
-<?php namespace Arcanedev\LaravelLang\Bases;
+<?php namespace Arcanedev\LaravelLang\Commands;
 
 use Arcanedev\LaravelLang\LaravelLang;
 use Arcanedev\Support\Bases\Command as BaseCommand;
@@ -9,12 +9,13 @@ use Arcanedev\Support\Bases\Command as BaseCommand;
  * @package  Arcanedev\LaravelLang\Bases
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-abstract class Command extends BaseCommand
+abstract class AbstractCommand extends BaseCommand
 {
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Display LogViewer Logo and Copyrights.
      */
@@ -30,7 +31,7 @@ abstract class Command extends BaseCommand
         $this->line('');
 
         // Copyright
-        $this->comment('Version ' . LaravelLang::VERSION . ' - Created by ARCANEDEV' . chr(169));
+        $this->comment('Version '.LaravelLang::VERSION.' - Created by ARCANEDEV'.chr(169));
         $this->line('');
     }
 }

@@ -1,7 +1,5 @@
 <?php namespace Arcanedev\LaravelLang\Tests;
 
-use Arcanedev\LaravelLang\TransPublisher;
-
 /**
  * Class     TransPublisherTest
  *
@@ -10,22 +8,24 @@ use Arcanedev\LaravelLang\TransPublisher;
  */
 class TransPublisherTest extends TestCase
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
-    /** @var  TransPublisher */
+
+    /** @var  \Arcanedev\LaravelLang\Contracts\TransPublisher */
     private $publisher;
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     public function setUp()
     {
         parent::setUp();
 
-        $this->publisher = $this->app['arcanedev.laravel-lang.publisher'];
+        $this->publisher = $this->app[\Arcanedev\LaravelLang\Contracts\TransPublisher::class];
     }
 
     public function tearDown()
@@ -39,13 +39,18 @@ class TransPublisherTest extends TestCase
      |  Test Functions
      | ------------------------------------------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_be_instantiated()
     {
-        $this->assertInstanceOf(
+        $expectations = [
+            \Arcanedev\LaravelLang\Contracts\TransPublisher::class,
             \Arcanedev\LaravelLang\TransPublisher::class,
-            $this->publisher
-        );
+        ];
+
+        foreach ($expectations as $expected) {
+            $this->assertInstanceOf($expected, $this->publisher);
+        }
     }
 
     /** @test */

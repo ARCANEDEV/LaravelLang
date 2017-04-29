@@ -1,7 +1,5 @@
 <?php namespace Arcanedev\LaravelLang\Tests;
 
-use Arcanedev\LaravelLang\TransChecker;
-
 /**
  * Class     TransCheckerTest
  *
@@ -10,22 +8,24 @@ use Arcanedev\LaravelLang\TransChecker;
  */
 class TransCheckerTest extends TestCase
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
-    /** @var TransChecker */
+
+    /** @var \Arcanedev\LaravelLang\Contracts\TransChecker */
     private $checker;
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     public function setUp()
     {
         parent::setUp();
 
-        $this->checker = $this->app['arcanedev.laravel-lang.checker'];
+        $this->checker = $this->app[\Arcanedev\LaravelLang\Contracts\TransChecker::class];
     }
 
     public function tearDown()
@@ -35,10 +35,11 @@ class TransCheckerTest extends TestCase
         parent::tearDown();
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Test Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Tests
+     | -----------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_be_instantiated()
     {

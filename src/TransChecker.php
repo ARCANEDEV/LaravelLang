@@ -2,6 +2,7 @@
 
 use Arcanedev\LaravelLang\Contracts\TransChecker as TransCheckerInterface;
 use Arcanedev\LaravelLang\Contracts\TransManager as TransManagerInterface;
+use Illuminate\Support\Arr;
 use Illuminate\Translation\Translator;
 
 /**
@@ -12,10 +13,11 @@ use Illuminate\Translation\Translator;
  */
 class TransChecker implements TransCheckerInterface
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
      * Config values.
      *
@@ -44,10 +46,11 @@ class TransChecker implements TransCheckerInterface
      */
     private $missing     = [];
 
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Constructor
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
      * Make TransChecker instance.
      *
@@ -65,10 +68,11 @@ class TransChecker implements TransCheckerInterface
         $this->configs    = $configs;
     }
 
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Getters & Setter
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
      * Get the default locale being used.
      *
@@ -86,7 +90,7 @@ class TransChecker implements TransCheckerInterface
      */
     public function getLocales()
     {
-        return array_get($this->configs, 'locales', []);
+        return Arr::get($this->configs, 'locales', []);
     }
 
     /**
@@ -96,13 +100,14 @@ class TransChecker implements TransCheckerInterface
      */
     public function getIgnoredTranslations()
     {
-        return array_get($this->configs, 'check.ignore', []);
+        return Arr::get($this->configs, 'check.ignore', []);
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Check the missing translations.
      *
@@ -126,10 +131,11 @@ class TransChecker implements TransCheckerInterface
         return $this->missing;
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Get locale translations from multiple groups.
      *
@@ -154,14 +160,12 @@ class TransChecker implements TransCheckerInterface
      * @param  array   $toTranslations
      * @param  array   $fromTranslations
      * @param  string  $locale
-     *
-     * @return array
      */
     private function diffMissing(array $toTranslations, array $fromTranslations, $locale)
     {
         $diff = array_diff_key($toTranslations, $fromTranslations);
 
-        if (count($diff) === 0) { return; }
+        if (count($diff) === 0) return;
 
         foreach ($diff as $transKey => $transValue) {
             $this->addMissing($locale, $transKey);
