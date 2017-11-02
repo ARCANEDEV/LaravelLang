@@ -40,7 +40,7 @@ class LaravelLangServiceProvider extends ServiceProvider
         $this->registerTransChecker();
         $this->registerLangPublisher();
 
-        $this->app->register(Providers\TranslationServiceProvider::class);
+        $this->registerProvider(Providers\TranslationServiceProvider::class);
         $this->registerConsoleServiceProvider(Providers\CommandServiceProvider::class);
     }
 
@@ -85,12 +85,11 @@ class LaravelLangServiceProvider extends ServiceProvider
              */
             $files  = $app['files'];
             $config = $app['config'];
-            $paths  = array_map('realpath', [
+
+            return new TransManager($files, array_map('realpath', [
                 'app'    => $app->langPath(),
                 'vendor' => $config->get('laravel-lang.vendor', ''),
-            ]);
-
-            return new TransManager($files, $paths);
+            ]));
         });
     }
 

@@ -21,8 +21,8 @@ abstract class TestCase extends BaseTestCase
      * @var array
      */
     protected $locales = [
-        'ar', 'be', 'bg', 'bn', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'es', 'et', 'fa', 'fi', 'fr',
-        'gl', 'he', 'hi', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ka', 'kk', 'km', 'ko', 'lt', 'me', 'mk', 'ms',
+        'ar', 'be', 'bg', 'bn', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'es', 'et', 'fa', 'fi', 'fr', 'gl',
+        'he', 'hi', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ka', 'kk', 'km', 'ko', 'lt', 'me', 'mk', 'mn', 'ms',
         'nb', 'ne', 'nl', 'nn', 'pl', 'pt', 'pt-BR', 'ro', 'ru', 'sc', 'sk', 'sl', 'sq', 'sr', 'sv', 'sw',
         'tg', 'th', 'tk', 'tl', 'tr', 'uk', 'ur', 'vi', 'zh-CN', 'zh-HK', 'zh-TW',
     ];
