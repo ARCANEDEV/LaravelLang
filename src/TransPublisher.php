@@ -115,16 +115,13 @@ class TransPublisher implements Contracts\TransPublisher
      * @param  bool    $force
      *
      * @return bool
-     *
-     * @throws \Arcanedev\LaravelLang\Exceptions\LangPublishException
      */
     public function publish($localeKey, $force = false)
     {
         $localeKey = trim($localeKey);
 
-        if ($this->isDefault($localeKey)) {
+        if ($this->isDefault($localeKey))
             return true;
-        }
 
         $this->checkLocale($localeKey);
 

@@ -45,7 +45,7 @@ class TranslatorTest extends TestCase
     /** @test */
     public function it_can_be_instantiated()
     {
-        $this->assertInstanceOf(Translator::class, $this->translator);
+        static::assertInstanceOf(Translator::class, $this->translator);
     }
 
     /** @test */
@@ -64,7 +64,7 @@ class TranslatorTest extends TestCase
             $this->translator->setLocale($locale);
 
             foreach ($translations as $key => $expected) {
-                $this->assertEquals($expected, $this->translator->get($key));
+                static::assertEquals($expected, $this->translator->get($key));
             }
         }
     }
@@ -77,7 +77,7 @@ class TranslatorTest extends TestCase
         foreach ($unsupportedLocales as $locale) {
             $this->translator->setLocale($locale);
 
-            $this->assertEquals(
+            static::assertEquals(
                 'These credentials do not match our records.',
                 $this->translator->get('auth.failed')
             );

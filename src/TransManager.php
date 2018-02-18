@@ -125,8 +125,6 @@ class TransManager implements Contracts\TransManager
      * @param  string  $path
      *
      * @return array
-     *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     private function loadLocaleFiles($path)
     {
@@ -171,9 +169,8 @@ class TransManager implements Contracts\TransManager
      */
     public function getFrom($group, $locale, $default = null)
     {
-        if ( ! $this->hasCollection($group)) {
+        if ( ! $this->hasCollection($group))
             return $default;
-        }
 
         $locales = $this->getCollection($group);
 

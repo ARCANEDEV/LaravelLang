@@ -49,7 +49,7 @@ class TransCheckerTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->checker);
+            static::assertInstanceOf($expected, $this->checker);
         }
     }
 
@@ -68,6 +68,6 @@ class TransCheckerTest extends TestCase
             ],
         ];
 
-        $this->assertEquals($expected, $this->checker->check());
+        static::assertEquals($expected, $this->checker->check());
     }
 }

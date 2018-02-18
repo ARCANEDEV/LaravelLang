@@ -21,10 +21,10 @@ abstract class TestCase extends BaseTestCase
      * @var array
      */
     protected $locales = [
-        'ar', 'be', 'bg', 'bn', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'es', 'et', 'fa', 'fi', 'fr', 'gl',
-        'he', 'hi', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ka', 'kk', 'km', 'ko', 'lt', 'me', 'mk', 'mn', 'ms',
+        'ar', 'be', 'bg', 'bn', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'es', 'et', 'eu', 'fa', 'fi', 'fr', 'gl',
+        'he', 'hi', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ka', 'kk', 'km', 'ko', 'lt', 'lv', 'me', 'mk', 'mn', 'ms',
         'nb', 'ne', 'nl', 'nn', 'pl', 'pt', 'pt-BR', 'ro', 'ru', 'sc', 'sk', 'sl', 'sq', 'sr', 'sv', 'sw',
-        'tg', 'th', 'tk', 'tl', 'tr', 'uk', 'ur', 'vi', 'zh-CN', 'zh-HK', 'zh-TW',
+        'tg', 'th', 'tk', 'tl', 'tr', 'ug', 'uk', 'ur', 'vi', 'zh-CN', 'zh-HK', 'zh-TW',
     ];
 
     /* -----------------------------------------------------------------
@@ -128,7 +128,7 @@ abstract class TestCase extends BaseTestCase
     protected function cleanLangDirectory($locale)
     {
         return $this->filesystem()
-                    ->cleanDirectory($this->app->langPath() . DS . $locale);
+                    ->cleanDirectory($this->app->langPath().DS.$locale);
     }
 
     /**
@@ -141,7 +141,7 @@ abstract class TestCase extends BaseTestCase
     protected function deleteLangDirectory($locale)
     {
         return $this->filesystem()
-                    ->deleteDirectory($this->app->langPath() . DS . $locale);
+                    ->deleteDirectory($this->app->langPath().DS.$locale);
     }
 
     /**

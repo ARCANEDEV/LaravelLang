@@ -49,7 +49,7 @@ class TransPublisherTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->publisher);
+            static::assertInstanceOf($expected, $this->publisher);
         }
     }
 
@@ -58,12 +58,12 @@ class TransPublisherTest extends TestCase
     {
         $locale = 'es';
 
-        $this->assertTrue($this->publisher->publish($locale));
+        static::assertTrue($this->publisher->publish($locale));
 
         // Clean the lang folder content.
         $this->cleanLangDirectory($locale);
 
-        $this->assertTrue($this->publisher->publish($locale));
+        static::assertTrue($this->publisher->publish($locale));
 
         // Delete the lang folder.
         $this->deleteLangDirectory($locale);
@@ -74,13 +74,13 @@ class TransPublisherTest extends TestCase
     {
         $locale = 'es';
 
-        $this->assertTrue($this->publisher->publish($locale));
+        static::assertTrue($this->publisher->publish($locale));
 
         try {
             $this->publisher->publish($locale);
         }
         catch(\Arcanedev\LaravelLang\Exceptions\LangPublishException $e) {
-            $this->assertEquals(
+            static::assertEquals(
                 'You can\'t publish the translations because the [es] folder is not empty. '.
                 'To override the translations, try to clean/delete the [es] folder or force the publication.',
                 $e->getMessage()
@@ -96,8 +96,8 @@ class TransPublisherTest extends TestCase
     {
         $locale = 'es';
 
-        $this->assertTrue($this->publisher->publish($locale));
-        $this->assertTrue($this->publisher->publish($locale, true));
+        static::assertTrue($this->publisher->publish($locale));
+        static::assertTrue($this->publisher->publish($locale, true));
 
         // Delete the lang folder.
         $this->deleteLangDirectory($locale);
@@ -106,7 +106,7 @@ class TransPublisherTest extends TestCase
     /** @test */
     public function it_can_skip_if_locale_is_english()
     {
-        $this->assertTrue($this->publisher->publish('en'));
+        static::assertTrue($this->publisher->publish('en'));
     }
 
     /**

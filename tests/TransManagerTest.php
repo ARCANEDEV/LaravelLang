@@ -49,13 +49,13 @@ class TransManagerTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->manager);
+            static::assertInstanceOf($expected, $this->manager);
         }
 
         $paths = $this->manager->getPaths();
-        $this->assertCount(2, $this->manager->getPaths());
-        $this->assertArrayHasKey('app', $paths);
-        $this->assertArrayHasKey('vendor', $paths);
+        static::assertCount(2, $this->manager->getPaths());
+        static::assertArrayHasKey('app', $paths);
+        static::assertArrayHasKey('vendor', $paths);
     }
 
     /** @test */
@@ -64,14 +64,14 @@ class TransManagerTest extends TestCase
         $keys = $this->manager->keys();
 
         foreach ($this->getLocales() as $locale) {
-            $this->assertArrayHasKey($locale, $keys);
+            static::assertArrayHasKey($locale, $keys);
         }
     }
 
     /** @test */
     public function it_can_count()
     {
-        $this->assertEquals($this->getLocalesCount(), $this->manager->count());
+        static::assertEquals($this->getLocalesCount(), $this->manager->count());
     }
 
     /** @test */
@@ -83,14 +83,14 @@ class TransManagerTest extends TestCase
         ];
 
         foreach ($expectations as $group => $count) {
-            $this->assertTrue($this->manager->hasCollection($group));
+            static::assertTrue($this->manager->hasCollection($group));
 
             $locales = $this->manager->getCollection($group);
 
-            $this->assertInstanceOf(
+            static::assertInstanceOf(
                 \Arcanedev\LaravelLang\Entities\LocaleCollection::class, $locales
             );
-            $this->assertCount($count, $locales);
+            static::assertCount($count, $locales);
         }
     }
 
@@ -114,13 +114,13 @@ class TransManagerTest extends TestCase
                 $locale = $this->manager->getFrom($group, $key);
 
                 if (is_null($expected)) {
-                    $this->assertNull($locale);
+                    static::assertNull($locale);
                     continue;
                 }
 
-                $this->assertEquals($key, $locale->getKey());
-                $this->assertTrue(file_exists($locale->getPath()));
-                $this->assertNotEmpty($locale->getTranslations());
+                static::assertEquals($key, $locale->getKey());
+                static::assertTrue(file_exists($locale->getPath()));
+                static::assertNotEmpty($locale->getTranslations());
             }
         }
     }
@@ -128,6 +128,6 @@ class TransManagerTest extends TestCase
     /** @test */
     public function it_return_default_on_getting_one_from_not_existed_group()
     {
-        $this->assertNull($this->manager->getFrom('locales', 'en'));
+        static::assertNull($this->manager->getFrom('locales', 'en'));
     }
 }

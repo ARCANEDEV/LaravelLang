@@ -104,11 +104,9 @@ class Locale
         );
 
         foreach ($translations as $key => $trans) {
-            if (starts_with($key, $ignored)) {
-                continue;
+            if ( ! starts_with($key, $ignored)) {
+                $merged[$key] = $trans;
             }
-
-            $merged[$key] = $trans;
         }
 
         return $merged;

@@ -108,9 +108,8 @@ class FileLoader extends IlluminateFileLoader
     {
         $defaults = [];
 
-        if (empty($this->locales) || $this->isSupported($locale)) {
+        if (empty($this->locales) || $this->isSupported($locale))
             $defaults = $this->loadPath($this->getVendorPath(), $locale, $group);
-        }
 
         return array_replace_recursive($defaults, parent::load($locale, $group, $namespace));
     }
