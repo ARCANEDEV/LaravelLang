@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\LaravelLang\Entities;
 
+use Arcanedev\LaravelLang\Contracts\Entities\Locale as LocaleContract;
 use Illuminate\Support\Arr;
 
 /**
@@ -8,7 +9,7 @@ use Illuminate\Support\Arr;
  * @package  Arcanedev\LaravelLang\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Locale
+class Locale implements LocaleContract
 {
     /* -----------------------------------------------------------------
      |  Properties
@@ -90,12 +91,12 @@ class Locale
     /**
      * Merge translations.
      *
-     * @param  self|null  $locale
+     * @param  \Arcanedev\LaravelLang\Contracts\Entities\Locale|null  $locale
      * @param  array      $ignored
      *
      * @return array
      */
-    public function mergeTranslations(Locale $locale = null, array $ignored = [])
+    public function mergeTranslations(LocaleContract $locale = null, array $ignored = [])
     {
         $merged       = [];
         $translations = array_merge(

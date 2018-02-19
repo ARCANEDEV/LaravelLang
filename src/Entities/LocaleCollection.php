@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\LaravelLang\Entities;
 
+use Arcanedev\LaravelLang\Contracts\Entities\Locale as LocaleContract;
 use Illuminate\Support\Collection;
 
 /**
@@ -21,7 +22,7 @@ class LocaleCollection extends Collection
      * @param  string  $key
      * @param  mixed   $default
      *
-     * @return \Arcanedev\LaravelLang\Entities\Locale|mixed
+     * @return \Arcanedev\LaravelLang\Contracts\Entities\Locale|mixed
      */
     public function get($key, $default = null)
     {
@@ -31,11 +32,11 @@ class LocaleCollection extends Collection
     /**
      * Add a locale to collection.
      *
-     * @param  \Arcanedev\LaravelLang\Entities\Locale  $local
+     * @param  \Arcanedev\LaravelLang\Contracts\Entities\Locale  $local
      *
      * @return self
      */
-    public function add(Locale $local)
+    public function add(LocaleContract $local)
     {
         return $this->put($local->getKey(), $local);
     }
