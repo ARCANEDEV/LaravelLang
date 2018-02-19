@@ -62,10 +62,11 @@ class CheckCommand extends AbstractCommand
         parent::__construct();
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Execute the console command.
      */
@@ -108,7 +109,7 @@ class CheckCommand extends AbstractCommand
             $rows[] = $this->tableSeparator();
         }
 
-        $rows[] = ['Total', $this->count . ' translations are missing.'];
+        $rows[] = ['Total', "{$this->count} translations are missing."];
 
         return $rows;
     }

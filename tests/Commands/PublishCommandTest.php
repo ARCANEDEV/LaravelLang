@@ -20,7 +20,7 @@ class PublishCommandTest extends TestCase
     {
         $locale = 'es';
 
-        $this->assertEquals(0, $this->artisan('trans:publish', compact('locale')));
+        static::assertEquals(0, $this->artisan('trans:publish', compact('locale')));
 
         // Delete the lang folder.
         $this->deleteLangDirectory($locale);
@@ -31,8 +31,8 @@ class PublishCommandTest extends TestCase
     {
         $locale = 'es';
 
-        $this->assertEquals(0, $this->artisan('trans:publish', compact('locale')));
-        $this->assertEquals(0, $this->artisan('trans:publish', compact('locale')));
+        static::assertEquals(0, $this->artisan('trans:publish', compact('locale')));
+        static::assertEquals(0, $this->artisan('trans:publish', compact('locale')));
 
         // Delete the lang folder.
         $this->deleteLangDirectory($locale);
@@ -43,8 +43,8 @@ class PublishCommandTest extends TestCase
     {
         $locale = 'es';
 
-        $this->assertEquals(0, $this->artisan('trans:publish', compact('locale')));
-        $this->assertEquals(0, $this->artisan('trans:publish', [
+        static::assertEquals(0, $this->artisan('trans:publish', compact('locale')));
+        static::assertEquals(0, $this->artisan('trans:publish', [
             'locale'  => $locale,
             '--force' => true,
         ]));
@@ -58,6 +58,6 @@ class PublishCommandTest extends TestCase
     {
         $locale = 'en';
 
-        $this->assertEquals(0, $this->artisan('trans:publish', compact('locale')));
+        static::assertEquals(0, $this->artisan('trans:publish', compact('locale')));
     }
 }

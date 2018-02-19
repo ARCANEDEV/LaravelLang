@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\LaravelLang\Entities;
 
-use Arcanedev\Support\Collection;
+use Illuminate\Support\Collection;
 
 /**
  * Class     LocaleCollection
@@ -37,8 +37,6 @@ class LocaleCollection extends Collection
      */
     public function add(Locale $local)
     {
-        $this->put($local->getKey(), $local);
-
-        return $this;
+        return $this->put($local->getKey(), $local);
     }
 }
