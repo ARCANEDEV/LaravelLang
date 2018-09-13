@@ -21,10 +21,10 @@ abstract class TestCase extends BaseTestCase
      * @var array
      */
     protected $locales = [
-        'ar', 'be', 'bg', 'bn', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'es', 'et', 'eu', 'fa', 'fi', 'fr', 'gl',
-        'he', 'hi', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ka', 'kk', 'km', 'ko', 'lt', 'lv', 'me', 'mk', 'mn', 'ms',
-        'nb', 'ne', 'nl', 'nn', 'pl', 'pt', 'pt-BR', 'ro', 'ru', 'sc', 'sk', 'sl', 'sq', 'sr', 'sv', 'sw',
-        'tg', 'th', 'tk', 'tl', 'tr', 'ug', 'uk', 'ur', 'vi', 'zh-CN', 'zh-HK', 'zh-TW',
+        'ar', 'az', 'be', 'bg', 'bn', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'de-CH', 'el', 'es', 'et', 'eu', 'fa', 'fi',
+        'fr', 'gl', 'he', 'hi', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ka', 'kk', 'km', 'ko', 'lt', 'lv', 'me', 'mk',
+        'mn', 'ms', 'nb', 'ne', 'nl', 'nn', 'pl', 'pt', 'pt-BR', 'ro', 'ru', 'sc', 'sk', 'sl', 'sq', 'sr', 'sv', 'sw',
+        'tg', 'th', 'tk', 'tl', 'tr', 'ug', 'uk', 'ur', 'uz-cyrillic', 'uz-latin', 'vi', 'zh-CN', 'zh-HK', 'zh-TW',
     ];
 
     /* -----------------------------------------------------------------

@@ -18,6 +18,9 @@ class CheckCommandTest extends TestCase
     /** @test */
     public function it_can_run_command()
     {
-        static::assertEquals(0, $this->artisan('trans:check'));
+        $this->artisan('trans:check')
+             ->assertExitCode(0);
+
+        static::assertTrue(true);
     }
 }
