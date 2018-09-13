@@ -20,7 +20,9 @@ class PublishCommandTest extends TestCase
     {
         $locale = 'es';
 
-        static::assertEquals(0, $this->artisan('trans:publish', compact('locale')));
+        $this->artisan('trans:publish', compact('locale'))
+             ->expectsOutput("The locale [{$locale}] translations were published successfully.")
+             ->assertExitCode(0);
 
         // Delete the lang folder.
         $this->deleteLangDirectory($locale);
@@ -31,8 +33,12 @@ class PublishCommandTest extends TestCase
     {
         $locale = 'es';
 
-        static::assertEquals(0, $this->artisan('trans:publish', compact('locale')));
-        static::assertEquals(0, $this->artisan('trans:publish', compact('locale')));
+        $this->artisan('trans:publish', compact('locale'))
+             ->expectsOutput("The locale [{$locale}] translations were published successfully.")
+             ->assertExitCode(0);
+
+        $this->artisan('trans:publish', compact('locale'))
+             ->assertExitCode(0);
 
         // Delete the lang folder.
         $this->deleteLangDirectory($locale);
@@ -43,11 +49,13 @@ class PublishCommandTest extends TestCase
     {
         $locale = 'es';
 
-        static::assertEquals(0, $this->artisan('trans:publish', compact('locale')));
-        static::assertEquals(0, $this->artisan('trans:publish', [
-            'locale'  => $locale,
-            '--force' => true,
-        ]));
+        $this->artisan('trans:publish', compact('locale'))
+             ->expectsOutput("The locale [{$locale}] translations were published successfully.")
+             ->assertExitCode(0);
+
+        $this->artisan('trans:publish', ['locale'  => $locale, '--force' => true])
+             ->expectsOutput("The locale [{$locale}] translations were published successfully.")
+             ->assertExitCode(0);
 
         // Delete the lang folder.
         $this->deleteLangDirectory($locale);
@@ -58,6 +66,9 @@ class PublishCommandTest extends TestCase
     {
         $locale = 'en';
 
-        static::assertEquals(0, $this->artisan('trans:publish', compact('locale')));
+        $this->artisan('trans:publish', compact('locale'))
+             ->assertExitCode(0);
+
+        static::assertTrue(true);
     }
 }

@@ -22,7 +22,7 @@ The LaravelLang package has a few system requirements:
 | ![LaravelLang v2.x][laravel_lang_2_x] | ![Laravel v5.4][laravel_5_4]                                                                                        |
 | ![LaravelLang v3.x][laravel_lang_3_x] | ![Laravel v5.5][laravel_5_5]                                                                                        |
 | ![LaravelLang v4.x][laravel_lang_4_x] | ![Laravel v5.6][laravel_5_6]                                                                                        |
-| ![LaravelLang v4.x][laravel_lang_5_x] | ![Laravel v5.7][laravel_5_7]                                                                                        |
+| ![LaravelLang v5.x][laravel_lang_5_x] | ![Laravel v5.7][laravel_5_7]                                                                                        |
 
 [laravel_5_0]:  https://img.shields.io/badge/v5.0-supported-brightgreen.svg?style=flat-square "Laravel v5.0"
 [laravel_5_1]:  https://img.shields.io/badge/v5.1-supported-brightgreen.svg?style=flat-square "Laravel v5.1"
