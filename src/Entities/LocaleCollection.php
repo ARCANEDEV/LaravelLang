@@ -35,7 +35,7 @@ class LocaleCollection extends Collection
      *
      * @return self
      */
-    public function add(Locale $local)
+    public function add($local)
     {
         return $this->put($local->getKey(), $local);
     }
