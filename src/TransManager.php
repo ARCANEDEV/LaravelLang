@@ -110,7 +110,7 @@ class TransManager implements Contracts\TransManager
             $excluded = in_array($key = basename($path), $this->excludedFolders);
 
             if ( ! $excluded) {
-                $locales->add(
+                $locales->addOne(
                     new Locale($key, $path, $this->loadLocaleFiles($path))
                 );
             }

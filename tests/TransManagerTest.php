@@ -21,14 +21,14 @@ class TransManagerTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->manager = $this->app[\Arcanedev\LaravelLang\Contracts\TransManager::class];
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->manager);
 
