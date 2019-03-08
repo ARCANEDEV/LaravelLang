@@ -21,14 +21,14 @@ class TransCheckerTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->checker = $this->app[\Arcanedev\LaravelLang\Contracts\TransChecker::class];
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->checker);
 

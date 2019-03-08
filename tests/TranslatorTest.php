@@ -23,14 +23,14 @@ class TranslatorTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->translator = $this->app['translator'];
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->translator);
 

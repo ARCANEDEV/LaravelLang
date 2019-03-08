@@ -2,6 +2,7 @@
 
 use Arcanedev\LaravelLang\Contracts\Entities\Locale as LocaleContract;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 /**
  * Class     Locale
@@ -105,7 +106,7 @@ class Locale implements LocaleContract
         );
 
         foreach ($translations as $key => $trans) {
-            if ( ! starts_with($key, $ignored)) {
+            if ( ! Str::startsWith($key, $ignored)) {
                 $merged[$key] = $trans;
             }
         }

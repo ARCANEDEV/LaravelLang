@@ -21,14 +21,14 @@ class TransPublisherTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->publisher = $this->app->make(\Arcanedev\LaravelLang\Contracts\TransPublisher::class);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->publisher);
 
@@ -109,14 +109,12 @@ class TransPublisherTest extends TestCase
         static::assertTrue($this->publisher->publish('en'));
     }
 
-    /**
-     * @test
-     *
-     * @expectedException         \Arcanedev\LaravelLang\Exceptions\LangPublishException
-     * @expectedExceptionMessage  The locale [arcanedev] is not supported.
-     */
+    /** @test */
     public function it_must_throw_an_exception_on_unsupported_locale()
     {
+        $this->expectException(\Arcanedev\LaravelLang\Exceptions\LangPublishException::class);
+        $this->expectExceptionMessage('The locale [arcanedev] is not supported.');
+
         $this->publisher->publish('arcanedev');
     }
 }
