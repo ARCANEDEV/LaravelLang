@@ -11,7 +11,7 @@
 The LaravelLang package has a few system requirements:
 
 ```
-- PHP >= 7.0
+- PHP >= 7.1.3
 ```
 
 ## Version Compatibility
