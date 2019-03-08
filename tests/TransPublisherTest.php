@@ -21,14 +21,14 @@ class TransPublisherTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->publisher = $this->app->make(\Arcanedev\LaravelLang\Contracts\TransPublisher::class);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->publisher);
 
