@@ -18,10 +18,10 @@
     "require": {
         "php":                  ">=7.1.3",
         "arcanedev/support":    "~4.5.0",
-        "caouecs/laravel-lang": "laravel58@dev"
+        "caouecs/laravel-lang": "dev-laravel58"
     },
     "require-dev": {
-        "orchestra/testbench": "~3.7.0",
+        "orchestra/testbench": "~3.8.0",
         "phpunit/phpcov":      "~5.0",
         "phpunit/phpunit":     "~7.0",
         "mockery/mockery":     "~1.1"
