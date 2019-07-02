@@ -84,6 +84,8 @@ class CheckCommand extends AbstractCommand
         $this->line('');
         $this->showMessage();
         $this->line('');
+
+		return $this->count;
     }
 
     /* ------------------------------------------------------------------------------------------------
