@@ -45,20 +45,4 @@ class CheckCommandTest extends TestCase
         $this->artisan('trans:check')
              ->assertExitCode(1);
     }
-
-    /** @test */
-    public function it_has_an_exit_code_if_we_miss_something()
-    {
-        $this->doesNotPerformAssertions();
-        $this->mock(TransChecker::class, function ($mock) {
-            $mock->shouldReceive('check')->andReturn([
-                'en' => [
-                    'file.message',
-                ],
-            ]);
-            return $mock;
-        });
-        $this->artisan('trans:check')
-            ->assertExitCode(1);
-    }
 }
