@@ -90,7 +90,7 @@ abstract class TestCase extends BaseTestCase
 
         $filesystem->copyDirectory(
             realpath(__DIR__.DS.'fixtures'.DS.'lang'),
-            realpath(base_path('resources'.DS.'lang'))
+            realpath(resource_path('lang'))
         );
     }
 

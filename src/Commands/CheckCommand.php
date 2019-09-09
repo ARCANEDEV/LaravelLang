@@ -41,7 +41,7 @@ class CheckCommand extends AbstractCommand
      *
      * @var int
      */
-    private $count = 0;
+    private $missingTranslations = 0;
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -57,7 +57,7 @@ class CheckCommand extends AbstractCommand
     {
         $this->name    = $this->signature;
         $this->checker = $checker;
-        $this->count   = 0;
+        $this->missingTranslations   = 0;
 
         parent::__construct();
     }
@@ -84,12 +84,15 @@ class CheckCommand extends AbstractCommand
         $this->line('');
         $this->showMessage();
         $this->line('');
+
+        return $this->getExitCode();
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Prepare table rows.
      *
@@ -104,12 +107,12 @@ class CheckCommand extends AbstractCommand
         foreach ($missing as $locale => $translations) {
             foreach ($translations as $translation) {
                 $rows[] = [$locale, $translation];
-                $this->count++;
+                $this->missingTranslations++;
             }
             $rows[] = $this->tableSeparator();
         }
 
-        $rows[] = ['Total', "{$this->count} translations are missing."];
+        $rows[] = ['Total', "{$this->missingTranslations} translations are missing."];
 
         return $rows;
     }
@@ -121,9 +124,29 @@ class CheckCommand extends AbstractCommand
      */
     private function showMessage()
     {
-        if ($this->count > 0)
+        if ($this->hasMissingTranslations())
             $this->comment('Try to fix your translations and run again the `trans:check` command.');
         else
             $this->info('No missing translations, YOU ROCK !! (^_^)b');
+    }
+
+    /**
+     * Get the exit code.
+     *
+     * @return int
+     */
+    protected function getExitCode()
+    {
+        return $this->hasMissingTranslations() ? 1 : 0;
+    }
+
+    /**
+     * Check if has missing translations.
+     *
+     * @return bool
+     */
+    protected function hasMissingTranslations()
+    {
+        return $this->missingTranslations > 0;
     }
 }
