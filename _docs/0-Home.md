@@ -7,7 +7,7 @@ Translations manager and checker for Laravel 5 based on [caouecs/Laravel-lang](h
   * Easy setup &amp; configuration.
   * Missing translations Checker.
   * Translations Publisher.
-  * Laravel `5.0` to `5.8` are supported.
+  * Laravel `5.0` to `6.0` are supported.
   * Well documented &amp; IDE Friendly.
   * Well tested with maximum code quality.
   * Made with :heart: &amp; :coffee:.
