@@ -1,4 +1,4 @@
-# LaravelLang [![Packagist License][badge_license]](LICENSE.md) [![For Laravel 5][badge_laravel]][link-github-repo]
+# LaravelLang [![Packagist License][badge_license]](LICENSE.md) [![For Laravel][badge_laravel]][link-github-repo]
 
 [![Travis Status][badge_build]][link-travis]
 [![Coverage Status][badge_coverage]][link-scrutinizer]
@@ -21,7 +21,7 @@ Feel free to check out the [releases](https://github.com/ARCANEDEV/LaravelLang/r
   * Easy setup &amp; configuration.
   * Missing translations Checker.
   * Translations Publisher.
-  * Laravel `5.0` to `5.8` are supported.
+  * Laravel `5.0` to `6.0` are supported.
   * Well documented &amp; IDE Friendly.
   * Well tested with maximum code quality.
   * Made with :heart: &amp; :coffee:.
@@ -50,7 +50,7 @@ If you discover any security related issues, please email arcanedev.maroc@gmail.
 - [All Contributors][link-contributors]
 
 [badge_license]:      https://img.shields.io/packagist/l/arcanedev/laravel-lang.svg?style=flat-square
-[badge_laravel]:      https://img.shields.io/badge/Laravel-From%205.0%20to%205.8-orange.svg?style=flat-square
+[badge_laravel]:      https://img.shields.io/badge/Laravel-From%205.0%20to%206.0-orange.svg?style=flat-square
 [badge_build]:        https://img.shields.io/travis/ARCANEDEV/LaravelLang.svg?style=flat-square
 [badge_coverage]:     https://img.shields.io/scrutinizer/coverage/g/ARCANEDEV/LaravelLang.svg?style=flat-square
 [badge_quality]:      https://img.shields.io/scrutinizer/g/ARCANEDEV/LaravelLang.svg?style=flat-square
