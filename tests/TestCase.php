@@ -44,6 +44,8 @@ abstract class TestCase extends BaseTestCase
     {
         return [
             \Arcanedev\LaravelLang\LaravelLangServiceProvider::class,
+            \Arcanedev\LaravelLang\Providers\DeferredServicesProvider::class,
+            \Arcanedev\LaravelLang\Providers\TranslationServiceProvider::class,
         ];
     }
 

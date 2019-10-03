@@ -11,7 +11,7 @@ use Illuminate\Foundation\Application;
  * @package  Arcanedev\LaravelLang\Providers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class DeferredServiceProvider extends ServiceProvider implements DeferrableProvider
+class DeferredServicesProvider extends ServiceProvider implements DeferrableProvider
 {
     /* -----------------------------------------------------------------
      |  Main Methods

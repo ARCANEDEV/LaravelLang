@@ -36,9 +36,6 @@ class LaravelLangServiceProvider extends ServiceProvider
 
         $this->registerConfig();
 
-        $this->app->registerDeferredProvider(Providers\DeferredServiceProvider::class);
-        $this->registerProvider(Providers\TranslationServiceProvider::class);
-
         $this->registerCommands([
             Commands\CheckCommand::class,
             Commands\PublishCommand::class,
