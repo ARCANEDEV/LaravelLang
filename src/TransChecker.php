@@ -44,7 +44,7 @@ class TransChecker implements TransCheckerInterface
      *
      * @var array
      */
-    private $missing     = [];
+    private $missing = [];
 
     /* -----------------------------------------------------------------
      |  Constructor

@@ -1,42 +1,34 @@
 <?php namespace Arcanedev\LaravelLang\Tests\Providers;
 
-use Arcanedev\LaravelLang\Providers\CommandServiceProvider;
+use Arcanedev\LaravelLang\Providers\DeferredServiceProvider;
 use Arcanedev\LaravelLang\Tests\TestCase;
-use Arcanedev\LaravelLang\Commands;
 
 /**
- * Class     CommandServiceProviderTest
+ * Class     DeferredServiceProviderTest
  *
  * @package  Arcanedev\LaravelLang\Tests\Providers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class CommandServiceProviderTest extends TestCase
+class DeferredServiceProviderTest extends TestCase
 {
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
 
-    /** @var \Arcanedev\LaravelLang\Providers\CommandServiceProvider */
-    private $provider;
+    /** @var  \Arcanedev\LaravelLang\Providers\DeferredServiceProvider */
+    protected $provider;
 
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
-        $this->provider = $this->app->getProvider(CommandServiceProvider::class);
-    }
-
-    public function tearDown(): void
-    {
-        unset($this->provider);
-
-        parent::tearDown();
+        $this->provider = $this->app->getProvider(DeferredServiceProvider::class);
     }
 
     /* -----------------------------------------------------------------
@@ -49,9 +41,9 @@ class CommandServiceProviderTest extends TestCase
     {
         $expectations = [
             \Illuminate\Support\ServiceProvider::class,
-            \Arcanedev\Support\ServiceProvider::class,
-            \Arcanedev\Support\Providers\CommandServiceProvider::class,
-            \Arcanedev\LaravelLang\Providers\CommandServiceProvider::class,
+            \Illuminate\Contracts\Support\DeferrableProvider::class,
+            \Arcanedev\Support\Providers\ServiceProvider::class,
+            \Arcanedev\LaravelLang\Providers\DeferredServiceProvider::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -63,8 +55,9 @@ class CommandServiceProviderTest extends TestCase
     public function it_can_provides()
     {
         $expected = [
-            Commands\CheckCommand::class,
-            Commands\PublishCommand::class,
+            \Arcanedev\LaravelLang\Contracts\TransManager::class,
+            \Arcanedev\LaravelLang\Contracts\TransChecker::class,
+            \Arcanedev\LaravelLang\Contracts\TransPublisher::class,
         ];
 
         static::assertEquals($expected, $this->provider->provides());

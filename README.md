@@ -12,7 +12,7 @@
 
 *By [ARCANEDEV&copy;](http://www.arcanedev.net/)*
 
-Translations manager and checker for Laravel v5 based on [caouecs/Laravel-lang](https://github.com/caouecs/Laravel-lang) translations.
+Translations manager and checker for Laravel based on [caouecs/Laravel-lang](https://github.com/caouecs/Laravel-lang) translations.
 
 Feel free to check out the [releases](https://github.com/ARCANEDEV/LaravelLang/releases), [license](LICENSE.md), and [contribution guidelines](CONTRIBUTING.md).
 
@@ -21,7 +21,7 @@ Feel free to check out the [releases](https://github.com/ARCANEDEV/LaravelLang/r
   * Easy setup &amp; configuration.
   * Missing translations Checker.
   * Translations Publisher.
-  * Laravel `5.0` to `6.0` are supported.
+  * Laravel `5.x | 6.x` are supported.
   * Well documented &amp; IDE Friendly.
   * Well tested with maximum code quality.
   * Made with :heart: &amp; :coffee:.
@@ -50,7 +50,7 @@ If you discover any security related issues, please email arcanedev.maroc@gmail.
 - [All Contributors][link-contributors]
 
 [badge_license]:      https://img.shields.io/packagist/l/arcanedev/laravel-lang.svg?style=flat-square
-[badge_laravel]:      https://img.shields.io/badge/Laravel-From%205.0%20to%206.0-orange.svg?style=flat-square
+[badge_laravel]:      https://img.shields.io/badge/Laravel-From%205.x%20|%206.x-orange.svg?style=flat-square
 [badge_build]:        https://img.shields.io/travis/ARCANEDEV/LaravelLang.svg?style=flat-square
 [badge_coverage]:     https://img.shields.io/scrutinizer/coverage/g/ARCANEDEV/LaravelLang.svg?style=flat-square
 [badge_quality]:      https://img.shields.io/scrutinizer/g/ARCANEDEV/LaravelLang.svg?style=flat-square

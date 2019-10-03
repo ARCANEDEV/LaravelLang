@@ -16,7 +16,7 @@
 | ![LaravelLang v4.x][laravel_lang_4_x] | ![Laravel v5.6][laravel_5_6]                                                                                        |
 | ![LaravelLang v5.x][laravel_lang_5_x] | ![Laravel v5.7][laravel_5_7]                                                                                        |
 | ![LaravelLang v6.x][laravel_lang_6_x] | ![Laravel v5.8][laravel_5_8]                                                                                        |
-| ![LaravelLang v7.x][laravel_lang_7_x] | ![Laravel v6.0][laravel_6_0]                                                                                        |
+| ![LaravelLang v7.x][laravel_lang_7_x] | ![Laravel v6.x][laravel_6_x]                                                                                        |
 
 [laravel_5_0]:  https://img.shields.io/badge/v5.0-supported-brightgreen.svg?style=flat-square "Laravel v5.0"
 [laravel_5_1]:  https://img.shields.io/badge/v5.1-supported-brightgreen.svg?style=flat-square "Laravel v5.1"
@@ -27,15 +27,15 @@
 [laravel_5_6]:  https://img.shields.io/badge/v5.6-supported-brightgreen.svg?style=flat-square "Laravel v5.6"
 [laravel_5_7]:  https://img.shields.io/badge/v5.7-supported-brightgreen.svg?style=flat-square "Laravel v5.7"
 [laravel_5_8]:  https://img.shields.io/badge/v5.8-supported-brightgreen.svg?style=flat-square "Laravel v5.8"
-[laravel_6_0]:  https://img.shields.io/badge/v6.0-supported-brightgreen.svg?style=flat-square "Laravel v6.0"
+[laravel_6_x]:  https://img.shields.io/badge/v6.x-supported-brightgreen.svg?style=flat-square "Laravel v6.x"
 
-[laravel_lang_1_x]: https://img.shields.io/badge/version-1.*-blue.svg?style=flat-square "LaravelLang v1.*"
-[laravel_lang_2_x]: https://img.shields.io/badge/version-2.*-blue.svg?style=flat-square "LaravelLang v2.*"
-[laravel_lang_3_x]: https://img.shields.io/badge/version-3.*-blue.svg?style=flat-square "LaravelLang v3.*"
-[laravel_lang_4_x]: https://img.shields.io/badge/version-4.*-blue.svg?style=flat-square "LaravelLang v4.*"
-[laravel_lang_5_x]: https://img.shields.io/badge/version-5.*-blue.svg?style=flat-square "LaravelLang v5.*"
-[laravel_lang_6_x]: https://img.shields.io/badge/version-6.*-blue.svg?style=flat-square "LaravelLang v6.*"
-[laravel_lang_7_x]: https://img.shields.io/badge/version-7.*-blue.svg?style=flat-square "LaravelLang v7.*"
+[laravel_lang_1_x]: https://img.shields.io/badge/version-1.x-blue.svg?style=flat-square "LaravelLang v1.x"
+[laravel_lang_2_x]: https://img.shields.io/badge/version-2.x-blue.svg?style=flat-square "LaravelLang v2.x"
+[laravel_lang_3_x]: https://img.shields.io/badge/version-3.x-blue.svg?style=flat-square "LaravelLang v3.x"
+[laravel_lang_4_x]: https://img.shields.io/badge/version-4.x-blue.svg?style=flat-square "LaravelLang v4.x"
+[laravel_lang_5_x]: https://img.shields.io/badge/version-5.x-blue.svg?style=flat-square "LaravelLang v5.x"
+[laravel_lang_6_x]: https://img.shields.io/badge/version-6.x-blue.svg?style=flat-square "LaravelLang v6.x"
+[laravel_lang_7_x]: https://img.shields.io/badge/version-7.x-blue.svg?style=flat-square "LaravelLang v7.x"
 
 ## Composer
 

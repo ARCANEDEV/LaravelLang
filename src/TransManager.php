@@ -1,7 +1,6 @@
 <?php namespace Arcanedev\LaravelLang;
 
-use Arcanedev\LaravelLang\Entities\Locale;
-use Arcanedev\LaravelLang\Entities\LocaleCollection;
+use Arcanedev\LaravelLang\Entities\{Locale, LocaleCollection};
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
 

@@ -1,7 +1,6 @@
 <?php namespace Arcanedev\LaravelLang\Tests;
 
 use Arcanedev\LaravelLang\LaravelLangServiceProvider;
-use Arcanedev\LaravelLang\Contracts;
 
 /**
  * Class     LaravelLangServiceProviderTest
@@ -48,8 +47,8 @@ class LaravelLangServiceProviderTest extends TestCase
     {
         $expectations = [
             \Illuminate\Support\ServiceProvider::class,
-            \Arcanedev\Support\ServiceProvider::class,
-            \Arcanedev\Support\PackageServiceProvider::class,
+            \Arcanedev\Support\Providers\ServiceProvider::class,
+            \Arcanedev\Support\Providers\PackageServiceProvider::class,
             \Arcanedev\LaravelLang\LaravelLangServiceProvider::class,
         ];
 
@@ -61,11 +60,7 @@ class LaravelLangServiceProviderTest extends TestCase
     /** @test */
     public function it_can_provides()
     {
-        $expected = [
-            Contracts\TransManager::class,
-            Contracts\TransChecker::class,
-            Contracts\TransPublisher::class,
-        ];
+        $expected = [];
 
         static::assertEquals($expected, $this->provider->provides());
     }
