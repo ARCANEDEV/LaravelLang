@@ -23,17 +23,13 @@ class TranslationServiceProvider extends ServiceProvider
     protected function registerLoader()
     {
         $this->app->singleton('translation.loader', function(Application $app) {
-            /**
-             * @var  \Illuminate\Config\Repository      $config
-             * @var  \Illuminate\Filesystem\Filesystem  $files
-             */
-            $config  = $app['config'];
-            $files   = $app['files'];
-            $vendor  = $config->get('laravel-lang.vendor', '');
-            $locales = $config->get('laravel-lang.locales', []);
+            $config = $app['config'];
 
             return new FileLoader(
-                $files, $app->langPath(), $vendor, $locales
+                $app['files'],
+                $app->langPath(),
+                $config->get('laravel-lang.vendor', ''),
+                $config->get('laravel-lang.locales', [])
             );
         });
     }

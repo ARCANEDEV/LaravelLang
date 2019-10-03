@@ -1,8 +1,7 @@
 <?php namespace Arcanedev\LaravelLang\Entities;
 
 use Arcanedev\LaravelLang\Contracts\Entities\Locale as LocaleContract;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
+use Illuminate\Support\{Arr, Str};
 
 /**
  * Class     Locale
