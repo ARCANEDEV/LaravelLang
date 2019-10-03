@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\LaravelLang\Tests\Providers;
 
-use Arcanedev\LaravelLang\Providers\DeferredServiceProvider;
+use Arcanedev\LaravelLang\Providers\DeferredServicesProvider;
 use Arcanedev\LaravelLang\Tests\TestCase;
 
 /**
@@ -16,7 +16,7 @@ class DeferredServiceProviderTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @var  \Arcanedev\LaravelLang\Providers\DeferredServiceProvider */
+    /** @var  \Arcanedev\LaravelLang\Providers\DeferredServicesProvider */
     protected $provider;
 
     /* -----------------------------------------------------------------
@@ -28,7 +28,7 @@ class DeferredServiceProviderTest extends TestCase
     {
         parent::setUp();
 
-        $this->provider = $this->app->getProvider(DeferredServiceProvider::class);
+        $this->provider = $this->app->getProvider(DeferredServicesProvider::class);
     }
 
     /* -----------------------------------------------------------------
@@ -43,7 +43,7 @@ class DeferredServiceProviderTest extends TestCase
             \Illuminate\Support\ServiceProvider::class,
             \Illuminate\Contracts\Support\DeferrableProvider::class,
             \Arcanedev\Support\Providers\ServiceProvider::class,
-            \Arcanedev\LaravelLang\Providers\DeferredServiceProvider::class,
+            \Arcanedev\LaravelLang\Providers\DeferredServicesProvider::class,
         ];
 
         foreach ($expectations as $expected) {

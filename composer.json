@@ -39,7 +39,9 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Arcanedev\\LaravelLang\\LaravelLangServiceProvider"
+                "Arcanedev\\LaravelLang\\LaravelLangServiceProvider",
+                "Arcanedev\\LaravelLang\\Providers\\DeferredServicesProvider",
+                "Arcanedev\\LaravelLang\\Providers\\TranslationServiceProvider"
             ]
         }
     }
