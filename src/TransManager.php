@@ -1,5 +1,10 @@
-<?php namespace Arcanedev\LaravelLang;
+<?php
 
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelLang;
+
+use Arcanedev\LaravelLang\Contracts\TransManager as TransManagerContract;
 use Arcanedev\LaravelLang\Entities\{Locale, LocaleCollection};
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
@@ -10,7 +15,7 @@ use Illuminate\Support\Arr;
  * @package  Arcanedev\LaravelLang
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class TransManager implements Contracts\TransManager
+class TransManager implements TransManagerContract
 {
     /* -----------------------------------------------------------------
      |  Properties
@@ -74,7 +79,7 @@ class TransManager implements Contracts\TransManager
      *
      * @return array
      */
-    public function getPaths()
+    public function getPaths(): array
     {
         return $this->paths;
     }
@@ -87,7 +92,7 @@ class TransManager implements Contracts\TransManager
     /**
      * Load lang files.
      */
-    private function load()
+    private function load(): void
     {
         foreach ($this->getPaths() as $group => $path) {
             $this->locales[$group] = $this->loadDirectories($path);
@@ -101,18 +106,18 @@ class TransManager implements Contracts\TransManager
      *
      * @return \Arcanedev\LaravelLang\Entities\LocaleCollection
      */
-    private function loadDirectories($dirPath)
+    private function loadDirectories($dirPath): LocaleCollection
     {
         $locales = new LocaleCollection;
 
         foreach ($this->filesystem->directories($dirPath) as $path) {
-            $excluded = in_array($key = basename($path), $this->excludedFolders);
-
-            if ( ! $excluded) {
-                $locales->addOne(
-                    new Locale($key, $path, $this->loadLocaleFiles($path))
-                );
+            if ($this->isExcluded($path)) {
+                continue;
             }
+
+            $locales->addOne(
+                new Locale(basename($path), $path, $this->loadLocaleFiles($path))
+            );
         }
 
         return $locales;
@@ -125,7 +130,7 @@ class TransManager implements Contracts\TransManager
      *
      * @return array
      */
-    private function loadLocaleFiles($path)
+    private function loadLocaleFiles(string $path): array
     {
         $files = [];
 
@@ -152,7 +157,7 @@ class TransManager implements Contracts\TransManager
      *
      * @return \Arcanedev\LaravelLang\Entities\LocaleCollection|null
      */
-    public function getCollection($group, $default = null)
+    public function getCollection(string $group, $default = null): ?LocaleCollection
     {
         return Arr::get($this->locales, $group, $default);
     }
@@ -166,10 +171,11 @@ class TransManager implements Contracts\TransManager
      *
      * @return \Arcanedev\LaravelLang\Entities\Locale|null
      */
-    public function getFrom($group, $locale, $default = null)
+    public function getFrom(string $group, string $locale, $default = null): ?Locale
     {
-        if ( ! $this->hasCollection($group))
+        if ( ! $this->hasCollection($group)) {
             return $default;
+        }
 
         $locales = $this->getCollection($group);
 
@@ -181,7 +187,7 @@ class TransManager implements Contracts\TransManager
      *
      * @return array
      */
-    public function keys()
+    public function keys(): array
     {
         $locales = array_map(function (LocaleCollection $locales) {
             $keys = $locales->keys()->toArray();
@@ -202,7 +208,7 @@ class TransManager implements Contracts\TransManager
      *
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->keys());
     }
@@ -219,8 +225,20 @@ class TransManager implements Contracts\TransManager
      *
      * @return bool
      */
-    public function hasCollection($group)
+    public function hasCollection(string $group): bool
     {
         return Arr::has($this->locales, $group);
+    }
+
+    /**
+     * Check if the given path is excluded.
+     *
+     * @param  string  $path
+     *
+     * @return bool
+     */
+    private function isExcluded(string $path): bool
+    {
+        return in_array($key = basename($path), $this->excludedFolders);
     }
 }

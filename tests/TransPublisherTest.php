@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\LaravelLang\Tests;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelLang\Tests;
 
 /**
  * Class     TransPublisherTest
@@ -41,7 +45,7 @@ class TransPublisherTest extends TestCase
      */
 
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         $expectations = [
             \Arcanedev\LaravelLang\Contracts\TransPublisher::class,
@@ -54,7 +58,7 @@ class TransPublisherTest extends TestCase
     }
 
     /** @test */
-    public function it_can_publish()
+    public function it_can_publish(): void
     {
         $locale = 'es';
 
@@ -70,7 +74,7 @@ class TransPublisherTest extends TestCase
     }
 
     /** @test */
-    public function it_can_not_publish_if_is_not_forced()
+    public function it_can_not_publish_if_is_not_forced(): void
     {
         $locale = 'es';
 
@@ -92,7 +96,7 @@ class TransPublisherTest extends TestCase
     }
 
     /** @test */
-    public function it_can_publish_on_force()
+    public function it_can_publish_on_force(): void
     {
         $locale = 'es';
 
@@ -104,13 +108,13 @@ class TransPublisherTest extends TestCase
     }
 
     /** @test */
-    public function it_can_skip_if_locale_is_english()
+    public function it_can_skip_if_locale_is_english(): void
     {
         static::assertTrue($this->publisher->publish('en'));
     }
 
     /** @test */
-    public function it_must_throw_an_exception_on_unsupported_locale()
+    public function it_must_throw_an_exception_on_unsupported_locale(): void
     {
         $this->expectException(\Arcanedev\LaravelLang\Exceptions\LangPublishException::class);
         $this->expectExceptionMessage('The locale [arcanedev] is not supported.');

@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\LaravelLang\Tests\Commands;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelLang\Tests\Commands;
 
 use Arcanedev\LaravelLang\Tests\TestCase;
 
@@ -16,7 +20,7 @@ class PublishCommandTest extends TestCase
      */
 
     /** @test */
-    public function it_can_publish()
+    public function it_can_publish(): void
     {
         $locale = 'es';
 
@@ -29,7 +33,7 @@ class PublishCommandTest extends TestCase
     }
 
     /** @test */
-    public function it_can_publish_with_no_force()
+    public function it_can_publish_with_no_force(): void
     {
         $locale = 'es';
 
@@ -45,7 +49,7 @@ class PublishCommandTest extends TestCase
     }
 
     /** @test */
-    public function it_can_publish_with_force()
+    public function it_can_publish_with_force(): void
     {
         $locale = 'es';
 
@@ -62,7 +66,7 @@ class PublishCommandTest extends TestCase
     }
 
     /** @test */
-    public function it_can_skip_the_default_locale()
+    public function it_can_skip_the_default_locale(): void
     {
         $locale = 'en';
 

@@ -1,7 +1,12 @@
-<?php namespace Arcanedev\LaravelLang;
+<?php
 
-use Arcanedev\LaravelLang\Contracts\TransChecker as TransCheckerInterface;
-use Arcanedev\LaravelLang\Contracts\TransManager as TransManagerInterface;
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelLang;
+
+use Arcanedev\LaravelLang\Contracts\{
+    TransChecker as TransCheckerInterface,
+    TransManager as TransManagerInterface};
 use Illuminate\Support\Arr;
 use Illuminate\Translation\Translator;
 
@@ -58,11 +63,8 @@ class TransChecker implements TransCheckerInterface
      * @param  \Arcanedev\LaravelLang\Contracts\TransManager  $manager
      * @param  array                                          $configs
      */
-    public function __construct(
-        Translator $translator,
-        TransManagerInterface $manager,
-        array $configs
-    ) {
+    public function __construct(Translator $translator, TransManagerInterface $manager, array $configs)
+    {
         $this->translator = $translator;
         $this->manager    = $manager;
         $this->configs    = $configs;
@@ -78,7 +80,7 @@ class TransChecker implements TransCheckerInterface
      *
      * @return string
      */
-    public function getDefaultLocale()
+    public function getDefaultLocale(): string
     {
         return $this->translator->getLocale();
     }
@@ -88,7 +90,7 @@ class TransChecker implements TransCheckerInterface
      *
      * @return array
      */
-    public function getLocales()
+    public function getLocales(): array
     {
         return Arr::get($this->configs, 'locales', []);
     }
@@ -98,7 +100,7 @@ class TransChecker implements TransCheckerInterface
      *
      * @return array
      */
-    public function getIgnoredTranslations()
+    public function getIgnoredTranslations(): array
     {
         return Arr::get($this->configs, 'check.ignore', []);
     }
@@ -113,7 +115,7 @@ class TransChecker implements TransCheckerInterface
      *
      * @return array
      */
-    public function check()
+    public function check(): array
     {
         $this->missing = [];
         $from          = $this->getDefaultLocale();
@@ -144,7 +146,7 @@ class TransChecker implements TransCheckerInterface
      *
      * @return array
      */
-    private function getTranslations($locale, array $ignored)
+    private function getTranslations(string $locale, array $ignored): array
     {
         $appLocale    = $this->manager->getFrom('app', $locale);
         $vendorLocale = $this->manager->getFrom('vendor', $locale);
@@ -161,7 +163,7 @@ class TransChecker implements TransCheckerInterface
      * @param  array   $fromTranslations
      * @param  string  $locale
      */
-    private function diffMissing(array $toTranslations, array $fromTranslations, $locale)
+    private function diffMissing(array $toTranslations, array $fromTranslations, string $locale): void
     {
         $diff = array_diff_key($toTranslations, $fromTranslations);
 
@@ -179,7 +181,7 @@ class TransChecker implements TransCheckerInterface
      * @param  string  $locale
      * @param  string  $transKey
      */
-    private function addMissing($locale, $transKey)
+    private function addMissing(string $locale, string $transKey)
     {
         if ( ! $this->hasMissing($locale, $transKey)) {
             $this->missing[$locale][] = $transKey;
@@ -194,7 +196,7 @@ class TransChecker implements TransCheckerInterface
      *
      * @return bool
      */
-    private function hasMissing($locale, $transKey)
+    private function hasMissing(string $locale, string $transKey): bool
     {
         if ( ! isset($this->missing[$locale]))
             return false;

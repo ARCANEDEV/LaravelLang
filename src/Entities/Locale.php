@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\LaravelLang\Entities;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelLang\Entities;
 
 use Arcanedev\LaravelLang\Contracts\Entities\Locale as LocaleContract;
 use Illuminate\Support\{Arr, Str};
@@ -37,7 +41,7 @@ class Locale implements LocaleContract
      * @param  string  $path
      * @param  array   $files
      */
-    public function __construct($key, $path, array $files)
+    public function __construct(string $key, string $path, array $files)
     {
         $this->key   = $key;
         $this->path  = $path;
@@ -54,7 +58,7 @@ class Locale implements LocaleContract
      *
      * @return string
      */
-    public function getKey()
+    public function getKey(): string
     {
         return $this->key;
     }
@@ -64,7 +68,7 @@ class Locale implements LocaleContract
      *
      * @return string
      */
-    public function getPath()
+    public function getPath(): string
     {
         return $this->path;
     }
@@ -74,7 +78,7 @@ class Locale implements LocaleContract
      *
      * @return array
      */
-    public function getTranslations()
+    public function getTranslations(): array
     {
         $translations = array_map(function ($file) {
             return $file['content'];
@@ -96,7 +100,7 @@ class Locale implements LocaleContract
      *
      * @return array
      */
-    public function mergeTranslations(LocaleContract $locale = null, array $ignored = [])
+    public function mergeTranslations(LocaleContract $locale = null, array $ignored = []): array
     {
         $merged       = [];
         $translations = array_merge(

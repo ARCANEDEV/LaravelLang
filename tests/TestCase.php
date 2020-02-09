@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\LaravelLang\Tests;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelLang\Tests;
 
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
@@ -40,7 +44,7 @@ abstract class TestCase extends BaseTestCase
      *
      * @return array
      */
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             \Arcanedev\LaravelLang\LaravelLangServiceProvider::class,
@@ -54,7 +58,7 @@ abstract class TestCase extends BaseTestCase
      *
      * @param  \Illuminate\Foundation\Application   $app
      */
-    protected function getEnvironmentSetUp($app)
+    protected function getEnvironmentSetUp($app): void
     {
         /** @var  \Illuminate\Contracts\Config\Repository  $config */
         $basePath = dirname(__DIR__);
@@ -84,7 +88,7 @@ abstract class TestCase extends BaseTestCase
     /**
      * Copy languages fixtures.
      *
-     * @param  \Illuminate\Foundation\Application   $app
+     * @param  \Illuminate\Contracts\Foundation\Application  $app
      */
     private function copyLanguagesFixtures($app)
     {
@@ -114,7 +118,7 @@ abstract class TestCase extends BaseTestCase
      *
      * @return bool
      */
-    protected function cleanLangDirectory($locale)
+    protected function cleanLangDirectory(string $locale): bool
     {
         return $this->filesystem()
                     ->cleanDirectory($this->app->langPath().DS.$locale);
@@ -127,7 +131,7 @@ abstract class TestCase extends BaseTestCase
      *
      * @return bool
      */
-    protected function deleteLangDirectory($locale)
+    protected function deleteLangDirectory(string $locale): bool
     {
         return $this->filesystem()
                     ->deleteDirectory($this->app->langPath().DS.$locale);
@@ -136,15 +140,15 @@ abstract class TestCase extends BaseTestCase
     /**
      * Get available locales.
      *
-     * @param  bool|true  $addEnglish
+     * @param  bool|true  $includeEnglish
      *
      * @return array
      */
-    protected function getLocales($addEnglish = true)
+    protected function getLocales(bool $includeEnglish = true): array
     {
         $locales = $this->locales;
 
-        if ($addEnglish) {
+        if ($includeEnglish) {
             $locales = array_merge(['en' => 'en'], array_combine($locales, $locales));
         }
 
@@ -154,12 +158,12 @@ abstract class TestCase extends BaseTestCase
     /**
      * Count available locales.
      *
-     * @param  bool|true  $addEnglish
+     * @param  bool|true  $includeEnglish
      *
      * @return int
      */
-    protected function getLocalesCount($addEnglish = true)
+    protected function getLocalesCount(bool $includeEnglish = true): int
     {
-        return count($this->getLocales($addEnglish));
+        return count($this->getLocales($includeEnglish));
     }
 }

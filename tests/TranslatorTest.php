@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\LaravelLang\Tests;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelLang\Tests;
 
 use Illuminate\Translation\Translator;
 
@@ -43,13 +47,13 @@ class TranslatorTest extends TestCase
      */
 
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         static::assertInstanceOf(Translator::class, $this->translator);
     }
 
     /** @test */
-    public function it_can_translate()
+    public function it_can_translate(): void
     {
         $expectations = [
             'es' => [
@@ -70,7 +74,7 @@ class TranslatorTest extends TestCase
     }
 
     /** @test */
-    public function it_can_translate_with_fallback()
+    public function it_can_translate_with_fallback(): void
     {
         $unsupportedLocales = ['ar', 'bg', 'bs', 'ca', 'it'];
 

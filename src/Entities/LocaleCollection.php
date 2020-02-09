@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\LaravelLang\Entities;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelLang\Entities;
 
 use Arcanedev\LaravelLang\Contracts\Entities\Locale as LocaleContract;
 use Illuminate\Support\Collection;
@@ -34,7 +38,7 @@ class LocaleCollection extends Collection
      *
      * @param  \Arcanedev\LaravelLang\Contracts\Entities\Locale  $local
      *
-     * @return self
+     * @return $this
      */
     public function addOne(LocaleContract $local)
     {

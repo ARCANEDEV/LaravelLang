@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\LaravelLang\Commands;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelLang\Commands;
 
 use Arcanedev\LaravelLang\LaravelLang;
 use Arcanedev\Support\Bases\Command as BaseCommand;
@@ -19,7 +23,7 @@ abstract class AbstractCommand extends BaseCommand
     /**
      * Display LogViewer Logo and Copyrights.
      */
-    protected function copyright()
+    protected function copyright(): void
     {
         // LOGO
         $this->comment("   __                           _   __                   ");

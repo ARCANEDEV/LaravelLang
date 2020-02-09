@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\LaravelLang\Exceptions;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelLang\Exceptions;
 
 /**
  * Class     LaravelLangException

@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\LaravelLang;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelLang;
 
 use Arcanedev\Support\Providers\PackageServiceProvider as ServiceProvider;
 
@@ -36,10 +40,12 @@ class LaravelLangServiceProvider extends ServiceProvider
 
         $this->registerConfig();
 
-        $this->registerCommands([
-            Commands\CheckCommand::class,
-            Commands\PublishCommand::class,
-        ]);
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                Commands\CheckCommand::class,
+                Commands\PublishCommand::class,
+            ]);
+        }
     }
 
     /**

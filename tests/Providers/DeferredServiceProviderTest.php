@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\LaravelLang\Tests\Providers;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelLang\Tests\Providers;
 
 use Arcanedev\LaravelLang\Providers\DeferredServicesProvider;
 use Arcanedev\LaravelLang\Tests\TestCase;
@@ -37,7 +41,7 @@ class DeferredServiceProviderTest extends TestCase
      */
 
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         $expectations = [
             \Illuminate\Support\ServiceProvider::class,
@@ -52,7 +56,7 @@ class DeferredServiceProviderTest extends TestCase
     }
 
     /** @test */
-    public function it_can_provides()
+    public function it_can_provides(): void
     {
         $expected = [
             \Arcanedev\LaravelLang\Contracts\TransManager::class,

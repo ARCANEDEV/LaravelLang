@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\LaravelLang\Commands;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelLang\Commands;
 
 use Arcanedev\LaravelLang\Contracts\TransChecker;
 
@@ -70,7 +74,7 @@ class CheckCommand extends AbstractCommand
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): int
     {
         $this->copyright();
 
@@ -100,7 +104,7 @@ class CheckCommand extends AbstractCommand
      *
      * @return array
      */
-    private function prepareRows(array $missing)
+    private function prepareRows(array $missing): array
     {
         $rows = [];
 
@@ -122,7 +126,7 @@ class CheckCommand extends AbstractCommand
      *
      * @codeCoverageIgnore
      */
-    private function showMessage()
+    private function showMessage(): void
     {
         if ($this->hasMissingTranslations())
             $this->comment('Try to fix your translations and run again the `trans:check` command.');
@@ -135,7 +139,7 @@ class CheckCommand extends AbstractCommand
      *
      * @return int
      */
-    protected function getExitCode()
+    protected function getExitCode(): int
     {
         return $this->hasMissingTranslations() ? 1 : 0;
     }
@@ -145,7 +149,7 @@ class CheckCommand extends AbstractCommand
      *
      * @return bool
      */
-    protected function hasMissingTranslations()
+    protected function hasMissingTranslations(): bool
     {
         return $this->missingTranslations > 0;
     }

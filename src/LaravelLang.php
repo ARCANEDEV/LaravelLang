@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\LaravelLang;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelLang;
 
 /**
  * Class     LaravelLang

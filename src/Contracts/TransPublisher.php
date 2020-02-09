@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\LaravelLang\Contracts;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelLang\Contracts;
 
 /**
  * Interface  TransPublisher
@@ -23,7 +27,7 @@ interface TransPublisher
      *
      * @throws \Arcanedev\LaravelLang\Exceptions\LangPublishException
      */
-    public function publish($localeKey, $force = false);
+    public function publish(string $localeKey, $force = false): bool;
 
     /* -----------------------------------------------------------------
      |  Check Methods
@@ -37,7 +41,7 @@ interface TransPublisher
      *
      * @return bool
      */
-    public function isDefault($locale);
+    public function isDefault(string $locale): bool;
 
     /**
      * Check if the locale is supported.
@@ -46,5 +50,5 @@ interface TransPublisher
      *
      * @return bool
      */
-    public function isSupported($key);
+    public function isSupported(string $key): bool;
 }
