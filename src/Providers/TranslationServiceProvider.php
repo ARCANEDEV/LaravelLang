@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\LaravelLang\Providers;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelLang\Providers;
 
 use Arcanedev\LaravelLang\FileLoader;
 use Illuminate\Foundation\Application;
@@ -20,7 +24,7 @@ class TranslationServiceProvider extends ServiceProvider
     /**
      * Register the translation line loader.
      */
-    protected function registerLoader()
+    protected function registerLoader(): void
     {
         $this->app->singleton('translation.loader', function(Application $app) {
             return new FileLoader(

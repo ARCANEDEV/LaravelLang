@@ -1,15 +1,21 @@
-<?php namespace Arcanedev\LaravelLang;
+<?php
 
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelLang;
+
+use Arcanedev\LaravelLang\Contracts\TransPublisher as TransPublisherContract;
+use Arcanedev\LaravelLang\Contracts\TransManager as TransManagerContract;
 use Arcanedev\LaravelLang\Exceptions\LangPublishException;
 use Illuminate\Filesystem\Filesystem;
 
 /**
  * Class     TransPublisher
  *
- * @package  Arcanedev\LaravelLang\Services
+ * @package  Arcanedev\LaravelLang
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class TransPublisher implements Contracts\TransPublisher
+class TransPublisher implements TransPublisherContract
 {
     /* -----------------------------------------------------------------
      |  Properties
@@ -56,7 +62,7 @@ class TransPublisher implements Contracts\TransPublisher
      * @param  \Arcanedev\LaravelLang\Contracts\TransManager  $manager
      * @param  string                                         $langPath
      */
-    public function __construct(Filesystem $filesystem, Contracts\TransManager $manager, $langPath)
+    public function __construct(Filesystem $filesystem, TransManagerContract $manager, string $langPath)
     {
         $this->filesystem = $filesystem;
         $this->manager    = $manager;
@@ -68,7 +74,7 @@ class TransPublisher implements Contracts\TransPublisher
     /**
      * Start the engine.
      */
-    private function init()
+    private function init(): void
     {
         $this->locales = $this->manager->getCollection('vendor');
     }
@@ -85,7 +91,7 @@ class TransPublisher implements Contracts\TransPublisher
      *
      * @return string
      */
-    private function getDestinationPath($locale)
+    private function getDestinationPath(string $locale): string
     {
         return $this->langPath.DS.$locale;
     }
@@ -98,7 +104,7 @@ class TransPublisher implements Contracts\TransPublisher
      *
      * @return \Arcanedev\LaravelLang\Entities\Locale|mixed
      */
-    private function getLocale($key, $default = null)
+    private function getLocale(string $key, $default = null)
     {
         return $this->locales->get($key, $default);
     }
@@ -111,24 +117,25 @@ class TransPublisher implements Contracts\TransPublisher
     /**
      * Publish a lang.
      *
-     * @param  string  $localeKey
+     * @param  string  $locale
      * @param  bool    $force
      *
      * @return bool
      */
-    public function publish($localeKey, $force = false)
+    public function publish(string $locale, $force = false): bool
     {
-        $localeKey = trim($localeKey);
+        $locale = trim($locale);
 
-        if ($this->isDefault($localeKey))
+        if ($this->isDefault($locale)) {
             return true;
+        }
 
-        $this->checkLocale($localeKey);
+        $this->checkLocale($locale);
 
-        $source      = $this->getLocale($localeKey)->getPath();
-        $destination = $this->getDestinationPath($localeKey);
+        $source      = $this->getLocale($locale)->getPath();
+        $destination = $this->getDestinationPath($locale);
 
-        $this->isPublishable($localeKey, $destination, $force);
+        $this->isPublishable($locale, $destination, $force);
 
         return $this->filesystem->copyDirectory($source, $destination);
     }
@@ -145,7 +152,7 @@ class TransPublisher implements Contracts\TransPublisher
      *
      * @return bool
      */
-    public function isDefault($locale)
+    public function isDefault(string $locale): bool
     {
         return $locale === 'en';
     }
@@ -157,7 +164,7 @@ class TransPublisher implements Contracts\TransPublisher
      *
      * @return bool
      */
-    public function isSupported($key)
+    public function isSupported(string $key): bool
     {
         return $this->locales->has($key);
     }
@@ -169,7 +176,7 @@ class TransPublisher implements Contracts\TransPublisher
      *
      * @throws \Arcanedev\LaravelLang\Exceptions\LangPublishException
      */
-    private function checkLocale($locale)
+    private function checkLocale(string $locale): void
     {
         if ( ! $this->isSupported($locale)) {
             throw new LangPublishException("The locale [$locale] is not supported.");
@@ -183,9 +190,10 @@ class TransPublisher implements Contracts\TransPublisher
      *
      * @return bool
      */
-    private function isFolderExists($path)
+    private function isFolderExists(string $path): bool
     {
-        return $this->filesystem->exists($path) && $this->filesystem->isDirectory($path);
+        return $this->filesystem->exists($path)
+            && $this->filesystem->isDirectory($path);
     }
 
     /**
@@ -195,7 +203,7 @@ class TransPublisher implements Contracts\TransPublisher
      *
      * @return bool
      */
-    private function isFolderEmpty($path)
+    private function isFolderEmpty(string $path): bool
     {
         $files = $this->filesystem->files($path);
 
@@ -211,16 +219,18 @@ class TransPublisher implements Contracts\TransPublisher
      *
      * @throws \Arcanedev\LaravelLang\Exceptions\LangPublishException
      */
-    private function isPublishable($locale, $path, $force)
+    private function isPublishable(string $locale, string $path, bool $force): void
     {
-        if ( ! $this->isFolderExists($path) || $this->isFolderEmpty($path))
+        if ( ! $this->isFolderExists($path)) {
             return;
+        }
+
+        if ($this->isFolderEmpty($path)) {
+            return;
+        }
 
         if ( ! $force) {
-            throw new LangPublishException(
-                "You can't publish the translations because the [$locale] folder is not empty. ".
-                "To override the translations, try to clean/delete the [$locale] folder or force the publication."
-            );
+            throw LangPublishException::unpublishable($locale);
         }
     }
 }

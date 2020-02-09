@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\LaravelLang\Contracts;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelLang\Contracts;
 
 /**
  * Interface  TransChecker
@@ -18,21 +22,21 @@ interface TransChecker
      *
      * @return string
      */
-    public function getDefaultLocale();
+    public function getDefaultLocale(): string;
 
     /**
      * Get the locales to check.
      *
      * @return array
      */
-    public function getLocales();
+    public function getLocales(): array;
 
     /**
      * Get the ignored translation attributes.
      *
      * @return array
      */
-    public function getIgnoredTranslations();
+    public function getIgnoredTranslations(): array;
 
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -44,5 +48,5 @@ interface TransChecker
      *
      * @return array
      */
-    public function check();
+    public function check(): array;
 }

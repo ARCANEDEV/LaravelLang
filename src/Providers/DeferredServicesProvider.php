@@ -1,6 +1,15 @@
-<?php namespace Arcanedev\LaravelLang\Providers;
+<?php
 
-use Arcanedev\LaravelLang\{Contracts, TransChecker, TransManager, TransPublisher};
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelLang\Providers;
+
+use Arcanedev\LaravelLang\{TransChecker, TransManager, TransPublisher};
+use Arcanedev\LaravelLang\Contracts\{
+    TransChecker as TransCheckerContract,
+    TransManager as TransManagerContract,
+    TransPublisher as TransPublisherContract
+};
 use Arcanedev\Support\Providers\ServiceProvider;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Foundation\Application;
@@ -36,9 +45,9 @@ class DeferredServicesProvider extends ServiceProvider implements DeferrableProv
     public function provides(): array
     {
         return [
-            Contracts\TransManager::class,
-            Contracts\TransChecker::class,
-            Contracts\TransPublisher::class,
+            TransManagerContract::class,
+            TransCheckerContract::class,
+            TransPublisherContract::class,
         ];
     }
 
@@ -50,9 +59,9 @@ class DeferredServicesProvider extends ServiceProvider implements DeferrableProv
     /**
      * Register the trans manager.
      */
-    private function registerTransManager()
+    private function registerTransManager(): void
     {
-        $this->singleton(Contracts\TransManager::class, function (Application $app) {
+        $this->singleton(TransManagerContract::class, function (Application $app) {
             $paths = array_map('realpath', [
                 'app'    => $app->langPath(),
                 'vendor' => $app['config']->get('laravel-lang.vendor', ''),
@@ -65,12 +74,12 @@ class DeferredServicesProvider extends ServiceProvider implements DeferrableProv
     /**
      * Register the trans checker.
      */
-    private function registerTransChecker()
+    private function registerTransChecker(): void
     {
-        $this->singleton(Contracts\TransChecker::class, function (Application $app) {
+        $this->singleton(TransCheckerContract::class, function (Application $app) {
             return new TransChecker(
                 $app['translator'],
-                $app[Contracts\TransManager::class],
+                $app[TransManagerContract::class],
                 $app['config']->get('laravel-lang', [])
             );
         });
@@ -79,12 +88,12 @@ class DeferredServicesProvider extends ServiceProvider implements DeferrableProv
     /**
      * Register the lang publisher.
      */
-    private function registerLangPublisher()
+    private function registerLangPublisher(): void
     {
-        $this->singleton(Contracts\TransPublisher::class, function (Application $app) {
+        $this->singleton(TransPublisherContract::class, function (Application $app) {
             return new TransPublisher(
                 $app['files'],
-                $app[Contracts\TransManager::class],
+                $app[TransManagerContract::class],
                 $app->langPath()
             );
         });

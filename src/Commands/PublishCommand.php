@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\LaravelLang\Commands;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelLang\Commands;
 
 use Arcanedev\LaravelLang\Contracts\TransPublisher;
 use Arcanedev\LaravelLang\Exceptions\LangPublishException;
@@ -65,7 +69,7 @@ class PublishCommand extends AbstractCommand
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         $this->copyright();
 
@@ -90,7 +94,7 @@ class PublishCommand extends AbstractCommand
      * @param  string  $locale
      * @param  bool    $force
      */
-    private function publish($locale, $force)
+    private function publish(string $locale, bool $force): void
     {
         try {
             $this->publisher->publish($locale, $force);

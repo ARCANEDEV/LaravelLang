@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\LaravelLang\Tests;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelLang\Tests;
 
 /**
  * Class     TransCheckerTest
@@ -41,7 +45,7 @@ class TransCheckerTest extends TestCase
      */
 
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         $expectations = [
             \Arcanedev\LaravelLang\Contracts\TransChecker::class,
@@ -54,7 +58,7 @@ class TransCheckerTest extends TestCase
     }
 
     /** @test */
-    public function it_can_check()
+    public function it_can_check(): void
     {
         $expected = [
             'es' => [

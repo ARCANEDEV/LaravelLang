@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\LaravelLang\Contracts\Entities;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelLang\Contracts\Entities;
 
 /**
  * Interface  Locale
@@ -18,19 +22,19 @@ interface Locale
      *
      * @return string
      */
-    public function getKey();
+    public function getKey(): string;
 
     /**
      * Get the locale translations path.
      *
      * @return string
      */
-    public function getPath();
+    public function getPath(): string;
 
     /**
      * Get locale translations.
      *
      * @return array
      */
-    public function getTranslations();
+    public function getTranslations(): array;
 }

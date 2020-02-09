@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\LaravelLang;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelLang;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Translation\FileLoader as IlluminateFileLoader;
@@ -43,7 +47,7 @@ class FileLoader extends IlluminateFileLoader
      * @param  string                             $vendorPath
      * @param  array                              $locales
      */
-    public function __construct(Filesystem $files, $path, $vendorPath, array $locales = [])
+    public function __construct(Filesystem $files, string $path, string $vendorPath, array $locales = [])
     {
         parent::__construct($files, $path);
 
@@ -61,7 +65,7 @@ class FileLoader extends IlluminateFileLoader
      *
      * @return string
      */
-    private function getVendorPath()
+    private function getVendorPath(): string
     {
         return $this->vendorPath;
     }
@@ -71,9 +75,9 @@ class FileLoader extends IlluminateFileLoader
      *
      * @param  string  $vendorPath
      *
-     * @return self
+     * @return $this
      */
-    private function setVendorPath($vendorPath)
+    private function setVendorPath(string $vendorPath): self
     {
         $this->vendorPath = $vendorPath;
 
@@ -84,10 +88,14 @@ class FileLoader extends IlluminateFileLoader
      * Set the supported locales.
      *
      * @param  array  $locales
+     *
+     * @return $this
      */
-    private function setSupportedLocales(array $locales)
+    private function setSupportedLocales(array $locales): self
     {
         $this->locales = $locales;
+
+        return $this;
     }
 
     /* -----------------------------------------------------------------
@@ -104,7 +112,7 @@ class FileLoader extends IlluminateFileLoader
      *
      * @return array
      */
-    public function load($locale, $group, $namespace = null)
+    public function load($locale, $group, $namespace = null): array
     {
         $defaults = [];
 
@@ -126,7 +134,7 @@ class FileLoader extends IlluminateFileLoader
      *
      * @return bool
      */
-    private function isSupported($locale)
+    private function isSupported($locale): bool
     {
         return in_array($locale, $this->locales);
     }

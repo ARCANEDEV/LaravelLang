@@ -41,7 +41,7 @@ class TransManagerTest extends TestCase
      */
 
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         $expectations = [
             \Arcanedev\LaravelLang\Contracts\TransManager::class,
@@ -59,7 +59,7 @@ class TransManagerTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_all_locales_keys()
+    public function it_can_get_all_locales_keys(): void
     {
         $keys = $this->manager->keys();
 
@@ -69,13 +69,13 @@ class TransManagerTest extends TestCase
     }
 
     /** @test */
-    public function it_can_count()
+    public function it_can_count(): void
     {
         static::assertEquals($this->getLocalesCount(), $this->manager->count());
     }
 
     /** @test */
-    public function it_can_get_locales_collection()
+    public function it_can_get_locales_collection(): void
     {
         $expectations = [
             'app'    => 2,
@@ -95,7 +95,7 @@ class TransManagerTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_one_from_collection()
+    public function it_can_get_one_from_collection(): void
     {
         $expectations = [
             'app'    => [
@@ -126,7 +126,7 @@ class TransManagerTest extends TestCase
     }
 
     /** @test */
-    public function it_return_default_on_getting_one_from_not_existed_group()
+    public function it_return_default_on_getting_one_from_not_existed_group(): void
     {
         static::assertNull($this->manager->getFrom('locales', 'en'));
     }
