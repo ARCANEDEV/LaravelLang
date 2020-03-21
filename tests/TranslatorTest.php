@@ -31,7 +31,7 @@ class TranslatorTest extends TestCase
     {
         parent::setUp();
 
-        $this->translator = $this->app['translator'];
+        $this->translator = $this->app->make('translator');
     }
 
     public function tearDown(): void

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Arcanedev\LaravelLang\Commands;
 
 use Arcanedev\LaravelLang\LaravelLang;
-use Arcanedev\Support\Bases\Command as BaseCommand;
+use Arcanedev\Support\Console\Command as BaseCommand;
 
 /**
  * Class     Command
