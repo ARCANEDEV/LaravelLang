@@ -137,7 +137,7 @@ class TransManager implements TransManagerContract
         foreach ($this->filesystem->allFiles($path) as $file) {
             /** @var \Symfony\Component\Finder\SplFileInfo $file */
             $key = str_replace(
-                ['.php', DS], ['', '.'], $file->getRelativePathname()
+                ['.php', DIRECTORY_SEPARATOR], ['', '.'], $file->getRelativePathname()
             );
 
             $files[$key] = [

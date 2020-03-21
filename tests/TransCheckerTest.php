@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Arcanedev\LaravelLang\Tests;
 
+use Arcanedev\LaravelLang\Contracts\TransChecker;
+
 /**
  * Class     TransCheckerTest
  *
@@ -29,7 +31,7 @@ class TransCheckerTest extends TestCase
     {
         parent::setUp();
 
-        $this->checker = $this->app[\Arcanedev\LaravelLang\Contracts\TransChecker::class];
+        $this->checker = $this->app->make(TransChecker::class);
     }
 
     public function tearDown(): void
@@ -48,7 +50,7 @@ class TransCheckerTest extends TestCase
     public function it_can_be_instantiated(): void
     {
         $expectations = [
-            \Arcanedev\LaravelLang\Contracts\TransChecker::class,
+            TransChecker::class,
             \Arcanedev\LaravelLang\TransChecker::class,
         ];
 

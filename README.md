@@ -21,7 +21,7 @@ Feel free to check out the [releases](https://github.com/ARCANEDEV/LaravelLang/r
   * Easy setup &amp; configuration.
   * Missing translations Checker.
   * Translations Publisher.
-  * Laravel `5.x | 6.x` are supported.
+  * Laravel `5.x` to `7.x` are supported.
   * Well documented &amp; IDE Friendly.
   * Well tested with maximum code quality.
   * Made with :heart: &amp; :coffee:.
@@ -50,7 +50,7 @@ If you discover any security related issues, please email arcanedev.maroc@gmail.
 - [All Contributors][link-contributors]
 
 [badge_license]:      https://img.shields.io/packagist/l/arcanedev/laravel-lang.svg?style=flat-square
-[badge_laravel]:      https://img.shields.io/badge/Laravel-From%205.x%20|%206.x-orange.svg?style=flat-square
+[badge_laravel]:      https://img.shields.io/badge/Laravel-5.x%20to%207.x-orange.svg?style=flat-square
 [badge_build]:       https://img.shields.io/github/workflow/status/ARCANEDEV/LaravelLang/run-tests?style=flat-square
 [badge_coverage]:     https://img.shields.io/scrutinizer/coverage/g/ARCANEDEV/LaravelLang.svg?style=flat-square
 [badge_quality]:      https://img.shields.io/scrutinizer/g/ARCANEDEV/LaravelLang.svg?style=flat-square

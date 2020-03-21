@@ -93,7 +93,7 @@ class TransPublisher implements TransPublisherContract
      */
     private function getDestinationPath(string $locale): string
     {
-        return $this->langPath.DS.$locale;
+        return $this->langPath.DIRECTORY_SEPARATOR.$locale;
     }
 
     /**

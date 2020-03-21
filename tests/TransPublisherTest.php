@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Arcanedev\LaravelLang\Tests;
 
+use Arcanedev\LaravelLang\Contracts\TransPublisher;
+
 /**
  * Class     TransPublisherTest
  *
@@ -29,7 +31,7 @@ class TransPublisherTest extends TestCase
     {
         parent::setUp();
 
-        $this->publisher = $this->app->make(\Arcanedev\LaravelLang\Contracts\TransPublisher::class);
+        $this->publisher = $this->app->make(TransPublisher::class);
     }
 
     public function tearDown(): void
@@ -48,7 +50,7 @@ class TransPublisherTest extends TestCase
     public function it_can_be_instantiated(): void
     {
         $expectations = [
-            \Arcanedev\LaravelLang\Contracts\TransPublisher::class,
+            TransPublisher::class,
             \Arcanedev\LaravelLang\TransPublisher::class,
         ];
 

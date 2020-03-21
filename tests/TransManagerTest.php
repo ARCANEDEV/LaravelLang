@@ -1,4 +1,10 @@
-<?php namespace Arcanedev\LaravelLang\Tests;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\LaravelLang\Tests;
+
+use Arcanedev\LaravelLang\Contracts\TransManager;
 
 /**
  * Class     TransManagerTest
@@ -25,7 +31,7 @@ class TransManagerTest extends TestCase
     {
         parent::setUp();
 
-        $this->manager = $this->app[\Arcanedev\LaravelLang\Contracts\TransManager::class];
+        $this->manager = $this->app->make(TransManager::class);
     }
 
     public function tearDown(): void
@@ -44,7 +50,7 @@ class TransManagerTest extends TestCase
     public function it_can_be_instantiated(): void
     {
         $expectations = [
-            \Arcanedev\LaravelLang\Contracts\TransManager::class,
+            TransManager::class,
             \Arcanedev\LaravelLang\TransManager::class,
         ];
 
@@ -53,7 +59,8 @@ class TransManagerTest extends TestCase
         }
 
         $paths = $this->manager->getPaths();
-        static::assertCount(2, $this->manager->getPaths());
+
+        static::assertCount(2, $paths);
         static::assertArrayHasKey('app', $paths);
         static::assertArrayHasKey('vendor', $paths);
     }
