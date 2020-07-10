@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Arcanedev\LaravelLang\Commands;
 
 use Arcanedev\LaravelLang\Contracts\TransPublisher;
-use Arcanedev\LaravelLang\Exceptions\LangPublishException;
 
 /**
  * Class     PublishCommand
@@ -28,7 +27,8 @@ class PublishCommand extends AbstractCommand
     protected $signature   = 'trans:publish
                                 {locale : The language to publish the translations.}
                                 {--force : Force to override the translations}
-                                {--inline : Publish the inline translations}';
+                                {--inline : Publish the inline translations}
+                                {--json : Include json translations file}';
 
     /**
      * The console command description.
@@ -85,6 +85,7 @@ class PublishCommand extends AbstractCommand
         $this->publish($locale, [
             'force'  => (bool) $this->option('force'),
             'inline' => (bool) $this->option('inline'),
+            'json'   => (bool) $this->option('json'),
         ]);
 
         $this->line('');

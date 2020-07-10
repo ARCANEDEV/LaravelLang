@@ -85,7 +85,7 @@ class TransPublisher implements TransPublisherContract
      */
     private function init(): void
     {
-        $this->locales = $this->manager->getCollection('vendor');
+        $this->locales = $this->manager->getCollection('vendor-php');
     }
 
     /* -----------------------------------------------------------------
@@ -150,11 +150,48 @@ class TransPublisher implements TransPublisherContract
 
         $this->filesystem->ensureDirectoryExists($destination);
 
+        // Publish the PHP Translations
         foreach ($this->filesystem->files($source) as $file) {
             $this->publishFile($file, $locale, $destination, $options);
         }
 
+        // Publish the JSON Translation
+        if ($options['json'] ?? false) {
+            $this->publishJson($locale, $destination);
+        }
+
         return $this->results;
+    }
+
+    /**
+     * Publish the json file.
+     *
+     * @param  string  $locale
+     * @param  string  $destination
+     * @param  array   $options
+     *
+     * @return bool
+     */
+    private function publishJson(string $locale, string $destination, array $options = []): bool
+    {
+        $file = $this->manager->getCollection('vendor-json')->get($locale);
+
+        if (is_null($file)) {
+            $this->results['skipped'][] = "{$locale}.json";
+            return false;
+        }
+
+        if ($this->filesystem->exists($destFile = $destination.'.json') && ($options['force'] ?? false) === false) {
+            $this->results['skipped'][] = "{$locale}.json";
+            return false;
+        }
+
+        return tap($this->filesystem->copy($file->getPath(), $destFile), function (bool $published) use ($locale) {
+            if ($published)
+                $this->results['published'][] = "{$locale}.json";
+            else
+                $this->results['skipped'][] = "{$locale}.json";
+        });
     }
 
     /* -----------------------------------------------------------------
