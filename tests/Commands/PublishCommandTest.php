@@ -25,7 +25,7 @@ class PublishCommandTest extends TestCase
         $locale = 'es';
 
         $this->artisan('trans:publish', compact('locale'))
-             ->expectsOutput("The locale [{$locale}] translations were published successfully.")
+             ->expectsOutput("Publishing the [{$locale}] translations...")
              ->assertExitCode(0);
 
         // Delete the lang folder.
@@ -38,7 +38,7 @@ class PublishCommandTest extends TestCase
         $locale = 'es';
 
         $this->artisan('trans:publish', compact('locale'))
-             ->expectsOutput("The locale [{$locale}] translations were published successfully.")
+             ->expectsOutput("Publishing the [{$locale}] translations...")
              ->assertExitCode(0);
 
         $this->artisan('trans:publish', compact('locale'))
@@ -54,11 +54,11 @@ class PublishCommandTest extends TestCase
         $locale = 'es';
 
         $this->artisan('trans:publish', compact('locale'))
-             ->expectsOutput("The locale [{$locale}] translations were published successfully.")
+             ->expectsOutput("Publishing the [{$locale}] translations...")
              ->assertExitCode(0);
 
         $this->artisan('trans:publish', ['locale'  => $locale, '--force' => true])
-             ->expectsOutput("The locale [{$locale}] translations were published successfully.")
+             ->expectsOutput("Publishing the [{$locale}] translations...")
              ->assertExitCode(0);
 
         // Delete the lang folder.
@@ -71,7 +71,7 @@ class PublishCommandTest extends TestCase
         $locale = 'es';
 
         $this->artisan('trans:publish', ['locale'  => $locale, '--inline' => true])
-             ->expectsOutput("The locale [{$locale}] translations were published successfully.")
+             ->expectsOutput("Publishing the [{$locale}] translations...")
              ->assertExitCode(0);
 
         // Delete the lang folder.

@@ -103,8 +103,27 @@ class PublishCommand extends AbstractCommand
      */
     private function publish(string $locale, array $options): void
     {
-        $this->publisher->publish($locale, $options);
+        $this->info("Publishing the [{$locale}] translations...");
 
-        $this->info("The locale [{$locale}] translations were published successfully.");
+        $results = $this->publisher->publish($locale, $options);
+
+        $this->showResults(['Published translations'], $results['published']);
+        $this->showResults(['Skipped translations'], $results['skipped']);
+    }
+
+    /**
+     * Show the results.
+     *
+     * @param  array  $headers
+     * @param  array  $results
+     */
+    public function showResults(array $headers, array $results): void
+    {
+        if (empty($results))
+            return;
+
+        $this->table($headers, array_map(function($result) {
+            return [$result];
+        }, $results));
     }
 }
