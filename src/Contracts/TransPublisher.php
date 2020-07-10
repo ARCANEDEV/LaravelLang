@@ -21,13 +21,13 @@ interface TransPublisher
      * Publish a lang.
      *
      * @param  string  $localeKey
-     * @param  bool    $force
+     * @param  array   $options
      *
-     * @return bool
+     * @return array
      *
      * @throws \Arcanedev\LaravelLang\Exceptions\LangPublishException
      */
-    public function publish(string $localeKey, $force = false): bool;
+    public function publish(string $localeKey, array $options = []): array;
 
     /* -----------------------------------------------------------------
      |  Check Methods

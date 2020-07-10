@@ -27,7 +27,8 @@ class PublishCommand extends AbstractCommand
      */
     protected $signature   = 'trans:publish
                                 {locale : The language to publish the translations.}
-                                {--force : Force to override the translations}';
+                                {--force : Force to override the translations}
+                                {--inline : Publish the inline translations}';
 
     /**
      * The console command description.
@@ -75,10 +76,16 @@ class PublishCommand extends AbstractCommand
 
         $locale = (string) $this->argument('locale');
 
-        if ($this->publisher->isDefault($locale))
+        if ($this->publisher->isDefault($locale)) {
             $this->info("The locale [{$locale}] is a default lang and it's shipped with laravel.");
-        else
-            $this->publish($locale, (bool) $this->option('force'));
+            $this->line('');
+            return;
+        }
+
+        $this->publish($locale, [
+            'force'  => (bool) $this->option('force'),
+            'inline' => (bool) $this->option('inline'),
+        ]);
 
         $this->line('');
     }
@@ -92,17 +99,12 @@ class PublishCommand extends AbstractCommand
      * Publish the translations.
      *
      * @param  string  $locale
-     * @param  bool    $force
+     * @param  array   $options
      */
-    private function publish(string $locale, bool $force): void
+    private function publish(string $locale, array $options): void
     {
-        try {
-            $this->publisher->publish($locale, $force);
+        $this->publisher->publish($locale, $options);
 
-            $this->info("The locale [{$locale}] translations were published successfully.");
-        }
-        catch (LangPublishException $e) {
-            $this->error($e->getMessage());
-        }
+        $this->info("The locale [{$locale}] translations were published successfully.");
     }
 }
