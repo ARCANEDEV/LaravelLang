@@ -28,8 +28,8 @@ abstract class TestCase extends BaseTestCase
         'ar', 'az', 'be', 'bg', 'bn', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'de-CH', 'el', 'es', 'et', 'eu', 'fa', 'fi',
         'fil', 'fr', 'gl', 'he', 'hi', 'hr', 'hu', 'hy', 'id', 'is', 'it', 'ja', 'ka', 'kk', 'km', 'kn', 'ko', 'lt',
         'lv', 'me', 'mk', 'mn', 'mr', 'ms', 'nb', 'ne', 'nl', 'nn', 'pl', 'ps', 'pt', 'pt-BR', 'ro', 'ru', 'sc', 'si',
-        'sk', 'sl', 'sq', 'sr', 'sv', 'sw', 'tg', 'th', 'tk', 'tl', 'tr', 'ug', 'uk', 'ur', 'uz-cyrillic', 'uz-latin',
-        'vi', 'zh-CN', 'zh-HK', 'zh-TW',
+        'sk', 'sl', 'sq', 'sr-cyrillic', 'sr-latin', 'sv', 'sw', 'tg', 'th', 'tk', 'tl', 'tr', 'ug', 'uk', 'ur',
+        'uz-cyrillic', 'uz-latin', 'vi', 'zh-CN', 'zh-HK', 'zh-TW',
     ];
 
     /* -----------------------------------------------------------------

@@ -8,6 +8,8 @@ use Arcanedev\LaravelLang\Contracts\TransPublisher as TransPublisherContract;
 use Arcanedev\LaravelLang\Contracts\TransManager as TransManagerContract;
 use Arcanedev\LaravelLang\Exceptions\LangPublishException;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Str;
+use SplFileInfo;
 
 /**
  * Class     TransPublisher
@@ -49,6 +51,13 @@ class TransPublisher implements TransPublisherContract
      * @var string
      */
     private $langPath;
+
+    /**
+     * Publish's results.
+     *
+     * @var array
+     */
+    private $results = [];
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -118,16 +127,20 @@ class TransPublisher implements TransPublisherContract
      * Publish a lang.
      *
      * @param  string  $locale
-     * @param  bool    $force
+     * @param  array   $options
      *
-     * @return bool
+     * @return array
      */
-    public function publish(string $locale, $force = false): bool
+    public function publish(string $locale, array $options = []): array
     {
+        $this->resetResults();
+
         $locale = trim($locale);
 
         if ($this->isDefault($locale)) {
-            return true;
+            $this->results['skipped'][] = $locale;
+
+            return $this->results;
         }
 
         $this->checkLocale($locale);
@@ -135,9 +148,13 @@ class TransPublisher implements TransPublisherContract
         $source      = $this->getLocale($locale)->getPath();
         $destination = $this->getDestinationPath($locale);
 
-        $this->isPublishable($locale, $destination, $force);
+        $this->filesystem->ensureDirectoryExists($destination);
 
-        return $this->filesystem->copyDirectory($source, $destination);
+        foreach ($this->filesystem->files($source) as $file) {
+            $this->publishFile($file, $locale, $destination, $options);
+        }
+
+        return $this->results;
     }
 
     /* -----------------------------------------------------------------
@@ -183,54 +200,64 @@ class TransPublisher implements TransPublisherContract
         }
     }
 
-    /**
-     * Check the folder exists.
-     *
-     * @param  string  $path
-     *
-     * @return bool
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
-    private function isFolderExists(string $path): bool
-    {
-        return $this->filesystem->exists($path)
-            && $this->filesystem->isDirectory($path);
-    }
 
     /**
-     * Check if the folder is empty.
+     * Publish the translation file.
      *
-     * @param  string  $path
-     *
-     * @return bool
+     * @param  SplFileInfo  $file
+     * @param  string       $locale
+     * @param  string       $destination
+     * @param  array        $options
      */
-    private function isFolderEmpty(string $path): bool
+    private function publishFile(SplFileInfo $file, string $locale, string $destination, array $options): void
     {
-        $files = $this->filesystem->files($path);
+        $isInlineFile = Str::endsWith($file->getFilename(), '-inline.php');
+        $destFile = $isInlineFile
+            ? Str::replaceLast('-inline.php', '.php', $file->getFilename())
+            : $file->getFilename();
 
-        return empty($files);
-    }
+        if ($this->isInResults($key = "{$locale}/{$destFile}"))
+            return;
 
-    /**
-     * Check if locale is publishable.
-     *
-     * @param  string  $locale
-     * @param  string  $path
-     * @param  bool    $force
-     *
-     * @throws \Arcanedev\LaravelLang\Exceptions\LangPublishException
-     */
-    private function isPublishable(string $locale, string $path, bool $force): void
-    {
-        if ( ! $this->isFolderExists($path)) {
+        // Ignore if inline option is not enabled
+        if ($isInlineFile && (($options['inline'] ?? false) === false))
+            return;
+
+        // Ignore if force option is not enabled
+        if ($this->filesystem->exists($destination.DIRECTORY_SEPARATOR.$destFile) && ($options['force'] ?? false) === false) {
+            $this->results['skipped'][] = $key;
             return;
         }
 
-        if ($this->isFolderEmpty($path)) {
-            return;
-        }
+        $this->filesystem->copy($file->getRealPath(), $destination.DIRECTORY_SEPARATOR.$destFile);
+        $this->results['published'][] = $key;
+    }
 
-        if ( ! $force) {
-            throw LangPublishException::unpublishable($locale);
-        }
+    /**
+     * Reset the publish results.
+     */
+    private function resetResults(): void
+    {
+        $this->results = [
+            'published' => [],
+            'skipped'   => [],
+        ];
+    }
+
+    /**
+     * Check if the given key exists in results.
+     *
+     * @param  string  $key
+     *
+     * @return bool
+     */
+    private function isInResults(string $key): bool
+    {
+        return in_array($key, $this->results['published'])
+            || in_array($key, $this->results['skipped']);
     }
 }

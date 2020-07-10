@@ -64,12 +64,28 @@ class TransPublisherTest extends TestCase
     {
         $locale = 'es';
 
-        static::assertTrue($this->publisher->publish($locale));
+        static::assertEquals([
+            'published' => [
+                'es/auth.php',
+                'es/pagination.php',
+                'es/passwords.php',
+                'es/validation.php',
+            ],
+            'skipped'   => [],
+        ], $this->publisher->publish($locale));
 
         // Clean the lang folder content.
         $this->cleanLangDirectory($locale);
 
-        static::assertTrue($this->publisher->publish($locale));
+        static::assertEquals([
+            'published' => [
+                'es/auth.php',
+                'es/pagination.php',
+                'es/passwords.php',
+                'es/validation.php',
+            ],
+            'skipped'   => [],
+        ], $this->publisher->publish($locale));
 
         // Delete the lang folder.
         $this->deleteLangDirectory($locale);
@@ -80,18 +96,25 @@ class TransPublisherTest extends TestCase
     {
         $locale = 'es';
 
-        static::assertTrue($this->publisher->publish($locale));
+        static::assertEquals([
+            'published' => [
+                'es/auth.php',
+                'es/pagination.php',
+                'es/passwords.php',
+                'es/validation.php',
+            ],
+            'skipped'   => [],
+        ], $this->publisher->publish($locale));
 
-        try {
-            $this->publisher->publish($locale);
-        }
-        catch(\Arcanedev\LaravelLang\Exceptions\LangPublishException $e) {
-            static::assertEquals(
-                'You can\'t publish the translations because the [es] folder is not empty. '.
-                'To override the translations, try to clean/delete the [es] folder or force the publication.',
-                $e->getMessage()
-            );
-        }
+        static::assertEquals([
+            'published' => [],
+            'skipped'   => [
+                'es/auth.php',
+                'es/pagination.php',
+                'es/passwords.php',
+                'es/validation.php',
+            ],
+        ], $this->publisher->publish($locale));
 
         // Delete the lang folder.
         $this->deleteLangDirectory($locale);
@@ -102,17 +125,30 @@ class TransPublisherTest extends TestCase
     {
         $locale = 'es';
 
-        static::assertTrue($this->publisher->publish($locale));
-        static::assertTrue($this->publisher->publish($locale, true));
+        $excepted = [
+            'published' => [
+                'es/auth.php',
+                'es/pagination.php',
+                'es/passwords.php',
+                'es/validation.php',
+            ],
+            'skipped'   => [],
+        ];
+
+        static::assertEquals($excepted, $this->publisher->publish($locale));
+        static::assertEquals($excepted, $this->publisher->publish($locale, ['force' => true]));
 
         // Delete the lang folder.
         $this->deleteLangDirectory($locale);
     }
 
     /** @test */
-    public function it_can_skip_if_locale_is_english(): void
+    public function it_can_skip_if_locale_is_default(): void
     {
-        static::assertTrue($this->publisher->publish('en'));
+        static::assertEquals([
+            'published' => [],
+            'skipped'   => ['en'],
+        ], $this->publisher->publish('en'));
     }
 
     /** @test */

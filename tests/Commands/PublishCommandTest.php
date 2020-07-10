@@ -66,6 +66,19 @@ class PublishCommandTest extends TestCase
     }
 
     /** @test */
+    public function it_can_publish_with_inline(): void
+    {
+        $locale = 'es';
+
+        $this->artisan('trans:publish', ['locale'  => $locale, '--inline' => true])
+             ->expectsOutput("The locale [{$locale}] translations were published successfully.")
+             ->assertExitCode(0);
+
+        // Delete the lang folder.
+        $this->deleteLangDirectory($locale);
+    }
+
+    /** @test */
     public function it_can_skip_the_default_locale(): void
     {
         $locale = 'en';

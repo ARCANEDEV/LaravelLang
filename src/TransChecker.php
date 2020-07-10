@@ -6,8 +6,10 @@ namespace Arcanedev\LaravelLang;
 
 use Arcanedev\LaravelLang\Contracts\{
     TransChecker as TransCheckerInterface,
-    TransManager as TransManagerInterface};
+    TransManager as TransManagerInterface
+};
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Translation\Translator;
 
 /**
@@ -151,9 +153,13 @@ class TransChecker implements TransCheckerInterface
         $appLocale    = $this->manager->getFrom('app', $locale);
         $vendorLocale = $this->manager->getFrom('vendor', $locale);
 
-        return is_null($appLocale)
+        $translations = is_null($appLocale)
             ? $vendorLocale->mergeTranslations($appLocale, $ignored)
             : $appLocale->mergeTranslations($vendorLocale, $ignored);
+
+        return array_filter($translations, function ($key) {
+            return ! Str::startsWith($key, ['validation-inline.']);
+        }, ARRAY_FILTER_USE_KEY);
     }
 
     /**
