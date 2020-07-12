@@ -48,7 +48,10 @@ class TransManager implements TransManagerContract
      *
      * @var array
      */
-    private $excludedFolders = ['script', 'vendor'];
+    private $excludedFolders = [
+        'script',
+        'vendor',
+    ];
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -95,8 +98,28 @@ class TransManager implements TransManagerContract
     private function load(): void
     {
         foreach ($this->getPaths() as $group => $path) {
-            $this->locales[$group] = $this->loadDirectories($path);
+            $this->locales[$group] = $group === 'vendor-json'
+                ? $this->loadJsonDirectory($path)
+                : $this->loadDirectories($path);
         }
+    }
+
+    /**
+     * @param  string  $path
+     *
+     * @return \Arcanedev\LaravelLang\Entities\LocaleCollection
+     */
+    private function loadJsonDirectory(string $path): LocaleCollection
+    {
+        $locales = new LocaleCollection;
+
+        foreach ($this->filesystem->files($path) as $file) {
+            $locales->addOne(
+                new Locale($file->getBasename('.json'), $file->getRealPath())
+            );
+        }
+
+        return $locales;
     }
 
     /**
@@ -106,7 +129,7 @@ class TransManager implements TransManagerContract
      *
      * @return \Arcanedev\LaravelLang\Entities\LocaleCollection
      */
-    private function loadDirectories($dirPath): LocaleCollection
+    private function loadDirectories(string $dirPath): LocaleCollection
     {
         $locales = new LocaleCollection;
 

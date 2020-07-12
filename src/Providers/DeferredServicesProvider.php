@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanedev\LaravelLang\Providers;
 
+use Illuminate\Support\Collection;
 use Arcanedev\LaravelLang\{TransChecker, TransManager, TransPublisher};
 use Arcanedev\LaravelLang\Contracts\{
     TransChecker as TransCheckerContract,
@@ -62,12 +63,7 @@ class DeferredServicesProvider extends ServiceProvider implements DeferrableProv
     private function registerTransManager(): void
     {
         $this->singleton(TransManagerContract::class, function (Application $app) {
-            $paths = array_map('realpath', [
-                'app'    => $app->langPath(),
-                'vendor' => $app['config']->get('laravel-lang.vendor', ''),
-            ]);
-
-            return new TransManager($app['files'], $paths);
+            return new TransManager($app['files'], $this->getVendorPaths($app));
         });
     }
 
@@ -97,5 +93,25 @@ class DeferredServicesProvider extends ServiceProvider implements DeferrableProv
                 $app->langPath()
             );
         });
+    }
+
+    /**
+     * Get the vendor paths.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     *
+     * @return array
+     */
+    private function getVendorPaths(Application $app): array
+    {
+        return Collection::make($app['config']->get('laravel-lang.vendor', []))
+            ->mapWithKeys(function (string $path, string $group) {
+                return ["vendor-{$group}" => $path];
+            })
+            ->put('app', $app->langPath())
+            ->transform(function (string $path) {
+                return realpath($path);
+            })
+            ->toArray();
     }
 }

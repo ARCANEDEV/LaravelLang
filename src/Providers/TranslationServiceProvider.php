@@ -30,7 +30,7 @@ class TranslationServiceProvider extends ServiceProvider
             return new FileLoader(
                 $app['files'],
                 $app->langPath(),
-                $app['config']->get('laravel-lang.vendor', ''),
+                $app['config']->get('laravel-lang.vendor', []),
                 $app['config']->get('laravel-lang.locales', [])
             );
         });

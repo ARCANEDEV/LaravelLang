@@ -41,7 +41,7 @@ class Locale implements LocaleContract
      * @param  string  $path
      * @param  array   $files
      */
-    public function __construct(string $key, string $path, array $files)
+    public function __construct(string $key, string $path, array $files = [])
     {
         $this->key   = $key;
         $this->path  = $path;

@@ -151,7 +151,7 @@ class TransChecker implements TransCheckerInterface
     private function getTranslations(string $locale, array $ignored): array
     {
         $appLocale    = $this->manager->getFrom('app', $locale);
-        $vendorLocale = $this->manager->getFrom('vendor', $locale);
+        $vendorLocale = $this->manager->getFrom('vendor-php', $locale);
 
         $translations = is_null($appLocale)
             ? $vendorLocale->mergeTranslations($appLocale, $ignored)

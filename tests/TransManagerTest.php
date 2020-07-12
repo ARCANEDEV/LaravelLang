@@ -60,9 +60,10 @@ class TransManagerTest extends TestCase
 
         $paths = $this->manager->getPaths();
 
-        static::assertCount(2, $paths);
+        static::assertCount(3, $paths);
         static::assertArrayHasKey('app', $paths);
-        static::assertArrayHasKey('vendor', $paths);
+        static::assertArrayHasKey('vendor-php', $paths);
+        static::assertArrayHasKey('vendor-json', $paths);
     }
 
     /** @test */
@@ -85,8 +86,8 @@ class TransManagerTest extends TestCase
     public function it_can_get_locales_collection(): void
     {
         $expectations = [
-            'app'    => 2,
-            'vendor' => $this->getLocalesCount(false),
+            'app'        => 2,
+            'vendor-php' => $this->getLocalesCount(false),
         ];
 
         foreach ($expectations as $group => $count) {
@@ -97,6 +98,7 @@ class TransManagerTest extends TestCase
             static::assertInstanceOf(
                 \Arcanedev\LaravelLang\Entities\LocaleCollection::class, $locales
             );
+
             static::assertCount($count, $locales);
         }
     }
@@ -110,7 +112,7 @@ class TransManagerTest extends TestCase
                 'es' => null,
                 'fr' => 'fr',
             ],
-            'vendor' => [
+            'vendor-php' => [
                 'es' => 'es',
                 'fr' => 'fr',
             ],

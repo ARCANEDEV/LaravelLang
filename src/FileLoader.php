@@ -23,9 +23,9 @@ class FileLoader extends IlluminateFileLoader
     /**
      * Vendor directory path.
      *
-     * @var string
+     * @var array
      */
-    protected $vendorPath;
+    protected $vendorPaths;
 
     /**
      * Supported locales.
@@ -44,14 +44,14 @@ class FileLoader extends IlluminateFileLoader
      *
      * @param  \Illuminate\Filesystem\Filesystem  $files
      * @param  string                             $path
-     * @param  string                             $vendorPath
+     * @param  array                              $vendorPaths
      * @param  array                              $locales
      */
-    public function __construct(Filesystem $files, string $path, string $vendorPath, array $locales = [])
+    public function __construct(Filesystem $files, string $path, array $vendorPaths, array $locales = [])
     {
         parent::__construct($files, $path);
 
-        $this->setVendorPath($vendorPath);
+        $this->setVendorPaths($vendorPaths);
         $this->setSupportedLocales($locales);
     }
 
@@ -63,23 +63,23 @@ class FileLoader extends IlluminateFileLoader
     /**
      * Get the vendor path.
      *
-     * @return string
+     * @return array
      */
-    private function getVendorPath(): string
+    private function getVendorPaths(): array
     {
-        return $this->vendorPath;
+        return $this->vendorPaths;
     }
 
     /**
-     * Set the vendor path.
+     * Set the vendor paths.
      *
-     * @param  string  $vendorPath
+     * @param  array  $vendorPaths
      *
      * @return $this
      */
-    private function setVendorPath(string $vendorPath): self
+    private function setVendorPaths(array $vendorPaths): self
     {
-        $this->vendorPath = $vendorPath;
+        $this->vendorPaths = $vendorPaths;
 
         return $this;
     }
@@ -117,7 +117,7 @@ class FileLoader extends IlluminateFileLoader
         $defaults = [];
 
         if (empty($this->locales) || $this->isSupported($locale))
-            $defaults = $this->loadPath($this->getVendorPath(), $locale, $group);
+            $defaults = $this->loadPath($this->getVendorPaths()['php'], $locale, $group);
 
         return array_replace_recursive($defaults, parent::load($locale, $group, $namespace));
     }

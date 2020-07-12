@@ -81,11 +81,35 @@ class PublishCommandTest extends TestCase
     /** @test */
     public function it_can_skip_the_default_locale(): void
     {
-        $locale = 'en';
-
-        $this->artisan('trans:publish', compact('locale'))
+        $this->artisan('trans:publish', ['locale' => 'en'])
              ->assertExitCode(0);
 
         static::assertTrue(true);
+    }
+
+    /** @test */
+    public function it_can_publish_json(): void
+    {
+        $locale = 'es';
+
+        $this->artisan('trans:publish', ['locale'  => $locale, '--json' => true])
+             ->expectsOutput("Publishing the [{$locale}] translations...")
+             ->assertExitCode(0);
+
+        // Delete the lang folder.
+        $this->deleteLangDirectory($locale);
+        $this->deleteJsonLangFile($locale);
+    }
+
+    /**
+     * Delete the json file from lang folder.
+     *
+     * @param  string  $locale
+     *
+     * @return bool
+     */
+    private function deleteJsonLangFile(string $locale): bool
+    {
+        return $this->filesystem()->delete($this->app->langPath().DIRECTORY_SEPARATOR.$locale.'.json');
     }
 }

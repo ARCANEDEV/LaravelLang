@@ -8,7 +8,10 @@ return [
      */
 
     /** @link      https://github.com/caouecs/Laravel-lang */
-    'vendor'    => base_path('vendor/caouecs/laravel-lang/src'),
+    'vendor'    => [
+        'php'  => base_path('vendor/caouecs/laravel-lang/src'),
+        'json' => base_path('vendor/caouecs/laravel-lang/json'),
+    ],
 
     /* -----------------------------------------------------------------
      |  Supported locales
