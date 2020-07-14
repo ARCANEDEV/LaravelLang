@@ -42,7 +42,7 @@
 
 ## Composer
 
-You can install this package via [Composer](http://getcomposer.org/) by running this command: `composer require arcanedev/laravel-lang`.
+You can install this package via [Composer](http://getcomposer.org/) by running this command: `composer require --dev arcanedev/laravel-lang`.
 
 ## Setup
 
