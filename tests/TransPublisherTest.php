@@ -9,7 +9,6 @@ use Arcanedev\LaravelLang\Contracts\TransPublisher;
 /**
  * Class     TransPublisherTest
  *
- * @package  Arcanedev\LaravelLang\Tests\Services
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class TransPublisherTest extends TestCase

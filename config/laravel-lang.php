@@ -7,10 +7,10 @@ return [
      | -----------------------------------------------------------------
      */
 
-    /** @link      https://github.com/caouecs/Laravel-lang */
+    /** @link      https://github.com/Laravel-Lang/lang */
     'vendor'    => [
-        'php'  => base_path('vendor/caouecs/laravel-lang/src'),
-        'json' => base_path('vendor/caouecs/laravel-lang/json'),
+        'php'  => base_path('vendor/laravel-lang/lang/src'),
+        'json' => base_path('vendor/laravel-lang/lang/json'),
     ],
 
     /* -----------------------------------------------------------------

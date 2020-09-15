@@ -7,7 +7,6 @@ namespace Arcanedev\LaravelLang\Contracts;
 /**
  * Interface  TransPublisher
  *
- * @package   Arcanedev\LaravelLang\Contracts
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 interface TransPublisher

@@ -9,7 +9,6 @@ use Arcanedev\LaravelLang\Contracts\TransChecker;
 /**
  * Class     CheckCommand
  *
- * @package  Arcanedev\LaravelLang\Commands
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class CheckCommand extends AbstractCommand

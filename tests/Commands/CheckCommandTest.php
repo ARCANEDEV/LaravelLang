@@ -10,7 +10,6 @@ use Arcanedev\LaravelLang\Tests\TestCase;
 /**
  * Class     CheckCommandTest
  *
- * @package  Arcanedev\LaravelLang\Tests\Commands
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class CheckCommandTest extends TestCase

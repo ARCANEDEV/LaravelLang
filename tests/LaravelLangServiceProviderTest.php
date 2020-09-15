@@ -9,7 +9,6 @@ use Arcanedev\LaravelLang\LaravelLangServiceProvider;
 /**
  * Class     LaravelLangServiceProviderTest
  *
- * @package  Arcanedev\LaravelLang\Tests
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class LaravelLangServiceProviderTest extends TestCase

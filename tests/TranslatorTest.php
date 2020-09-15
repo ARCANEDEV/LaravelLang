@@ -7,9 +7,8 @@ namespace Arcanedev\LaravelLang\Tests;
 use Illuminate\Translation\Translator;
 
 /**
- * Class     Test
+ * Class     TranslatorTest
  *
- * @package  Arcanedev\LaravelLang\Tests
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class TranslatorTest extends TestCase

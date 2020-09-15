@@ -9,7 +9,6 @@ use Arcanedev\LaravelLang\Contracts\TransPublisher;
 /**
  * Class     PublishCommand
  *
- * @package  Arcanedev\LaravelLang\Commands
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class PublishCommand extends AbstractCommand

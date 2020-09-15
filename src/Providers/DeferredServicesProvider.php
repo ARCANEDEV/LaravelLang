@@ -6,19 +6,16 @@ namespace Arcanedev\LaravelLang\Providers;
 
 use Illuminate\Support\Collection;
 use Arcanedev\LaravelLang\{TransChecker, TransManager, TransPublisher};
-use Arcanedev\LaravelLang\Contracts\{
-    TransChecker as TransCheckerContract,
-    TransManager as TransManagerContract,
-    TransPublisher as TransPublisherContract
-};
+use Arcanedev\LaravelLang\Contracts\TransChecker as TransCheckerContract;
+use Arcanedev\LaravelLang\Contracts\TransManager as TransManagerContract;
+use Arcanedev\LaravelLang\Contracts\TransPublisher as TransPublisherContract;
 use Arcanedev\Support\Providers\ServiceProvider;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Foundation\Application;
 
 /**
- * Class     DeferredServiceProvider
+ * Class     DeferredServicesProvider
  *
- * @package  Arcanedev\LaravelLang\Providers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class DeferredServicesProvider extends ServiceProvider implements DeferrableProvider

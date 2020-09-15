@@ -10,7 +10,6 @@ use Illuminate\Support\Collection;
 /**
  * Class     LocaleCollection
  *
- * @package  Arcanedev\LaravelLang\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class LocaleCollection extends Collection

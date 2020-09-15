@@ -9,7 +9,6 @@ use Arcanedev\LaravelLang\Contracts\TransChecker;
 /**
  * Class     TransCheckerTest
  *
- * @package  Arcanedev\LaravelLang\Tests
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class TransCheckerTest extends TestCase
