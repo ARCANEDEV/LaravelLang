@@ -17,13 +17,13 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
-        "arcanedev/support": "^8.0",
+        "arcanedev/support": "^9.0",
         "laravel-lang/lang": "^9.0"
     },
     "require-dev": {
         "laravel/framework": "^8.40",
         "mockery/mockery": "^1.4.2",
-        "orchestra/testbench-core": "^6.4",
+        "orchestra/testbench-core": "^7.0",
         "phpunit/phpunit": "^9.3.3"
     },
     "autoload": {
@@ -43,7 +43,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-develop": "9.x-dev"
+            "dev-develop": "10.x-dev"
         },
         "laravel": {
             "providers": [
