@@ -8,9 +8,8 @@ use Arcanedev\LaravelLang\LaravelLang;
 use Arcanedev\Support\Console\Command as BaseCommand;
 
 /**
- * Class     Command
+ * Class     AbstractCommand
  *
- * @package  Arcanedev\LaravelLang\Bases
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class AbstractCommand extends BaseCommand

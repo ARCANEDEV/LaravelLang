@@ -9,7 +9,6 @@ use Arcanedev\Support\Providers\PackageServiceProvider as ServiceProvider;
 /**
  * Class     LaravelLangServiceProvider
  *
- * @package  Arcanedev\LaravelLang
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class LaravelLangServiceProvider extends ServiceProvider

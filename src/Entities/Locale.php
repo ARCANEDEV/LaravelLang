@@ -10,7 +10,6 @@ use Illuminate\Support\{Arr, Str};
 /**
  * Class     Locale
  *
- * @package  Arcanedev\LaravelLang\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Locale implements LocaleContract

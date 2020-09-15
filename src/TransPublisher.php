@@ -14,7 +14,6 @@ use SplFileInfo;
 /**
  * Class     TransPublisher
  *
- * @package  Arcanedev\LaravelLang
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class TransPublisher implements TransPublisherContract

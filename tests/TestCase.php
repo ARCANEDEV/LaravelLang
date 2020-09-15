@@ -9,7 +9,6 @@ use Orchestra\Testbench\TestCase as BaseTestCase;
 /**
  * Class     TestCase
  *
- * @package  Arcanedev\LaravelLang\Tests
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class TestCase extends BaseTestCase
@@ -66,8 +65,8 @@ abstract class TestCase extends BaseTestCase
 
         $config->set('laravel-lang', [
             'vendor'    => [
-                'php'  => realpath($basePath . '/vendor/caouecs/laravel-lang/src'),
-                'json' => realpath($basePath . '/vendor/caouecs/laravel-lang/json'),
+                'php'  => realpath($basePath . '/vendor/laravel-lang/lang/src'),
+                'json' => realpath($basePath . '/vendor/laravel-lang/lang/json'),
             ],
 
             'locales'   => ['es', 'fr'],

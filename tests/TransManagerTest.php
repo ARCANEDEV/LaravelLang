@@ -9,7 +9,6 @@ use Arcanedev\LaravelLang\Contracts\TransManager;
 /**
  * Class     TransManagerTest
  *
- * @package  Arcanedev\LaravelLang\Tests
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class TransManagerTest extends TestCase

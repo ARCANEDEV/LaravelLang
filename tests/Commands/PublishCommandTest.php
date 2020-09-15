@@ -9,7 +9,6 @@ use Arcanedev\LaravelLang\Tests\TestCase;
 /**
  * Class     PublishCommandTest
  *
- * @package  Arcanedev\LaravelLang\Tests\Commands
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class PublishCommandTest extends TestCase

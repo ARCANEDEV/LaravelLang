@@ -10,7 +10,6 @@ use Illuminate\Translation\FileLoader as IlluminateFileLoader;
 /**
  * Class     FileLoader
  *
- * @package  Arcanedev\LaravelLang
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class FileLoader extends IlluminateFileLoader

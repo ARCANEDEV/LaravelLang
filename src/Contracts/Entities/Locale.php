@@ -7,7 +7,6 @@ namespace Arcanedev\LaravelLang\Contracts\Entities;
 /**
  * Interface  Locale
  *
- * @package   Arcanedev\LaravelLang\Contracts\Entities
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 interface Locale

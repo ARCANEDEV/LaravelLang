@@ -9,7 +9,6 @@ use Arcanedev\LaravelLang\Entities\{Locale, LocaleCollection};
 /**
  * Interface  TransManager
  *
- * @package   Arcanedev\LaravelLang\Contracts
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 interface TransManager

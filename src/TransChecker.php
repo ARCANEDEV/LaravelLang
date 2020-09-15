@@ -4,18 +4,14 @@ declare(strict_types=1);
 
 namespace Arcanedev\LaravelLang;
 
-use Arcanedev\LaravelLang\Contracts\{
-    TransChecker as TransCheckerInterface,
-    TransManager as TransManagerInterface
-};
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
+use Arcanedev\LaravelLang\Contracts\TransChecker as TransCheckerInterface;
+use Arcanedev\LaravelLang\Contracts\TransManager as TransManagerInterface;
+use Illuminate\Support\{Arr, Str};
 use Illuminate\Translation\Translator;
 
 /**
  * Class     TransChecker
  *
- * @package  Arcanedev\LaravelLang
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class TransChecker implements TransCheckerInterface

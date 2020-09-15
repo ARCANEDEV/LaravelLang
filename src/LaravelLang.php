@@ -7,7 +7,6 @@ namespace Arcanedev\LaravelLang;
 /**
  * Class     LaravelLang
  *
- * @package  Arcanedev\LaravelLang
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class LaravelLang
@@ -17,5 +16,5 @@ class LaravelLang
      | -----------------------------------------------------------------
      */
 
-    const VERSION = '8.2.0';
+    const VERSION = '9.0.0';
 }

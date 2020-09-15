@@ -19,8 +19,11 @@ return [
      | -----------------------------------------------------------------
      */
 
-    /** @link      https://github.com/caouecs/Laravel-lang */
-    'vendor'    => base_path('vendor/caouecs/laravel-lang/src'),
+    /** @link      https://github.com/Laravel-Lang/lang */
+    'vendor'    => [
+        'php'  => base_path('vendor/laravel-lang/lang/src'),
+        'json' => base_path('vendor/laravel-lang/lang/json'),
+    ],
 
     /* -----------------------------------------------------------------
      |  Supported locales

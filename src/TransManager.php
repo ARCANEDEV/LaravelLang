@@ -12,7 +12,6 @@ use Illuminate\Support\Arr;
 /**
  * Class     TransManager
  *
- * @package  Arcanedev\LaravelLang
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class TransManager implements TransManagerContract

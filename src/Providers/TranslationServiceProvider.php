@@ -11,7 +11,6 @@ use Illuminate\Translation\TranslationServiceProvider as ServiceProvider;
 /**
  * Class     TranslationServiceProvider
  *
- * @package  Arcanedev\LaravelLang\Providers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class TranslationServiceProvider extends ServiceProvider
