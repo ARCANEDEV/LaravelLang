@@ -115,8 +115,12 @@ class FileLoader extends IlluminateFileLoader
     {
         $defaults = [];
 
-        if (empty($this->locales) || $this->isSupported($locale))
-            $defaults = $this->loadPath($this->getVendorPaths()['php'], $locale, $group);
+        if (empty($this->locales) || $this->isSupported($locale)) {
+            foreach ($this->getVendorPaths() as $path) {
+                if ( ! empty($defaults = $this->loadPath($path, $locale, $group)))
+                    break;
+            }
+        }
 
         return array_replace_recursive($defaults, parent::load($locale, $group, $namespace));
     }

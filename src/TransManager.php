@@ -26,7 +26,7 @@ class TransManager implements TransManagerContract
      *
      * @var array
      */
-    private $paths   = [];
+    private $paths = [];
 
     /**
      * Translations collection.
@@ -96,49 +96,33 @@ class TransManager implements TransManagerContract
      */
     private function load(): void
     {
-        foreach ($this->getPaths() as $group => $path) {
-            $this->locales[$group] = $group === 'vendor-json'
-                ? $this->loadJsonDirectory($path)
-                : $this->loadDirectories($path);
+        $paths = $this->getPaths();
+
+        $this->locales['app'] = $this->loadTranslations($paths['app']);
+
+        foreach ($paths['vendors'] as $path) {
+            $this->locales['vendor-php'] = $this->loadTranslations($path);
+            $this->locales['vendor-json'] = $this->loadJsonTranslations($path);
         }
     }
 
     /**
-     * @param  string  $path
-     *
-     * @return \Arcanedev\LaravelLang\Entities\LocaleCollection
-     */
-    private function loadJsonDirectory(string $path): LocaleCollection
-    {
-        $locales = new LocaleCollection;
-
-        foreach ($this->filesystem->files($path) as $file) {
-            $locales->addOne(
-                new Locale($file->getBasename('.json'), $file->getRealPath())
-            );
-        }
-
-        return $locales;
-    }
-
-    /**
-     * Load directories.
+     * Load translation files.
      *
      * @param  string  $dirPath
      *
      * @return \Arcanedev\LaravelLang\Entities\LocaleCollection
      */
-    private function loadDirectories(string $dirPath): LocaleCollection
+    private function loadTranslations(string $dirPath): LocaleCollection
     {
         $locales = new LocaleCollection;
 
         foreach ($this->filesystem->directories($dirPath) as $path) {
-            if ($this->isExcluded($path)) {
+            if ($this->isExcluded($path))
                 continue;
-            }
 
             $locales->addOne(
-                new Locale(basename($path), $path, $this->loadLocaleFiles($path))
+                new Locale(basename($path), $path, $this->loadTranslationFiles($path))
             );
         }
 
@@ -152,12 +136,14 @@ class TransManager implements TransManagerContract
      *
      * @return array
      */
-    private function loadLocaleFiles(string $path): array
+    private function loadTranslationFiles(string $path): array
     {
         $files = [];
 
         foreach ($this->filesystem->allFiles($path) as $file) {
-            /** @var \Symfony\Component\Finder\SplFileInfo $file */
+            if ($file->getExtension() !== 'php')
+                continue;
+
             $key = str_replace(
                 ['.php', DIRECTORY_SEPARATOR], ['', '.'], $file->getRelativePathname()
             );
@@ -169,6 +155,34 @@ class TransManager implements TransManagerContract
         }
 
         return $files;
+    }
+
+    /**
+     * Load json translation files.
+     *
+     * @param  string  $dirPath
+     *
+     * @return \Arcanedev\LaravelLang\Entities\LocaleCollection
+     */
+    private function loadJsonTranslations(string $dirPath): LocaleCollection
+    {
+        $locales = new LocaleCollection;
+
+        foreach ($this->filesystem->directories($dirPath) as $path) {
+            if ($this->isExcluded($path))
+                continue;
+
+            foreach ($this->filesystem->files($path) as $file) {
+                if ($file->getExtension() === 'json') {
+                    $locales->addOne(
+                        new Locale($file->getBasename('.json'), $file->getRealPath())
+                    );
+                    break;
+                }
+            }
+        }
+
+        return $locales;
     }
 
     /**
@@ -261,6 +275,6 @@ class TransManager implements TransManagerContract
      */
     private function isExcluded(string $path): bool
     {
-        return in_array($key = basename($path), $this->excludedFolders);
+        return in_array(basename($path), $this->excludedFolders);
     }
 }

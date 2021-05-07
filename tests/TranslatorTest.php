@@ -56,10 +56,10 @@ class TranslatorTest extends TestCase
     {
         $expectations = [
             'es' => [
-                'auth.failed' => 'Estas credenciales no coinciden con nuestros registros.'
+                'auth.failed' => 'Estas credenciales no coinciden con nuestros registros.',
             ],
             'fr' => [
-                'auth.failed' => 'Ces identifiants ne correspondent pas à nos enregistrements'
+                'auth.failed' => 'Ces identifiants ne correspondent pas à nos enregistrements.',
             ],
         ];
 

@@ -9,8 +9,7 @@ return [
 
     /** @link      https://github.com/Laravel-Lang/lang */
     'vendor'    => [
-        'php'  => base_path('vendor/laravel-lang/lang/src'),
-        'json' => base_path('vendor/laravel-lang/lang/json'),
+        base_path('vendor/laravel-lang/lang/locales'),
     ],
 
     /* -----------------------------------------------------------------
