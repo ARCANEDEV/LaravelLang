@@ -59,10 +59,9 @@ class TransManagerTest extends TestCase
 
         $paths = $this->manager->getPaths();
 
-        static::assertCount(3, $paths);
+        static::assertCount(2, $paths);
         static::assertArrayHasKey('app', $paths);
-        static::assertArrayHasKey('vendor-php', $paths);
-        static::assertArrayHasKey('vendor-json', $paths);
+        static::assertArrayHasKey('vendors', $paths);
     }
 
     /** @test */

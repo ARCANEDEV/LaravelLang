@@ -24,11 +24,11 @@ abstract class TestCase extends BaseTestCase
      * @var array
      */
     protected $locales = [
-        'ar', 'az', 'be', 'bg', 'bn', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'de_CH', 'el', 'es', 'et', 'eu', 'fa', 'fi',
-        'fil', 'fr', 'gl', 'he', 'hi', 'hr', 'hu', 'hy', 'id', 'is', 'it', 'ja', 'ka', 'kk', 'km', 'kn', 'ko', 'lt',
-        'lv', 'me', 'mk', 'mn', 'mr', 'ms', 'nb', 'ne', 'nl', 'nn', 'pl', 'ps', 'pt', 'pt_BR', 'ro', 'ru', 'sc', 'si',
-        'sk', 'sl', 'sq', 'sr_Cyrillic', 'sr_Latin', 'sv', 'sw', 'tg', 'th', 'tk', 'tl', 'tr', 'ug', 'uk', 'ur',
-        'uz_Cyrillic', 'uz_Latin', 'vi', 'zh_CN', 'zh_HK', 'zh_TW',
+        'af', 'ar', 'az', 'be', 'bg', 'bn', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'de_CH', 'el', 'es', 'et', 'eu', 'fa',
+        'fi', 'fil', 'fr', 'gl', 'he', 'hi', 'hr', 'hu', 'hy', 'id', 'is', 'it', 'ja', 'ka', 'kk', 'km', 'kn', 'ko',
+        'lt', 'lv', 'mk', 'mn', 'mr', 'ms', 'nb', 'ne', 'nl', 'nn', 'oc', 'pl', 'ps', 'pt', 'pt_BR', 'ro', 'ru', 'sc',
+        'si', 'sk', 'sl', 'sq', 'sr_Cyrl', 'sr_Latn', 'sr_Latn_ME', 'sv', 'sw', 'tg', 'th', 'tk', 'tl', 'tr', 'ug', 'uk',
+        'ur', 'uz_Cyrl', 'uz_Latn', 'vi', 'zh_CN', 'zh_HK', 'zh_TW',
     ];
 
     /* -----------------------------------------------------------------
@@ -64,14 +64,13 @@ abstract class TestCase extends BaseTestCase
         $config   = $app['config'];
 
         $config->set('laravel-lang', [
-            'vendor'    => [
-                'php'  => realpath($basePath . '/vendor/laravel-lang/lang/src'),
-                'json' => realpath($basePath . '/vendor/laravel-lang/lang/json'),
+            'vendor'  => [
+                realpath($basePath . '/vendor/laravel-lang/lang/locales'),
             ],
 
-            'locales'   => ['es', 'fr'],
+            'locales' => ['es', 'fr'],
 
-            'check'     => [
+            'check'   => [
                 'ignore'  => [
                     'validation.custom',
                     'validation.attributes',

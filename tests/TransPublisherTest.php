@@ -66,6 +66,7 @@ class TransPublisherTest extends TestCase
         static::assertEquals([
             'published' => [
                 'es/auth.php',
+                'es/es.json',
                 'es/pagination.php',
                 'es/passwords.php',
                 'es/validation.php',
@@ -79,6 +80,7 @@ class TransPublisherTest extends TestCase
         static::assertEquals([
             'published' => [
                 'es/auth.php',
+                'es/es.json',
                 'es/pagination.php',
                 'es/passwords.php',
                 'es/validation.php',
@@ -98,6 +100,7 @@ class TransPublisherTest extends TestCase
         static::assertEquals([
             'published' => [
                 'es/auth.php',
+                'es/es.json',
                 'es/pagination.php',
                 'es/passwords.php',
                 'es/validation.php',
@@ -109,6 +112,7 @@ class TransPublisherTest extends TestCase
             'published' => [],
             'skipped'   => [
                 'es/auth.php',
+                'es/es.json',
                 'es/pagination.php',
                 'es/passwords.php',
                 'es/validation.php',
@@ -127,6 +131,7 @@ class TransPublisherTest extends TestCase
         $excepted = [
             'published' => [
                 'es/auth.php',
+                'es/es.json',
                 'es/pagination.php',
                 'es/passwords.php',
                 'es/validation.php',

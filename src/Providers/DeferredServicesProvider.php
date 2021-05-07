@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace Arcanedev\LaravelLang\Providers;
 
-use Illuminate\Support\Collection;
 use Arcanedev\LaravelLang\{TransChecker, TransManager, TransPublisher};
 use Arcanedev\LaravelLang\Contracts\TransChecker as TransCheckerContract;
 use Arcanedev\LaravelLang\Contracts\TransManager as TransManagerContract;
 use Arcanedev\LaravelLang\Contracts\TransPublisher as TransPublisherContract;
 use Arcanedev\Support\Providers\ServiceProvider;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\DeferrableProvider;
-use Illuminate\Foundation\Application;
 
 /**
  * Class     DeferredServicesProvider
@@ -60,7 +59,7 @@ class DeferredServicesProvider extends ServiceProvider implements DeferrableProv
     private function registerTransManager(): void
     {
         $this->singleton(TransManagerContract::class, function (Application $app) {
-            return new TransManager($app['files'], $this->getVendorPaths($app));
+            return new TransManager($app['files'], $this->getPaths($app));
         });
     }
 
@@ -93,22 +92,17 @@ class DeferredServicesProvider extends ServiceProvider implements DeferrableProv
     }
 
     /**
-     * Get the vendor paths.
+     * Get the localization paths.
      *
-     * @param  \Illuminate\Foundation\Application  $app
+     * @param  \Illuminate\Contracts\Foundation\Application  $app
      *
      * @return array
      */
-    private function getVendorPaths(Application $app): array
+    private function getPaths(Application $app): array
     {
-        return Collection::make($app['config']->get('laravel-lang.vendor', []))
-            ->mapWithKeys(function (string $path, string $group) {
-                return ["vendor-{$group}" => $path];
-            })
-            ->put('app', $app->langPath())
-            ->transform(function (string $path) {
-                return realpath($path);
-            })
-            ->toArray();
+        return [
+            'app'     => $app->langPath(),
+            'vendors' => $app['config']->get('laravel-lang.vendor', []),
+        ];
     }
 }
