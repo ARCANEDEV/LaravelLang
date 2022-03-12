@@ -63,12 +63,16 @@ class TransPublisherTest extends TestCase
     {
         $locale = 'es';
 
+        if ($this->langDirectoryExists($locale))
+            $this->deleteLangDirectory($locale);
+
         static::assertEquals([
             'published' => [
                 'es/auth.php',
                 'es/es.json',
                 'es/pagination.php',
                 'es/passwords.php',
+                'es/validation-nova.php',
                 'es/validation.php',
             ],
             'skipped'   => [],
@@ -83,6 +87,7 @@ class TransPublisherTest extends TestCase
                 'es/es.json',
                 'es/pagination.php',
                 'es/passwords.php',
+                'es/validation-nova.php',
                 'es/validation.php',
             ],
             'skipped'   => [],
@@ -97,12 +102,16 @@ class TransPublisherTest extends TestCase
     {
         $locale = 'es';
 
+        if ($this->langDirectoryExists($locale))
+            $this->deleteLangDirectory($locale);
+
         static::assertEquals([
             'published' => [
                 'es/auth.php',
                 'es/es.json',
                 'es/pagination.php',
                 'es/passwords.php',
+                'es/validation-nova.php',
                 'es/validation.php',
             ],
             'skipped'   => [],
@@ -115,6 +124,7 @@ class TransPublisherTest extends TestCase
                 'es/es.json',
                 'es/pagination.php',
                 'es/passwords.php',
+                'es/validation-nova.php',
                 'es/validation.php',
             ],
         ], $this->publisher->publish($locale));
@@ -128,12 +138,16 @@ class TransPublisherTest extends TestCase
     {
         $locale = 'es';
 
+        if ($this->langDirectoryExists($locale))
+            $this->deleteLangDirectory($locale);
+
         $excepted = [
             'published' => [
                 'es/auth.php',
                 'es/es.json',
                 'es/pagination.php',
                 'es/passwords.php',
+                'es/validation-nova.php',
                 'es/validation.php',
             ],
             'skipped'   => [],

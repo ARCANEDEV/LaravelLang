@@ -25,7 +25,7 @@ abstract class TestCase extends BaseTestCase
      */
     protected $locales = [
         'af', 'ar', 'az', 'be', 'bg', 'bn', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'de_CH', 'el', 'es', 'et', 'eu', 'fa',
-        'fi', 'fil', 'fr', 'gl', 'he', 'hi', 'hr', 'hu', 'hy', 'id', 'is', 'it', 'ja', 'ka', 'kk', 'km', 'kn', 'ko',
+        'fi', 'fil', 'fr', 'gl', 'gu', 'he', 'hi', 'hr', 'hu', 'hy', 'id', 'is', 'it', 'ja', 'ka', 'kk', 'km', 'kn', 'ko',
         'lt', 'lv', 'mk', 'mn', 'mr', 'ms', 'nb', 'ne', 'nl', 'nn', 'oc', 'pl', 'ps', 'pt', 'pt_BR', 'ro', 'ru', 'sc',
         'si', 'sk', 'sl', 'sq', 'sr_Cyrl', 'sr_Latn', 'sr_Latn_ME', 'sv', 'sw', 'tg', 'th', 'tk', 'tl', 'tr', 'ug', 'uk',
         'ur', 'uz_Cyrl', 'uz_Latn', 'vi', 'zh_CN', 'zh_HK', 'zh_TW',
@@ -98,7 +98,7 @@ abstract class TestCase extends BaseTestCase
 
         $filesystem->copyDirectory(
             realpath(__DIR__.DIRECTORY_SEPARATOR.'fixtures'.DIRECTORY_SEPARATOR.'lang'),
-            realpath(resource_path('lang'))
+            $app->langPath()
         );
     }
 
@@ -121,8 +121,25 @@ abstract class TestCase extends BaseTestCase
      */
     protected function cleanLangDirectory(string $locale): bool
     {
-        return $this->filesystem()
-                    ->cleanDirectory($this->app->langPath().DIRECTORY_SEPARATOR.$locale);
+        return $this
+            ->filesystem()
+            ->cleanDirectory($this->app->langPath().DIRECTORY_SEPARATOR.$locale)
+        ;
+    }
+
+    /**
+     * Determine if the lang directory exists.
+     *
+     * @param  string  $locale
+     *
+     * @return bool
+     */
+    protected function langDirectoryExists(string $locale): bool
+    {
+        return $this
+            ->filesystem()
+            ->exists($this->app->langPath().DIRECTORY_SEPARATOR.$locale)
+        ;
     }
 
     /**
@@ -134,8 +151,10 @@ abstract class TestCase extends BaseTestCase
      */
     protected function deleteLangDirectory(string $locale): bool
     {
-        return $this->filesystem()
-                    ->deleteDirectory($this->app->langPath().DIRECTORY_SEPARATOR.$locale);
+        return $this
+            ->filesystem()
+            ->deleteDirectory($this->app->langPath().DIRECTORY_SEPARATOR.$locale)
+        ;
     }
 
     /**

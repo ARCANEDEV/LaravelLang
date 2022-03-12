@@ -1,6 +1,6 @@
 {
     "name":        "arcanedev/laravel-lang",
-    "description": "Translations manager and checker for Laravel based on 'caouecs/laravel-lang' package.",
+    "description": "Translations manager and checker for Laravel based on 'Laravel-Lang/lang' package.",
     "homepage":    "https://github.com/ARCANEDEV/LaravelLang",
     "keywords":    [
         "arcanedev", "laravel", "translations", "trans", "languages", "lang", "localisation", "localization", "validations"
@@ -16,15 +16,15 @@
     "type":    "library",
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0",
-        "arcanedev/support": "^8.0",
-        "laravel-lang/lang": "^9.0"
+        "php": "^8.0",
+        "arcanedev/support": "^9.0",
+        "laravel-lang/lang": "^10.4.2"
     },
     "require-dev": {
-        "laravel/framework": "^8.40",
-        "mockery/mockery": "^1.4.2",
-        "orchestra/testbench-core": "^6.4",
-        "phpunit/phpunit": "^9.3.3"
+        "laravel/framework": "^9.0",
+        "mockery/mockery": "^1.4.4",
+        "orchestra/testbench-core": "^7.0",
+        "phpunit/phpunit": "^9.5.10"
     },
     "autoload": {
         "psr-4": {
@@ -43,7 +43,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-develop": "9.x-dev"
+            "dev-develop": "10.x-dev"
         },
         "laravel": {
             "providers": [
