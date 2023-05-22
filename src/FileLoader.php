@@ -117,7 +117,7 @@ class FileLoader extends IlluminateFileLoader
 
         if (empty($this->locales) || $this->isSupported($locale)) {
             foreach ($this->getVendorPaths() as $path) {
-                if ( ! empty($defaults = $this->loadPath($path, $locale, $group)))
+                if ( ! empty($defaults = $this->loadPaths([$path], $locale, $group)))
                     break;
             }
         }
